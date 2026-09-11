@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Reviews of Zebra Coffee on Mangilik El 38 in Astana.">
+
+    <meta name="author" content="Dana">
+
+    <title>Zebra Coffee - Reviews</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Zebra Coffee - Reviews</h1>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="colophon.html">Colophon</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section id="reviews">
+
+        <h2>Customer Reviews</h2>
+
+        <article>
+            <h3>Visitors' Opinions</h3>
+
+            <p>
+                Reviews help visitors understand the atmosphere and
+                service at Zebra Coffee. People can share their
+                impressions after visiting the coffee shop.
+            </p>
+
+            <p>
+                Visitors can comment on the coffee, service and
+                atmosphere.
+            </p>
+        </article>
+
+        <blockquote>
+
+            <img src="/Users/danamaratova/Desktop/IMG_0045.jpg"
+                 alt="Review of Zebra Coffee"
+                 width="300">
+            <p>
+                "Pleasant atmosphere, great purple on Salvador Geisha.
+                 <br>A clean balanced cup with a bright aroma, pleasant 
+                <br> sweetness and revealing floral and fruity notes."
+            </p>
+
+            
+        </blockquote>
+
+        <figure>
+            <img src="/Users/danamaratova/Desktop/IMG_0046.jpg"
+                alt="Interior of Zebra Coffee"
+                width="300">
+        <figcaption>Main interior of Zebra Coffee.</figcaption>
+</figure>
+
+<figure>
+    <img src="/Users/danamaratova/Desktop/IMG_0047.jpg"
+         alt="Another view of Zebra Coffee interior"
+         width="200">
+    <figcaption>Another view of the interior.</figcaption>
+</figure>
+
+        <hr>
+
+        <article id="review-form">
+
+            <h3>Leave a Review</h3>
+
+            <form action="#" method="post">
+
+                <!-- The form does not send information yet because server-side handling comes later. -->
+
+                <fieldset>
+
+                    <legend>Your Review</legend>
+
+                    <p>
+                        <label for="name">Name:</label>
+                        <input type="text"
+                               id="name"
+                               name="name"
+                               placeholder="Your name"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="email">Email:</label>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Your email"
+                               required>
+                    </p>
+
+                    <p>
+                        <label for="date">Visit date:</label>
+                        <input type="date"
+                               id="date"
+                               name="date"
+                               required>
+                    </p>
+
+                    <p>How was your visit?</p>
+
+                    <input type="radio"
+                           id="good"
+                           name="rating"
+                           value="good"
+                           required>
+                    <label for="good">Good</label>
+
+                    <input type="radio"
+                           id="excellent"
+                           name="rating"
+                           value="excellent">
+                    <label for="excellent">Excellent</label>
+
+                    <p>
+                        <label for="drink">What did you order?</label>
+
+                        <select id="drink" name="drink">
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea</option>
+                            <option value="dessert">Dessert</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <input type="checkbox"
+                               id="recommend"
+                               name="recommend">
+
+                        <label for="recommend">
+                            I recommend Zebra Coffee.
+                        </label>
+                    </p>
+
+                    <p>
+                        <label for="review">Your review:</label>
+                    </p>
+
+                    <textarea id="review"
+                              name="review"
+                              rows="5"
+                              cols="40"
+                              placeholder="Write your review"
+                              required></textarea>
+
+                    <p>
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Reset">
+                    </p>
+
+                </fieldset>
+
+            </form>
+
+        </article>
+
+        <aside>
+            <h3>Review Tips</h3>
+
+            <ul>
+                <li>Write about your personal experience.</li>
+                <li>Be honest and clear.</li>
+                <li>Do not share private information.</li>
+            </ul>
+        </aside>
+
+        <p>
+            Go to
+            <a href="#reviews">reviews</a>
+            or
+            <a href="#review-form">review form</a>.
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>
+        Zebra Coffee - educational project.
+        &copy; 2026
+    </p>
+
+    <p>
+        Address: Mangilik El 38 Avenue, Astana.
+    </p>
+
+    <p>
+        Phone:
+        <a href="tel:+77470290043">+7 747 029 00 43</a>
+    </p>
+
+</footer>
+
+</body>
+</html>
