@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Table reservation and room booking at Zebra Coffee in Astana.">
+    <meta name="author" content="Korkem">
+    <title>Table Booking | Zebra Coffee</title>
+</head>
+<body>
+    <!-- Author: Korkem -->
+    <header>
+        <h1>Zebra Coffee</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="colophon.html">Colophon</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="booking-intro">
+            <h2>Reserve Your Table at Zebra Coffee</h2>
+            <p>Planning a business meeting, a friendly chat, or a quiet study session? Reserve a table in advance at <strong>Zebra Coffee</strong>! We will ensure your place is reserved and ready with fresh coffee and pastries upon your arrival. Enjoy our cozy atmosphere located in <abbr title="Astana">AST</abbr>, <abbr title="Kazakhstan">KZ</abbr>.</p>
+        </section>
+
+        <!-- Structural Decision Comment: Used aside to visually isolate non-critical warning without diluting main context -->
+        <aside>
+            <h3>Important Notice</h3>
+            <p><strong>Please note:</strong> This online booking form is currently a demonstration and is <em>not yet functional</em>. Submissions will not process active reservations &bull; &copy; Zebra Coffee.</p>
+        </aside>
+
+        <section id="reservation-form-section">
+            <h3>Booking Form</h3>
+            
+            <form action="#" method="post">
+                <!-- Note: This form is static client-side markup only and does not process or send data to a server yet. -->
+                
+                <fieldset>
+                    <legend>Personal Contact Details</legend>
+                    
+                    <p>
+                        <label for="full-name">Full Name:</label><br>
+                        <input type="text" id="full-name" name="full_name" placeholder="Korkem" required>
+                    </p>
+
+                    <p>
+                        <label for="customer-email">Email Address:</label><br>
+                        <input type="email" id="customer-email" name="customer_email" placeholder="info@zebracoffee.kz" required>
+                    </p>
+
+                    <p>
+                        <label for="customer-phone">Phone Number:</label><br>
+                        <input type="tel" id="customer-phone" name="customer_phone" placeholder="+7 747 029 00 43" required>
+                    </p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Reservation Details</legend>
+
+                    <p>
+                        <label for="guests-count">Number of Guests (1 to 10):</label><br>
+                        <input type="number" id="guests-count" name="guests_count" min="1" max="10" value="2" required>
+                    </p>
+
+                    <p>
+                        <label for="booking-date">Date:</label><br>
+                        <input type="date" id="booking-date" name="booking_date" required>
+                    </p>
+
+                    <p>
+                        <label for="booking-time">Time:</label><br>
+                        <input type="time" id="booking-time" name="booking_time" required>
+                    </p>
+
+                    <!-- Added mandatory Radio Button Group requirement -->
+                    <p>
+                        <strong>Visit Type:</strong><br>
+                        <label><input type="radio" name="visit_type" value="personal" checked> Personal / Study</label><br>
+                        <label><input type="radio" name="visit_type" value="business"> Business Meeting</label>
+                    </p>
+
+                    <p>
+                        <label for="seating-area">Preferred Seating Area:</label><br>
+                        <select id="seating-area" name="seating_area">
+                            <option value="main-hall">Main Hall</option>
+                            <option value="window-side">Window Side Table</option>
+                            <option value="quiet-corner">Quiet Workspace Corner</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label>
+                            <input type="checkbox" name="vip_requested" value="yes">
+                            Request high-speed Wi-Fi &amp; power socket table
+                        </label>
+                    </p>
+
+                    <p>
+                        <label for="special-requests">Special Requests / Notes:</label><br>
+                        <textarea id="special-requests" name="special_requests" rows="4" cols="40" placeholder="Let us know if you need extra space..."></textarea>
+                    </p>
+                </fieldset>
+
+                <p>
+                    <button type="submit">Submit Reservation</button>
+                    <button type="reset">Reset Form</button>
+                </p>
+            </form>
+        </section>
+
+        <article>
+            <h3>Reservation Rules &amp; Guidelines</h3>
+            <p>To keep everything comfortable for all guests, please arrive within <mark>15 minutes</mark> of your reserved time. If you need to cancel or change your time slot, notify us as early as possible.</p>
+            <dl>
+                <dt>Cancellation Policy</dt>
+                <dd>Please inform us at least 1 hour before if your plans change.</dd>
+            </dl>
+        </article>
+    </main>
+
+    <footer>
+        <p>Phone: <a href="tel:+77470290043">+7 747 029 00 43</a></p>
+        <p>&copy; 2026 Zebra Coffee</p>
+    </footer>
+</body>
+</html>
