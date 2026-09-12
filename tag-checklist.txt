@@ -1,0 +1,17 @@
+Tag Checklist for Korkem (booking.html & contacts.html)
+
+HTML5 Semantic Structural Tags:
+- <header>: Page branding and title
+- <nav>: Main site navigation bar
+- <main>: Primary page content container
+- <section>: Content thematic grouping (booking form, location details, opening hours)
+- <aside>: Quick notice regarding seating limitations
+- <footer>: Page copyright and global contact info
+
+Content & Formatting Elements:
+- Headings: <h1>, <h2>, <h3>, <h4> for proper document outline
+- Text Formatting: <strong>, <p>, &nbsp;, &copy;, &ndash;, &bull;
+- Contact & Links: <address>, <a href="tel:...">, <a href="mailto:...">, <a href="..." target="_blank" rel="noopener noreferrer">
+- Data & Lists: <table>, <caption>, <thead>, <tbody>, <tr>, <th> (scope="col"/"row"), <td>, <dl>, <dt>, <dd>
+- Form Elements: <form>, <fieldset>, <legend>, <label>, <input type="text">, <input type="email">, <input type="tel">, <input type="number">, <input type="date">, <input type="time">, <input type="checkbox">, <select>, <option>, <textarea>, <button type="submit">, <button type="reset">
+- Media: <figure>, <figcaption>, <img src="images/zebra-1.jpg" alt="...">
