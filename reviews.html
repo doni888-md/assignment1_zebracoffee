@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+     <!-- Author of the page: Dana -->
 <header>
     <h1>Zebra Coffee - Reviews</h1>
 
@@ -47,31 +47,37 @@
                 Visitors can comment on the coffee, service and
                 atmosphere.
             </p>
+
+            <p>
+                A <abbr title="Customer Review">CR</abbr>
+                describes a visitor's experience at the coffee shop.
+            </p>
         </article>
 
-        <blockquote>
-
-            <img src="/Users/danamaratova/Desktop/IMG_0045.jpg"
+            <img src="/Users/danamaratova/Desktop/zebra coffee/IMG_0045.jpg"
                  alt="Review of Zebra Coffee"
                  width="300">
-            <p>
-                "Pleasant atmosphere, great purple on Salvador Geisha.
-                 <br>A clean balanced cup with a bright aroma, pleasant 
-                <br> sweetness and revealing floral and fruity notes."
-            </p>
+            <blockquote>
+    <p>
+        <q>
+            Pleasant atmosphere, great purple on Salvador Geisha.
+            A clean balanced cup with a bright aroma, pleasant
+            sweetness and revealing floral and fruity notes.
+        </q>
+    </p>
 
-            
-        </blockquote>
+    <cite>— d sss__, 30 July 2026</cite>
+</blockquote>
 
         <figure>
-            <img src="/Users/danamaratova/Desktop/IMG_0046.jpg"
+            <img src="/Users/danamaratova/Desktop/zebra coffee/IMG_0046.jpg"
                 alt="Interior of Zebra Coffee"
                 width="300">
         <figcaption>Main interior of Zebra Coffee.</figcaption>
 </figure>
 
 <figure>
-    <img src="/Users/danamaratova/Desktop/IMG_0047.jpg"
+    <img src="/Users/danamaratova/Desktop/zebra coffee/IMG_0047.jpg"
          alt="Another view of Zebra Coffee interior"
          width="200">
     <figcaption>Another view of the interior.</figcaption>
@@ -110,11 +116,30 @@
                     </p>
 
                     <p>
+                        <label for="phone">Phone:</label>
+                        <input type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="+7 700 000 00 00">
+                    </p>
+
+                    <p>
                         <label for="date">Visit date:</label>
                         <input type="date"
                                id="date"
                                name="date"
                                required>
+                    </p>
+
+                    <p>
+                        <label for="rating-number">Rating from 1 to 5:</label>
+                        <input type="number"
+                                id="rating-number"
+                                name="rating-number"
+                                min="1"
+                                max="5"
+                                placeholder="5"
+                                required>
                     </p>
 
                     <p>How was your visit?</p>
@@ -178,7 +203,13 @@
             <h3>Review Tips</h3>
 
             <ul>
-                <li>Write about your personal experience.</li>
+                <li>
+                    Write about your personal experience.
+            <ul>
+                <li>Mention the drink.</li>
+                <li>Mention the atmosphere.</li>
+            </ul>
+                </li>
                 <li>Be honest and clear.</li>
                 <li>Do not share private information.</li>
             </ul>
