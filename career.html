@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore job openings and student barista opportunities at Zebra Coffee on Mangilik El in Astana.">
+    <meta name="author" content="Yasmina Rozieva">
+    <title>Zebra Coffee — Careers</title>
+</head>
+<body>
+    <!-- Author: Yasmina Rozieva -->
+    <!-- Rationale: Clear hierarchical structure with dedicated articles for vacancies ensures high readability and automated parser compatibility. -->
+    <header id="top">
+        <h1>Zebra Coffee</h1>
+        <p>Careers and Opportunities</p>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="career.html">Careers</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="booking.html">Booking</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+                <li><a href="colophon.html">Colophon</a></li>
+            </ul>
+        </nav>
+        <hr>
+    </header>
+    <main>
+        <p>Quick navigation: <a href="#benefits">Team Culture</a> | <a href="#openings">Available Roles</a> | <a href="#apply">How to Apply</a></p>
+        <section id="benefits">
+            <h2>Why work with us</h2>
+            <p>At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay, 
+                flexible shift rotations, and accredited espresso training. Located on busy Mangilik El Avenue, 
+                our team thrives on swift service, collaborative spirit, and positive guest interactions every day.
+            </p>
+            <blockquote>
+                <p>
+                    Balancing university classes with morning bar shifts was straightforward thanks to flexible scheduling. 
+                    I mastered grinder calibration within my first month.
+                </p>
+                <cite>&mdash; Daniyar, Shift Supervisor</cite>
+            </blockquote>
+            <figure>
+                <img src="images/img8_team.jpg" alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar" width="400" height="300">
+                <figcaption>Our passionate barista crew at the Mangilik El branch ready to welcome guests.</figcaption>
+            </figure>
+        </section>
+        <section id="openings">
+            <h2>Current vacancies in Astana:</h2>
+            <article id="role-barista">
+                <h3>Express Barista (Full-time / Part-time)</h3>
+                <p>
+                    Posted: <time datetime="2026-09-10">September 10, 2026</time> | Location: Mangilik El 38
+                </p>
+                <p>Key duties include:</p>
+                <ul>
+                    <li>Extracting specialty espresso drinks under the three-minute standard</li>
+                    <li>Handling POS transactions and cash management efficiently</li>
+                    <li>Maintaining workstation sanitation during rush hours</li>
+                </ul>
+            </article>
+            <h3>Overview of Open Positions</h3>
+            <table border="1">
+                <caption>Available positions and shift requirements</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Position</th>
+                        <th scope="col">Schedule</th>
+                        <th scope="col">Experience Needed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Express Barista</td>
+                        <td>Flexible (4&ndash;8 hour shifts)</td>
+                        <td>No experience required (training provided)</td>
+                    </tr>
+                    <tr>
+                        <td>Shift Lead</td>
+                        <td>Full-time (rotational)</td>
+                        <td>1+ year in specialty coffee</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="apply">
+            <h2>Recruitment Process</h2>
+            <ol>
+                <li>Submit the application form below or attach your resume</li>
+                <li>Attend a brief twenty-minute interview at our cafe</li>
+                <li>Complete three paid onboarding shifts with a senior mentor</li>
+            </ol>
+        </section>
+        <section id="apply-form">
+            <h2>Apply Online</h2>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Candidate Details</legend>
+
+                    <p>
+                        <label for="full-name">Full Name:</label><br>
+                        <input type="text" id="full-name" name="fullName" placeholder="e.g. Yasmina Rozieva" required>
+                    </p>
+
+                    <p>
+                        <label for="email-addr">Email Address:</label><br>
+                        <input type="email" id="email-addr" name="email" placeholder="example@mail.kz" required>
+                    </p>
+
+                    <p>
+                        <label for="phone-num">Phone Number:</label><br>
+                        <input type="tel" id="phone-num" name="phone" placeholder="+7 (707) 000-00-00" required>
+                    </p>
+
+                    <p>
+                        <label for="desired-role">Desired Position:</label><br>
+                        <select id="desired-role" name="role" required>
+                            <option value="">-- Choose a position --</option>
+                            <option value="barista">Express Barista</option>
+                            <option value="shift-lead">Shift Lead</option>
+                            <option value="intern">Student Intern</option>
+                        </select>
+                    </p>
+
+                    <fieldset>
+                        <legend>Preferred Schedule</legend>
+                        <label>
+                            <input type="radio" name="schedule" value="part-time" checked> Part-time (Student friendly)
+                        </label><br>
+                        <label>
+                            <input type="radio" name="schedule" value="full-time"> Full-time
+                        </label>
+                    </fieldset>
+
+                    <p>
+                        <label for="resume-file">Upload Resume (PDF/DOCX):</label><br>
+                        <input type="file" id="resume-file" name="resume" accept=".pdf,.docx">
+                    </p>
+
+                    <p>
+                        <label for="cover-letter">Short Cover Letter or Motivation:</label><br>
+                        <textarea id="cover-letter" name="coverLetter" rows="4" cols="40" placeholder="Tell us about yourself and your schedule availability..."></textarea>
+                    </p>
+
+                    <p>
+                        <button type="submit">Submit Application</button>
+                        <button type="reset">Clear Form</button>
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+        <p><a href="#top">Back to top &uarr;</a></p>
+    </main>
+    <footer>
+        <hr>
+        <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
+        <p>Phone: <a href="tel: +77470290043"> +7 747 029 00 43</a></p>
+        <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
+        <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
+        <hr>
+        <p>&copy; 2026 Zebra Coffee. All rights reserved.</p>
+    </footer>
+</body>
+</html>
