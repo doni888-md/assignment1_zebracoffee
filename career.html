@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore job openings and student barista opportunities at Zebra Coffee on Mangilik El in Astana.">
-    <meta name="author" content="Yasmina Rozieva">
+    <meta name="author" content="Yasmina Roziyeva">
     <title>Zebra Coffee — Careers</title>
 </head>
 <body>
-    <!-- Author: Yasmina Rozieva -->
+    <!-- Author: Yasmina Roziyeva -->
     <!-- Rationale: Clear hierarchical structure with dedicated articles for vacancies ensures high readability and automated parser compatibility. -->
     <header id="top">
         <h1>Zebra Coffee</h1>
@@ -32,9 +32,11 @@
         <p>Quick navigation: <a href="#benefits">Team Culture</a> | <a href="#openings">Available Roles</a> | <a href="#apply">How to Apply</a></p>
         <section id="benefits">
             <h2>Why work with us</h2>
-            <p>At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay, 
+            <p>
+                At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay, 
                 flexible shift rotations, and accredited espresso training. Located on busy Mangilik El Avenue, 
                 our team thrives on swift service, collaborative spirit, and positive guest interactions every day.
+                We provide <mark>free weekly cuppings</mark> and professional mentorship.
             </p>
             <blockquote>
                 <p>
@@ -58,7 +60,7 @@
                 <p>Key duties include:</p>
                 <ul>
                     <li>Extracting specialty espresso drinks under the three-minute standard</li>
-                    <li>Handling POS transactions and cash management efficiently</li>
+                    <li>Handling <abbr title="Point of Sale">POS</abbr> transactions and cash management efficiently</li>
                     <li>Maintaining workstation sanitation during rush hours</li>
                 </ul>
             </article>
@@ -88,15 +90,17 @@
         </section>
         <section id="apply">
             <h2>Recruitment Process</h2>
-            <ol>
+            <ol type="1">
                 <li>Submit the application form below or attach your resume</li>
                 <li>Attend a brief twenty-minute interview at our cafe</li>
                 <li>Complete three paid onboarding shifts with a senior mentor</li>
             </ol>
         </section>
+        <!-- Rationale: Explicit fieldset grouping and strict input type mapping guarantee accessible keyboard navigation and native client-side validation. -->
         <section id="apply-form">
             <h2>Apply Online</h2>
             <form action="#" method="post">
+                <!-- Note: This form does not send anything yet as there is no backend server configured for this assignment; handling will be implemented later. -->
                 <fieldset>
                     <legend>Candidate Details</legend>
 
@@ -113,6 +117,16 @@
                     <p>
                         <label for="phone-num">Phone Number:</label><br>
                         <input type="tel" id="phone-num" name="phone" placeholder="+7 (707) 000-00-00" required>
+                    </p>
+
+                    <p>
+                        <label for="hours-available">Available Hours Per Week:</label><br>
+                        <input type="number" id="hours-available" name="hours" min="10" max="40" placeholder="20" required>
+                    </p>
+
+                    <p>
+                        <label for="start-date">Earliest Start Date:</label><br>
+                        <input type="date" id="start-date" name="startDate" required>
                     </p>
 
                     <p>
@@ -146,6 +160,16 @@
                     </p>
 
                     <p>
+                        <label>
+                            <input type="checkbox" name="terms" required> I confirm that the details provided are accurate and complete.
+                        </label>
+                    </p>
+
+                    <p>
+                        <small>*We respond to successful applicants within three business days.</small>
+                    </p>
+
+                    <p>
                         <button type="submit">Submit Application</button>
                         <button type="reset">Clear Form</button>
                     </p>
@@ -157,7 +181,7 @@
     <footer>
         <hr>
         <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-        <p>Phone: <a href="tel: +77470290043"> +7 747 029 00 43</a></p>
+        <p>Phone: <a href="tel:+77470290043">+7 747 029 00 43</a></p>
         <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
         <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
         <hr>

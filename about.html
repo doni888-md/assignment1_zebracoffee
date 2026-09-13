@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn about Zebra Coffee – our brand story, mission, and dedication to fast quality coffee.">
-    <meta name="author" content="Yasmina Rozieva">
+    <meta name="author" content="Yasmina Roziyeva">
     <title>About Us — Zebra Coffee</title>
 </head>
 <body>
-    <!-- Author: Yasmina Rozieva -->
+    <!-- Author: Yasmina Roziyeva -->
     <!-- Rationale: Uniform navigation across the website ensures predictable keyboard and screen-reader accessibility. -->
     <header id="top">
         <h1>Zebra Coffee</h1>
@@ -40,17 +40,18 @@
                     Founded in <time datetime="2014">2014</time>, <strong>Zebra Coffee</strong> began 
                     with a clear mission: provide exceptional grab-and-go specialty beverages at a fair price. 
                     What started as a single humble kiosk has developed into an urban network serving thousands 
-                    of students, commuters, and professionals every single morning.
+                    of students from nearby <abbr title="Astana IT University">AITU</abbr>, busy commuters, and city professionals every single morning. 
+                    We prioritize <em>uncompromising bean freshness</em> and <b>craft precision</b>.
                 </p>
                 <p>
                     Our flagship branch on Mangilik El Avenue represents our latest interior vision&mdash;combining 
                     swift counter service with comfortable second-floor collaborative workspaces open 
-                    <strong>24/7</strong> for late-night study sessions. We rank among the top 10<sup>th</sup> 
-                    percentile of fast-service coffee chains for customer satisfaction in Astana.
+                    <mark>24/7</mark> for late-night study sessions. We rank among the top 10<sup>th</sup> 
+                    percentile of fast-service coffee chains for customer satisfaction in Astana, offering 
+                    <i>quiet corners</i> alongside active urban energy.
                 </p>
             </article>
 
-            
             <figure>
                 <img src="images/img5_kassa.jpg" alt="Order counter at Zebra Coffee featuring an illuminated overhead menu board and cash register" width="300" height="200">
                 <figcaption>Main service counter with overhead digital menu boards for quick order placement.</figcaption>
@@ -65,49 +66,54 @@
             </figure>
         </section>
 
+        <!-- Rationale: A definition list (<dl>) is semantically chosen over an unordered list to explicitly associate core brand principles with their operational definitions. -->
         <section id="values">
-        <h2>Our Core Principles</h2>
+            <h2>Our Core Principles</h2>
 
-        <dl>
-            <dt><strong>Quality</strong></dt>
-            <dd>Certified Arabica beans, calibrated espresso grinders, and fresh local milk for every single cup.</dd>
+            <dl>
+                <dt><strong>Quality</strong></dt>
+                <dd>Certified Arabica beans, calibrated espresso grinders, and fresh local milk for every single cup.</dd>
 
-            <dt><strong>Speed</strong></dt>
-            <dd>Average order preparation time under three minutes, prioritizing busy commuters and students.</dd>
+                <dt><strong>Speed</strong></dt>
+                <dd>Average order preparation time under three minutes, prioritizing busy commuters and students.</dd>
 
-            <dt><strong>Hospitality</strong></dt>
-            <dd>Welcoming atmosphere, respectful counter communication, and comfortable seating across both floors.</dd>
-        </dl>
+                <dt><strong>Hospitality</strong></dt>
+                <dd>Welcoming atmosphere, respectful counter communication, and comfortable seating across both floors.</dd>
+            </dl>
 
-        <h3>Service Benchmarks</h3>
-        <table border="1">
-            <caption>Key operational standards at our Mangilik El location</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Standard</th>
-                    <th scope="col">Target</th>
-                    <th scope="col">Frequency</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Order Prep Time</td>
-                    <td>&lt; 3 minutes</td>
-                    <td>Every order</td>
-                </tr>
-                <tr>
-                    <td>Grinder Calibration</td>
-                    <td>Exact espresso extraction</td>
-                    <td>Twice per shift</td>
-                </tr>
-                <tr>
-                    <td>Workplace Seating</td>
-                    <td>24/7 access</td>
-                    <td>Continuous</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+            <h3>Service Benchmarks</h3>
+
+            <!-- Rationale: A generic div container is used strictly as a structural wrapper around the data table because HTML5 provides no specific semantic container for tabular layouts. -->
+            <div class="table-wrapper">
+                <table border="1">
+                    <caption>Key operational standards at our Mangilik El location</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Standard</th>
+                            <th scope="col">Target</th>
+                            <th scope="col">Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Order Prep Time</td>
+                            <td>&lt; 3 minutes</td>
+                            <td>Every order</td>
+                        </tr>
+                        <tr>
+                            <td>Grinder Calibration</td>
+                            <td>Exact espresso extraction</td>
+                            <td>Twice per shift</td>
+                        </tr>
+                        <tr>
+                            <td>Workplace Seating</td>
+                            <td>24/7 access</td>
+                            <td>Continuous</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
         <p><a href="#top">Back to top</a></p>
     </main>
@@ -115,7 +121,7 @@
     <footer>
         <hr>
         <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-        <p>Phone: <a href="tel: +77470290043"> +7 747 029 00 43</a></p>
+        <p>Phone: <a href="tel:+77470290043"> +7 747 029 00 43</a></p>
         <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
         <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
         <hr>
