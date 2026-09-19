@@ -1,0 +1,431 @@
+/* Discount area is the containing block for the absolutely positioned badge. */
+/* The discount block gets a warm background to emphasize the special offer. */
+.discount-area {
+    position: relative;
+    margin-top: 24px;
+    padding: 24px;
+    background-color: #F8F7F2;
+    border: 1px solid #E8DED2;
+    border-radius: 12px;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    background-color: #00A99D;
+    color: white;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.gallery-grid {
+    /* Grid creates alternating wide and narrow photos with balanced proportions. */
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 28px;
+    align-items: start;
+
+    background-color: white;
+    padding: 28px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 16px;
+}
+
+.gallery-grid > h2,
+.gallery-grid > p {
+    grid-column: 1 / -1;
+}
+
+.gallery-item {
+    margin: 0;
+}
+
+.gallery-item figcaption {
+    padding: 10px 4px 0;
+    color: #6B4F3A;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    display: block;
+    object-position: center bottom;
+}
+
+/* First row: wider + narrower. */
+.gallery-item:nth-of-type(1) {
+    grid-column: 1 / 6;
+}
+
+.gallery-item:nth-of-type(2) {
+    grid-column: 6 / 9;
+}
+
+/* Second row: narrower + wider. */
+.gallery-item:nth-of-type(3) {
+    grid-column: 1 / 4;
+}
+
+.gallery-item:nth-of-type(4) {
+    grid-column: 4 / 9;
+}
+
+/* Flexbox is suitable here because the duties are separate items
+   that can grow, shrink and wrap within the available space. */
+.duty-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 20px 0 32px;
+    list-style: none;
+}
+
+.duty-list li {
+    flex: 1 1 260px;
+    min-height: 130px;
+    padding: 24px;
+    background-color: #F8F7F2;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 12px;
+    color: #202020;
+    line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(32, 32, 32, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.duty-list li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(32, 32, 32, 0.12);
+}
+
+#role-barista > p:nth-of-type(2) {
+    margin-bottom: 8px;
+    color: #6B4F3A;
+    font-weight: 700;
+}
+
+/* Main career sections are visually separated from the page background. */
+#benefits,
+#openings,
+#apply,
+#apply-form {
+    background-color: white;
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+}
+
+/* The table uses full width so the three columns remain easy to scan. */
+#openings table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border: 1px solid #E8DED2;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Static positioning keeps the openings section in the normal document flow. */
+#openings {
+    position: static;
+}
+
+/* The caption visually connects the table with its purpose. */
+#openings caption {
+    margin-bottom: 12px;
+    color: #6B4F3A;
+    font-weight: 600;
+    text-align: left;
+}
+
+#openings th {
+    padding: 16px;
+    background-color: #00A99D;
+    color: white;
+    text-align: left;
+    font-weight: 700;
+}
+
+#openings td {
+    padding: 16px;
+    border-bottom: 1px solid #E8DED2;
+    vertical-align: top;
+}
+
+#openings tbody tr:nth-child(even) {
+    background-color: #F8F7F2;
+}
+
+#openings tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#openings tbody tr:hover {
+    background-color: #E8DED2;
+}
+
+#openings > h3 {
+    margin: 32px 0 0;
+    padding: 14px 18px;
+    background-color: #F8F7F2;
+    border-left: 4px solid #00A99D;
+    color: #6B4F3A;
+}
+
+
+
+/* The ordered list presents the recruitment process as a clear sequence. */
+#apply ol {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: recruitment-step;
+}
+
+#apply ol li {
+    counter-increment: recruitment-step;
+    position: relative;
+    margin-bottom: 16px;
+    padding: 20px 24px 20px 68px;
+    background-color: #F8F7F2;
+    border: 1px solid #E8DED2;
+    border-left: 4px solid #00A99D;
+    border-radius: 12px;
+    line-height: 1.5;
+}
+
+/* Custom numbered marker keeps the three recruitment steps visually connected. */
+#apply ol li::before {
+    content: counter(recruitment-step);
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #00A99D;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    line-height: 32px;
+}
+
+/* Cascade demonstration: this external !important rule overrides the normal inline color. */
+#apply h2 {
+    color: #6B4F3A !important;
+}
+
+/* Section headings use the Zebra Coffee accent color. */
+main h2 {
+    color: #6B4F3A;
+    letter-spacing: 0.5px;
+}
+
+/* Grid is suitable for the history gallery because the three photos
+   need equal columns and consistent spacing. */
+#history {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    background-color: white;
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+}
+
+/* The heading and article use the full width of the history section. */
+#history > h2,
+#history > article {
+    grid-column: 1 / -1;
+}
+
+/* Adjacent sibling selector: matches the article immediately following the h2. */
+#history h2 + article {
+    margin-top: 8px;
+}
+
+#history figure {
+    margin: 0;
+    background-color: #F8F7F2;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#history figure img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+#history figcaption {
+    padding: 14px;
+    color: #6B4F3A;
+    text-align: center;
+}
+
+/* Core principles are presented as a separate content card. */
+#values {
+    background-color: white;
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+}
+
+/* The definition list keeps each principle and its explanation together vertically. */
+#values dl {
+    margin: 24px 0 32px;
+}
+
+#values dt {
+    padding: 16px 20px 6px;
+    background-color: #E8DED2;
+    color: #6B4F3A;
+    font-size: 18px;
+    font-weight: 700;
+    border-left: 4px solid #00A99D;
+}
+
+#values dd {
+    margin: 0 0 18px;
+    padding: 0 20px 16px;
+    background-color: #F8F7F2;
+    border-left: 4px solid #00A99D;
+    line-height: 1.5;
+}
+
+/* The table uses the same visual language as the other content cards. */
+#values table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+#values caption {
+    margin-bottom: 12px;
+    color: #6B4F3A;
+    font-weight: 600;
+}
+
+#values th {
+    background-color: #00A99D;
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
+
+#values td {
+    padding: 14px;
+    border-bottom: 1px solid #E8DED2;
+}
+
+#values tbody tr:nth-child(even) {
+    background-color: #F8F7F2;
+}
+
+/* Fixed positioning keeps the navigation control visible while scrolling. */
+.back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 10;
+    padding: 10px 16px;
+    background-color: #00A99D;
+    color: white;
+    text-decoration: none;
+    border-radius: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(32, 32, 32, 0.2);
+}
+
+.back-to-top:hover {
+    background-color: #6B4F3A;
+    color: white;
+}
+
+/* Main page sections use the same card style as the About and Career pages. */
+#welcome,
+#highlights,
+#schedule {
+    background-color: white;
+    padding: 28px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 16px;
+}
+
+/* The benefits image is centered with margin auto because it is a standalone visual element. */
+#benefits figure {
+    margin: 24px auto 0;
+    max-width: 650px;
+    text-align: center;
+}
+
+#benefits figure img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+}
+
+#benefits figcaption {
+    padding-top: 12px;
+    color: #6B4F3A;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Attribute selector: matches links that open in a new browser tab. */
+a[target="_blank"] {
+    text-decoration-thickness: 2px;
+}
+
+/* The image floats beside the paragraph text, demonstrating text wrapping around an image. */
+.benefit-float {
+    float: left;
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    margin: 0 24px 14px 0;
+    border-radius: 12px;
+}
+
+/* Clear prevents the following content from wrapping around the floated image. */
+.clear-after {
+    clear: both;
+}
+
+/* The external stylesheet is loaded after the internal style, so this rule wins in the cascade. */
+#openings > h3 {
+    color: #00A99D;
+}
+
+/* Specificity: 0-0-1. Matches every h2 element. */
+h2 {
+    color: #6B4F3A;
+}
+
+/* Specificity: 0-1-1. Matches h2 inside #benefits.
+   This rule wins because it has higher specificity. */
+#benefits h2 {
+    color: #00A99D;
+}

@@ -6,11 +6,15 @@
     <meta name="description" content="Zebra Coffee – a cozy coffee shop in a convenient location.">
     <meta name="author" content="Yasmina Roziyeva">
     <title>Zebra Coffee — Homepage</title>
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/yasmina.css">
 </head>
  
 <body>
     <!-- Author: Yasmina Roziyeva -->
     <header id="top">
+        <img src="images/logo.png" alt="Zebra Coffee logo">
         <h1>Zebra Coffee</h1>
         <p>City to-go coffee shop</p>
         <nav>
@@ -29,7 +33,7 @@
     </header>
 
     <main>
-        <p>Quick links: <a href="#highlights">Highlights</a> | <a href="#photo-gallery">Gallery</a></p>
+        <p class="quick-links">Quick links: <a href="#highlights">Highlights</a> | <a href="#photo-gallery">Gallery</a></p>
         <section id="welcome">
             <h2>Welcome to Zebra Coffee on Mangilik El</h2>
             <p>
@@ -52,44 +56,45 @@
                 espresso shots, and free splashes of milk to build their personal 
                 favorite beverage.
             </p>
-            <aside>
-                <h4>Discounts and Grab-and-Go</h4>
+            <aside class="discount-area">
+                <h3>Discounts and Grab-and-Go</h3>
                 <p>
                     We appreciate guests visiting us around the clock. The express <abbr title="To-Go format">TG</abbr> setup ensures your order is ready in under three minutes.
                 </p>
                 <p>
                     <!-- span is used to mark the numeric discount value because HTML5 lacks a semantic tag for percentages/discounts -->
-                    Ask our barista for the loyalty program to receive a special <span class="discount-badge">10% discount</span> on regular visits.
+                    <span class="discount-badge">10% discount</span>
+                    Ask our barista for the loyalty program to receive a special on regular visits.
                 </p>
             </aside>
         </section>
         <!-- Independent section with figure elements encapsulates visual assets, ensuring image-caption pairs remain semantically coupled even if rendered outside standard document flow. -->
-        <section id="photo-gallery">
+        <section id="photo-gallery" class="gallery-grid">
             <h2>Photo Gallery</h2>
             <p>Authentic photos taken at our Mangilik El location:</p>
-            <figure>
-                <img src="images/img1_street.jpg" alt="Cozy street view of Zebra Coffee entrance on Mangilik El with warm lighting" width="300" height="200">
+            <figure class="gallery-item">
+                <img src="images/img1_street.jpg" alt="Cozy street view of Zebra Coffee entrance on Mangilik El with warm lighting">
                 <figcaption>Exterior view of our cozy Mangilik El branch welcoming guests with evening lights.</figcaption>
             </figure>
-            <figure>
-                <img src="images/img2_kassa.jpg" alt="Main entrance and cash desk of Zebra Coffee with pastry showcase and menu board" width="300" height="200">
+            <figure class="gallery-item">
+                <img src="images/img2_kassa.jpg" alt="Main entrance and cash desk of Zebra Coffee with pastry showcase and menu board">
                 <figcaption>Main entrance and cash counter where guests place takeaway orders and pick up fresh pastries.</figcaption>
             </figure>
-            <figure>
-                <img src="images/img3_2floor.jpg" alt="Second floor seating area of Zebra Coffee featuring white modern chairs, wooden tables, and study spaces" width="300" height="200">
+            <figure class="gallery-item">
+                <img src="images/img3_2floor.jpg" alt="Second floor seating area of Zebra Coffee featuring white modern chairs, wooden tables, and study spaces">
                 <figcaption>Cozy second-floor mezzanine with white chairs and tables, offering a quiet space for studying and working.</figcaption>
             </figure>
-            <figure>
-                <img src="images/img4_style.jpg" alt="Sleek and modern interior of Zebra Coffee with illuminated white walls, ambient LED lighting, and contemporary seating" width="300" height="200">
+            <figure class="gallery-item">
+                <img src="images/img4_style.jpg" alt="Sleek and modern interior of Zebra Coffee with illuminated white walls, ambient LED lighting, and contemporary seating">
                 <figcaption>Stylish coffee shop interior with bright white backlighting and a clean minimalist aesthetic.</figcaption>
             </figure>
         </section>
-        <section id="schedule">
+        <section id="schedule" class="opening-hours">
             <h2>Opening Hours</h2>
             <p>Our doors are open <strong>24 hours a day</strong>, welcoming guests day and night without breaks.</p>
             <p><small>&quot;Quality and care in every single cup&quot; &mdash; that is the core commitment of our team.</small></p>
         </section>
-        <p><a href="#top">Back to top</a></p>
+        <p><a class="back-to-top" href="#top">Back to top</a></p>
         
     </main>
 

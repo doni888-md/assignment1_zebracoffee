@@ -6,11 +6,24 @@
     <meta name="description" content="Explore job openings and student barista opportunities at Zebra Coffee on Mangilik El in Astana.">
     <meta name="author" content="Yasmina Roziyeva">
     <title>Zebra Coffee — Careers</title>
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/yasmina.css">
+
+    <!-- Cascade demonstration: this internal rule is intentionally overridden by the external stylesheet. -->
+    <!-- Cascade demonstration: this internal rule is intentionally overridden by the external stylesheet. -->
+    <!-- Cascade demonstration: this internal rule is intentionally overridden by the external stylesheet. -->
+    <style>
+        #openings > h3 {
+            color: #6B4F3A;
+        }
+    </style>
 </head>
 <body>
     <!-- Author: Yasmina Roziyeva -->
     <!-- Rationale: Clear hierarchical structure with dedicated articles for vacancies ensures high readability and automated parser compatibility. -->
     <header id="top">
+        <img src="images/logo.png" alt="Zebra Coffee logo">
         <h1>Zebra Coffee</h1>
         <p>Careers and Opportunities</p>
 
@@ -32,23 +45,28 @@
         <p>Quick navigation: <a href="#benefits">Team Culture</a> | <a href="#openings">Available Roles</a> | <a href="#apply">How to Apply</a></p>
         <section id="benefits">
             <h2>Why work with us</h2>
+
             <p>
-                At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay, 
-                flexible shift rotations, and accredited espresso training. Located on busy Mangilik El Avenue, 
-                our team thrives on swift service, collaborative spirit, and positive guest interactions every day.
-                We provide <mark>free weekly cuppings</mark> and professional mentorship.
+                <img src="images/img8_team.jpg"
+                    alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar"
+                    class="benefit-float">
+                    At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay,
+                    flexible shift rotations, and accredited espresso training. Located on busy Mangilik El Avenue,
+                    our team thrives on swift service, collaborative spirit, and positive guest interactions every day.
+                    We provide <mark>free weekly cuppings</mark> and professional mentorship.
             </p>
+
             <blockquote>
                 <p>
-                    Balancing university classes with morning bar shifts was straightforward thanks to flexible scheduling. 
+                    Balancing university classes with morning bar shifts was straightforward thanks to flexible scheduling.
                     I mastered grinder calibration within my first month.
                 </p>
                 <cite>&mdash; Daniyar, Shift Supervisor</cite>
             </blockquote>
-            <figure>
-                <img src="images/img8_team.jpg" alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar" width="400" height="300">
-                <figcaption>Our passionate barista crew at the Mangilik El branch ready to welcome guests.</figcaption>
-            </figure>
+
+            <p class="clear-after">
+                Our passionate barista crew at the Mangilik El branch is ready to welcome guests.
+            </p>
         </section>
         <section id="openings">
             <h2>Current vacancies in Astana:</h2>
@@ -58,14 +76,14 @@
                     Posted: <time datetime="2026-09-10">September 10, 2026</time> | Location: Mangilik El 38
                 </p>
                 <p>Key duties include:</p>
-                <ul>
+                <ul class="duty-list">
                     <li>Extracting specialty espresso drinks under the three-minute standard</li>
                     <li>Handling <abbr title="Point of Sale">POS</abbr> transactions and cash management efficiently</li>
                     <li>Maintaining workstation sanitation during rush hours</li>
                 </ul>
             </article>
             <h3>Overview of Open Positions</h3>
-            <table border="1">
+            <table>
                 <caption>Available positions and shift requirements</caption>
                 <thead>
                     <tr>
@@ -89,7 +107,8 @@
             </table>
         </section>
         <section id="apply">
-            <h2>Recruitment Process</h2>
+            <!-- Cascade demonstration: this inline style is intentionally overridden by the external !important rule. -->
+            <h2 style="color: #00A99D;">Recruitment Process</h2>
             <ol type="1">
                 <li>Submit the application form below or attach your resume</li>
                 <li>Attend a brief twenty-minute interview at our cafe</li>
@@ -132,7 +151,6 @@
                     <p>
                         <label for="desired-role">Desired Position:</label><br>
                         <select id="desired-role" name="role" required>
-                            <option value="">-- Choose a position --</option>
                             <option value="barista">Express Barista</option>
                             <option value="shift-lead">Shift Lead</option>
                             <option value="intern">Student Intern</option>
@@ -176,7 +194,7 @@
                 </fieldset>
             </form>
         </section>
-        <p><a href="#top">Back to top &uarr;</a></p>
+        <p><a class="back-to-top" href="#top">Back to top</a></p>
     </main>
     <footer>
         <hr>
