@@ -11,25 +11,30 @@
     <meta name="author" content="Dana">
 
     <title>Zebra Coffee - Reviews</title>
+
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="dana.css">
 </head>
 
 <body>
-     <!-- Author of the page: Dana -->
+
 <header>
+
     <h1>Zebra Coffee - Reviews</h1>
 
     <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="career.html">Careers</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="colophon.html">Colophon</a></li>
-            </ul>
-        </nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="colophon.html">Colophon</a></li>
+        </ul>
+    </nav>
+
 </header>
 
 <main>
@@ -39,6 +44,7 @@
         <h2>Customer Reviews</h2>
 
         <article>
+
             <h3>Visitors' Opinions</h3>
 
             <p>
@@ -56,36 +62,50 @@
                 A <abbr title="Customer Review">CR</abbr>
                 describes a visitor's experience at the coffee shop.
             </p>
+
         </article>
 
-            <img src="images/IMG_0045.jpg"
-                 alt="Review of Zebra Coffee"
-                 width="300">
-            <blockquote>
-    <p>
-        <q>
-            Pleasant atmosphere, great purple on Salvador Geisha.
-            A clean balanced cup with a bright aroma, pleasant
-            sweetness and revealing floral and fruity notes.
-        </q>
-    </p>
+        <img src="images/IMG_0045.jpg"
+             alt="Review of Zebra Coffee"
+             width="300">
 
-    <cite>— d sss__, 30 July 2026</cite>
-</blockquote>
+        <blockquote>
+
+            <p>
+                <q>
+                    Pleasant atmosphere, great purple on Salvador Geisha.
+                    A clean balanced cup with a bright aroma, pleasant
+                    sweetness and revealing floral and fruity notes.
+                </q>
+            </p>
+
+            <cite>— d sss__, 30 July 2026</cite>
+
+        </blockquote>
 
         <figure>
-            <img src="images/IMG_0046.jpg"
-                alt="Interior of Zebra Coffee"
-                width="300">
-        <figcaption>Main interior of Zebra Coffee.</figcaption>
-</figure>
 
-<figure>
-    <img src="images/IMG_0047.jpg"
-         alt="Another view of Zebra Coffee interior"
-         width="200">
-    <figcaption>Another view of the interior.</figcaption>
-</figure>
+            <img src="images/IMG_0046.jpg"
+                 alt="Interior of Zebra Coffee"
+                 width="300">
+
+            <figcaption>
+                Main interior of Zebra Coffee.
+            </figcaption>
+
+        </figure>
+
+        <figure>
+
+            <img src="images/IMG_0047.jpg"
+                 alt="Another view of Zebra Coffee interior"
+                 width="200">
+
+            <figcaption>
+                Another view of the interior.
+            </figcaption>
+
+        </figure>
 
         <hr>
 
@@ -95,14 +115,13 @@
 
             <form action="#" method="post">
 
-                <!-- The form does not send information yet because server-side handling comes later. -->
-
                 <fieldset>
 
                     <legend>Your Review</legend>
 
                     <p>
                         <label for="name">Name:</label>
+
                         <input type="text"
                                id="name"
                                name="name"
@@ -112,6 +131,7 @@
 
                     <p>
                         <label for="email">Email:</label>
+
                         <input type="email"
                                id="email"
                                name="email"
@@ -121,14 +141,16 @@
 
                     <p>
                         <label for="phone">Phone:</label>
+
                         <input type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="+7 700 000 00 00">
+                               id="phone"
+                               name="phone"
+                               placeholder="+7 700 000 00 00">
                     </p>
 
                     <p>
                         <label for="date">Visit date:</label>
+
                         <input type="date"
                                id="date"
                                name="date"
@@ -136,14 +158,17 @@
                     </p>
 
                     <p>
-                        <label for="rating-number">Rating from 1 to 5:</label>
+                        <label for="rating-number">
+                            Rating from 1 to 5:
+                        </label>
+
                         <input type="number"
-                                id="rating-number"
-                                name="rating-number"
-                                min="1"
-                                max="5"
-                                placeholder="5"
-                                required>
+                               id="rating-number"
+                               name="rating-number"
+                               min="1"
+                               max="5"
+                               placeholder="5"
+                               required>
                     </p>
 
                     <p>How was your visit?</p>
@@ -153,25 +178,42 @@
                            name="rating"
                            value="good"
                            required>
+
                     <label for="good">Good</label>
 
                     <input type="radio"
                            id="excellent"
                            name="rating"
                            value="excellent">
+
                     <label for="excellent">Excellent</label>
 
                     <p>
-                        <label for="drink">What did you order?</label>
+
+                        <label for="drink">
+                            What did you order?
+                        </label>
 
                         <select id="drink" name="drink">
-                            <option value="coffee">Coffee</option>
-                            <option value="tea">Tea</option>
-                            <option value="dessert">Dessert</option>
+
+                            <option value="coffee">
+                                Coffee
+                            </option>
+
+                            <option value="tea">
+                                Tea
+                            </option>
+
+                            <option value="dessert">
+                                Dessert
+                            </option>
+
                         </select>
+
                     </p>
 
                     <p>
+
                         <input type="checkbox"
                                id="recommend"
                                name="recommend">
@@ -179,10 +221,15 @@
                         <label for="recommend">
                             I recommend Zebra Coffee.
                         </label>
+
                     </p>
 
                     <p>
-                        <label for="review">Your review:</label>
+
+                        <label for="review">
+                            Your review:
+                        </label>
+
                     </p>
 
                     <textarea id="review"
@@ -193,8 +240,13 @@
                               required></textarea>
 
                     <p>
-                        <input type="submit" value="Submit">
-                        <input type="reset" value="Reset">
+
+                        <input type="submit"
+                               value="Submit">
+
+                        <input type="reset"
+                               value="Reset">
+
                     </p>
 
                 </fieldset>
@@ -204,19 +256,27 @@
         </article>
 
         <aside>
+
             <h3>Review Tips</h3>
 
             <ul>
+
                 <li>
                     Write about your personal experience.
-            <ul>
-                <li>Mention the drink.</li>
-                <li>Mention the atmosphere.</li>
-            </ul>
+
+                    <ul>
+                        <li>Mention the drink.</li>
+                        <li>Mention the atmosphere.</li>
+                    </ul>
+
                 </li>
+
                 <li>Be honest and clear.</li>
+
                 <li>Do not share private information.</li>
+
             </ul>
+
         </aside>
 
         <p>

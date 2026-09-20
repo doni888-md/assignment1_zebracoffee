@@ -1,0 +1,333 @@
+/* ==================================================
+   DANA.CSS
+   Styles for menu.html and reviews.html
+   ================================================== */
+
+
+/* ==================================================
+   MENU PAGE
+   ================================================== */
+
+#menu {
+    background-color: white;
+    padding: 28px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 16px;
+}
+
+#menu h2,
+#menu h3 {
+    color: #6B4F3A;
+}
+
+#menu article {
+    margin-bottom: 32px;
+}
+
+#menu table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border: 1px solid #E8DED2;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#menu caption {
+    color: #6B4F3A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 16px 0;
+}
+
+#menu th {
+    background-color: #00A99D;
+    color: white;
+    padding: 16px;
+    text-align: left;
+}
+
+#menu td {
+    padding: 16px;
+    border-bottom: 1px solid #E8DED2;
+    vertical-align: middle;
+}
+
+#menu tr:nth-child(even) {
+    background-color: #F8F7F2;
+}
+
+#menu tr:hover {
+    background-color: #E8DED2;
+}
+
+#menu img {
+    width: 150px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+#menu button {
+    background-color: #00A99D;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#menu button:hover {
+    background-color: #6B4F3A;
+}
+
+#menu button:focus {
+    outline: 2px solid #00A99D;
+    outline-offset: 3px;
+}
+
+#menu input[type="number"],
+#menu input[type="text"] {
+    width: 100%;
+    max-width: 180px;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #E8DED2;
+    border-radius: 8px;
+    background-color: #F8F7F2;
+}
+
+#menu input[type="number"]:focus,
+#menu input[type="text"]:focus {
+    outline: none;
+    border-color: #00A99D;
+}
+
+#menu aside,
+#menu > article:nth-of-type(2),
+#menu > section {
+    background-color: white;
+    padding: 28px;
+    margin-top: 32px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 16px;
+}
+
+#menu ul {
+    padding-left: 24px;
+}
+
+#menu a {
+    color: #6B4F3A;
+    font-weight: 600;
+}
+
+#menu a:hover {
+    color: #00A99D;
+}
+
+
+/* ==================================================
+   REVIEWS PAGE
+   ================================================== */
+
+#reviews {
+    background-color: white;
+    padding: 28px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 16px;
+}
+
+#reviews h2,
+#reviews h3 {
+    color: #6B4F3A;
+}
+
+#reviews article {
+    margin-bottom: 32px;
+}
+
+#reviews img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 12px 0;
+}
+
+#reviews blockquote {
+    background-color: #F8F7F2;
+    border-left: 4px solid #00A99D;
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-radius: 12px;
+}
+
+#reviews blockquote p {
+    margin-top: 0;
+}
+
+#reviews cite {
+    color: #6B4F3A;
+    font-weight: bold;
+}
+
+#reviews figure {
+    background-color: #F8F7F2;
+    padding: 16px;
+    margin: 24px 0;
+    border: 1px solid #E8DED2;
+    border-radius: 12px;
+}
+
+#reviews figcaption {
+    color: #6B4F3A;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+#reviews hr {
+    border: none;
+    border-top: 2px solid #E8DED2;
+    margin: 40px 0;
+}
+
+#review-form {
+    margin-top: 40px;
+}
+
+#reviews fieldset {
+    background-color: white;
+    border: 2px solid #E8DED2;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(32, 32, 32, 0.08);
+}
+
+#reviews legend {
+    color: #6B4F3A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+#reviews label {
+    font-weight: bold;
+}
+
+#reviews input[type="text"],
+#reviews input[type="email"],
+#reviews input[type="tel"],
+#reviews input[type="date"],
+#reviews input[type="number"],
+#reviews select,
+#reviews textarea {
+    width: 100%;
+    padding: 11px 14px;
+    margin-top: 6px;
+    border: 1px solid #E8DED2;
+    border-radius: 8px;
+    background-color: #F8F7F2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+#reviews input:focus,
+#reviews select:focus,
+#reviews textarea:focus {
+    outline: none;
+    border-color: #00A99D;
+}
+
+#reviews input[type="radio"],
+#reviews input[type="checkbox"] {
+    accent-color: #00A99D;
+}
+
+#reviews textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#reviews input[type="submit"],
+#reviews input[type="reset"] {
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#reviews input[type="submit"] {
+    background-color: #00A99D;
+}
+
+#reviews input[type="reset"] {
+    background-color: #6B4F3A;
+}
+
+#reviews input[type="submit"]:hover,
+#reviews input[type="reset"]:hover {
+    opacity: 0.85;
+}
+
+#reviews aside {
+    background-color: #F8F7F2;
+    padding: 24px;
+    margin-top: 32px;
+    border: 1px solid #E8DED2;
+    border-left: 4px solid #00A99D;
+    border-radius: 12px;
+}
+
+#reviews a {
+    color: #6B4F3A;
+    font-weight: 600;
+}
+
+#reviews a:hover {
+    color: #00A99D;
+}
+
+
+/* ==================================================
+   RESPONSIVE DESIGN
+   ================================================== */
+
+@media (max-width: 800px) {
+
+    #menu,
+    #reviews {
+        padding: 18px;
+    }
+
+    #menu table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    #menu th,
+    #menu td {
+        padding: 10px;
+    }
+
+    #menu img {
+        width: 100px;
+        height: 90px;
+    }
+
+    #reviews fieldset {
+        padding: 18px;
+    }
+
+}

@@ -6,236 +6,345 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Menu of Zebra Coffee at Mangilik El 38 Avenue in Astana.">
+          content="Menu of Zebra Coffee on Mangilik El 38 in Astana.">
 
     <meta name="author" content="Dana">
 
     <title>Zebra Coffee - Menu</title>
+
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="dana.css">
 </head>
 
 <body>
-<!-- Author of the page: Dana -->
+
 <header>
     <h1>Zebra Coffee - Menu</h1>
+
     <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="career.html">Careers</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="colophon.html">Colophon</a></li>
-            </ul>
-        </nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="career.html">Careers</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="colophon.html">Colophon</a></li>
+        </ul>
+    </nav>
 </header>
+
 <main>
+
     <section id="menu">
-        <h2>Zebra Coffee Menu</h2>
+
+        <h2>Our Menu</h2>
+
         <p>
-            Zebra Coffee is a coffee shop where visitors can choose
-            different coffee drinks, tea and other beverages.
-            This page presents information about the menu of the
-            branch at <strong>Mangilik El 38 Avenue</strong> in Astana.
+            Explore the drinks and other items available at Zebra Coffee.
+            Choose your favorite drink and place your order.
         </p>
+
         <article>
+
             <h3>Coffee Drinks</h3>
+
             <table>
-                <caption>Zebra Coffee Coffee Drinks</caption>
+
+                <caption>Coffee Menu</caption>
+
                 <thead>
                     <tr>
-                        <th scope="col">Drink</th>
-                        <th scope="col">Volume</th>
-                        <th scope="col">Price</th>
+                        <th>Drink</th>
+                        <th>Volume</th>
+                        <th>Price</th>
+                        <th>Order</th>
                     </tr>
                 </thead>
 
                 <tbody>
+
                     <tr>
-                        <th scope="row">Espresso</th>
+                        <td>
+                            <img src="images/americanoespresso.jpg"
+                                 alt="Americano coffee">
+                            <p>Espresso</p>
+                        </td>
+
                         <td>30 ml</td>
-                        <td>590 tg</td>
+                        <td>900 ₸</td>
+
+                        <td>
+                            <button type="button">Order</button>
+
+                            <p>
+                                <label for="espresso-quantity">Quantity:</label>
+                                <input type="number"
+                                       id="espresso-quantity"
+                                       min="1"
+                                       value="1">
+                            </p>
+
+                            <p>
+                                <label for="espresso-comment">Comment:</label>
+                                <input type="text"
+                                       id="espresso-comment"
+                                       placeholder="Your comment">
+                            </p>
+
+                            <button type="button">Here</button>
+                            <button type="button">Takeaway</button>
+                        </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">Americano</th>
+                        <td>
+                            <img src="images/americanoespresso.jpg"
+                                 alt="Americano coffee">
+                            <p>Americano</p>
+                        </td>
+
                         <td>250 ml</td>
-                        <td>790 tg</td>
+                        <td>1200 ₸</td>
+
+                        <td>
+                            <button type="button">Order</button>
+
+                            <p>
+                                <label for="americano-quantity">Quantity:</label>
+                                <input type="number"
+                                       id="americano-quantity"
+                                       min="1"
+                                       value="1">
+                            </p>
+
+                            <p>
+                                <label for="americano-comment">Comment:</label>
+                                <input type="text"
+                                       id="americano-comment"
+                                       placeholder="Your comment">
+                            </p>
+
+                            <button type="button">Here</button>
+                            <button type="button">Takeaway</button>
+                        </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">Cappuccino</th>
+                        <td>
+                            <img src="images/cappuccinolatte.jpg"
+                                 alt="Cappuccino coffee">
+                            <p>Cappuccino</p>
+                        </td>
+
                         <td>250 ml</td>
-                        <td>990 tg</td>
+                        <td>1400 ₸</td>
+
+                        <td>
+                            <button type="button">Order</button>
+
+                            <p>
+                                <label for="cappuccino-quantity">Quantity:</label>
+                                <input type="number"
+                                       id="cappuccino-quantity"
+                                       min="1"
+                                       value="1">
+                            </p>
+
+                            <p>
+                                <label for="cappuccino-comment">Comment:</label>
+                                <input type="text"
+                                       id="cappuccino-comment"
+                                       placeholder="Your comment">
+                            </p>
+
+                            <button type="button">Here</button>
+                            <button type="button">Takeaway</button>
+                        </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">Latte</th>
-                        <td>250 ml</td>
-                        <td>990 tg</td>
+                        <td>
+                            <img src="images/cappuccinolatte.jpg"
+                                 alt="Latte coffee">
+                            <p>Latte</p>
+                        </td>
+
+                        <td>300 ml</td>
+                        <td>1500 ₸</td>
+
+                        <td>
+                            <button type="button">Order</button>
+
+                            <p>
+                                <label for="latte-quantity">Quantity:</label>
+                                <input type="number"
+                                       id="latte-quantity"
+                                       min="1"
+                                       value="1">
+                            </p>
+
+                            <p>
+                                <label for="latte-comment">Comment:</label>
+                                <input type="text"
+                                       id="latte-comment"
+                                       placeholder="Your comment">
+                            </p>
+
+                            <button type="button">Here</button>
+                            <button type="button">Takeaway</button>
+                        </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">Raf</th>
-                        <td>250 ml</td>
-                        <td>1090 tg</td>
+                        <td>
+                            <img src="images/raf.jpg"
+                                 alt="Raf coffee">
+                            <p>Raf</p>
+                        </td>
+
+                        <td>300 ml</td>
+                        <td>1600 ₸</td>
+
+                        <td>
+                            <button type="button">Order</button>
+
+                            <p>
+                                <label for="raf-quantity">Quantity:</label>
+                                <input type="number"
+                                       id="raf-quantity"
+                                       min="1"
+                                       value="1">
+                            </p>
+
+                            <p>
+                                <label for="raf-comment">Comment:</label>
+                                <input type="text"
+                                       id="raf-comment"
+                                       placeholder="Your comment">
+                            </p>
+
+                            <button type="button">Here</button>
+                            <button type="button">Takeaway</button>
+                        </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">Flat White</th>
-                        <td>250 ml</td>
-                        <td>990 tg</td>
+                        <td>
+                            <img src="images/flatwhite.jpg"
+                                 alt="Flat White coffee">
+                            <p>Flat White</p>
+                        </td>
+
+                        <td>200 ml</td>
+                        <td>1500 ₸</td>
+
+                        <td>
+                            <button type="button">Order</button>
+
+                            <p>
+                                <label for="flatwhite-quantity">Quantity:</label>
+                                <input type="number"
+                                       id="flatwhite-quantity"
+                                       min="1"
+                                       value="1">
+                            </p>
+
+                            <p>
+                                <label for="flatwhite-comment">Comment:</label>
+                                <input type="text"
+                                       id="flatwhite-comment"
+                                       placeholder="Your comment">
+                            </p>
+
+                            <button type="button">Here</button>
+                            <button type="button">Takeaway</button>
+                        </td>
                     </tr>
+
                 </tbody>
+
             </table>
+
         </article>
 
         <article>
-    <h3>Other Drinks</h3>
 
-    <ol start="1">
-        <li>
-            Tea
+            <h3>Other Drinks</h3>
+
             <ul>
-                <li>Black Tea</li>
-                <li>Green Tea</li>
+                <li>Tea</li>
+                <li>Cold drinks</li>
+                <li>Seasonal drinks</li>
             </ul>
-        </li>
-        <li>Cocoa</li>
-        <li>Iced Coffee</li>
-        <li>Lemonade</li>
-    </ol>
 
-    <p>
-        The menu also includes drinks for visitors who prefer
-        something other than coffee. <em>Tea and cold drinks</em>
-        give customers more choices.
-    </p>
-</article>
-    </section>
-    <hr>
-
-    <section id="coffee">
-        <h2>Photo of the Menu</h2>
-
-        <figure>
-        
-
-                <img src="images/IMG_1902..jpg"
-                 alt="Coffee drink at Zebra Coffee on Mangilik El 38"
-                 width="400">
-
-            <figcaption>
-                A coffee drink at Zebra Coffee at Mangilik El 38.
-            </figcaption>
-        </figure>
-
-        <p>
-            Coffee is one of the main parts of the menu.
-            Classic drinks are familiar choices for visitors,
-            while other drinks can offer a different taste.
-        </p>
-    </section>
-
-    <aside>
-        <h2>Branch Information</h2>
-
-        <dl>
-            <dt>Name</dt>
-            <dd>Zebra Coffee</dd>
-
-            <dt>Address</dt>
-            <dd>Mangilik El 38 Avenue, Astana</dd>
-
-            <dt>City</dt>
-            <dd>Astana</dd>
-
-            <dt>Format</dt>
-            <dd>Coffee shop</dd>
-        </dl>
-
-        <p>
-            The menu may change, so visitors should check
-            the current prices before ordering.
-        </p>
-    </aside>
-
-    <section id="description">
-        <h2>About the Drinks</h2>
+        </article>
 
         <article>
-            <h3>Classic Choice</h3>
 
-            <p>
-                <strong>Cappuccino</strong> and <strong>Latte</strong>
-                are popular coffee drinks. <b>Americano</b> is a simple
-                choice for people who prefer a stronger coffee taste.
-            </p>
+            <h3>Photo of the Menu</h3>
 
-            <p>
-                <i>The menu may change</i>, so the information on this
-                educational page should be checked against the current menu.
-            </p>
+            <figure>
+                <img src="images/IMG_1902..jpg"
+                     alt="Zebra Coffee menu"
+                     width="400">
+                <figcaption>Zebra Coffee menu.</figcaption>
+            </figure>
 
-            <p>
-                <mark>Important:</mark> prices should be checked before
-                submitting the final project.
-            </p>
-
-            <p>
-                Coffee can be ordered to go.<br>
-                Visitors can also enjoy their drinks inside the coffee shop.
-            </p>
-
-            <p>
-                The menu uses measurements such as 250 ml and prices in
-                <abbr title="Kazakhstani tenge">KZT</abbr>.
-                One drink can contain 2<sup>1</sup> shots of espresso.
-            </p>
-
-            <p>
-                <abbr title="Frequently Asked Questions">FAQ</abbr>
-                can help visitors find answers about the coffee shop.
-            </p>
-
-            <p>
-                <small>Educational project information.</small>
-            </p>
         </article>
-    </section>
 
-    <section id="contacts">
-        <h2>Contacts</h2>
+        <aside>
 
-        <p>
-            Coffee shop phone:
-            <a href="tel:+77470290043">+7 747 029 00 43</a>
-        </p>
+            <h3>Branch Information</h3>
 
-        <p>
-            Support email:
-            <a href="mailto:support@zebracoffee.kz">support@zebracoffee.kz</a>
-        </p>
+            <p>
+                Zebra Coffee is located at Mangilik El 38 Avenue, Astana.
+            </p>
 
-        <p>
-            Website information:
-            <a href="https://www.instagram.com/zebracoffee.kz?stkn=bnplNG1iNGZiYWV0"
-            target="_blank"
-            rel="noopener noreferrer">Instagram</a>
-        </p>
+            <p>
+                Visitors can enjoy coffee, drinks and a comfortable atmosphere.
+            </p>
 
-        <p>
-            Go to:
-            <a href="#menu">the menu</a>
-            or
-            <a href="#contacts">the contacts</a>.
-        </p>
+        </aside>
+
+        <section>
+
+            <h3>About the Drinks</h3>
+
+            <p>
+                Our coffee menu includes classic drinks prepared with
+                carefully selected coffee beans.
+            </p>
+
+            <p>
+                You can choose different volumes and enjoy your drink
+                at the coffee shop or take it away.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h3>Contacts</h3>
+
+            <p>
+                Address: Mangilik El 38 Avenue, Astana.
+            </p>
+
+            <p>
+                Phone:
+                <a href="tel:+77470290043">+7 747 029 00 43</a>
+            </p>
+
+        </section>
+
     </section>
 
 </main>
 
 <footer>
+
     <p>
         Zebra Coffee - educational project.
         &copy; 2026
@@ -244,6 +353,7 @@
     <p>
         Address: Mangilik El 38 Avenue, Astana.
     </p>
+
 </footer>
 
 </body>
