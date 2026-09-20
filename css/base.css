@@ -125,3 +125,136 @@ header img {
     display: block;
     margin: 0 auto 12px;
 }
+
+/* ==================================================
+   COLOPHON PAGE
+   Shared styles for Dana, Yasmina and Korkem
+   ================================================== */
+
+#about,
+#authors,
+#structure,
+#forms,
+#elements,
+#project,
+#quote {
+    background-color: white;
+    padding: 28px;
+    margin-bottom: 32px;
+    border: 1px solid #E8DED2;
+    border-top: 4px solid #00A99D;
+    border-radius: 16px;
+}
+
+#about h2,
+#authors h2,
+#structure h2,
+#forms h2,
+#elements h2,
+#project h2,
+#quote h2 {
+    color: #6B4F3A;
+}
+
+#structure h3,
+#forms h3,
+#elements h3 {
+    color: #6B4F3A;
+}
+
+#structure article,
+#forms article,
+#elements article {
+    background-color: #F8F7F2;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #E8DED2;
+    border-radius: 12px;
+}
+
+#authors dl,
+#project dl {
+    margin-top: 20px;
+}
+
+#authors dt,
+#project dt {
+    color: #6B4F3A;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+#authors dd,
+#project dd {
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+#structure code,
+#forms code,
+#elements code {
+    color: #6B4F3A;
+    background-color: #E8DED2;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+#structure kbd {
+    background-color: #202020;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+
+#structure pre {
+    background-color: #202020;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+#forms samp {
+    background-color: #E8DED2;
+    color: #6B4F3A;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+#elements mark {
+    background-color: #E8DED2;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+#elements div {
+    background-color: #F8F7F2;
+    border-left: 4px solid #00A99D;
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+#elements span {
+    color: #00A99D;
+    font-weight: bold;
+}
+
+main > hr {
+    border: none;
+    border-top: 2px solid #E8DED2;
+    margin: 40px 0;
+}
+
+#quote blockquote {
+    background-color: #F8F7F2;
+    border-left: 4px solid #00A99D;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+#quote cite {
+    color: #6B4F3A;
+    font-weight: bold;
+}
