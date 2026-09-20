@@ -429,3 +429,121 @@ h2 {
 #benefits h2 {
     color: #00A99D;
 }
+
+/* =========================
+   APPLICATION FORM
+   ========================= */
+
+#apply-form {
+    margin-top: 40px;
+}
+
+/* Main form card */
+#apply-form form {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+/* Fieldset creates the main visual card */
+#apply-form fieldset {
+    border: 2px solid #E8DED2;
+    border-radius: 18px;
+    background-color: #FFFFFF;
+    padding: 30px;
+    box-shadow: 0 6px 18px rgba(107, 79, 58, 0.10);
+}
+
+/* Fieldset titles */
+#apply-form legend {
+    padding: 0 12px;
+    color: #6B4F3A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Labels */
+#apply-form label {
+    color: #202020;
+    font-weight: 600;
+}
+
+/* Text inputs and select */
+#apply-form input[type="text"],
+#apply-form input[type="email"],
+#apply-form input[type="tel"],
+#apply-form input[type="number"],
+#apply-form input[type="date"],
+#apply-form select,
+#apply-form textarea {
+    width: 100%;
+    padding: 11px 14px;
+    margin-top: 6px;
+    border: 1px solid #D5C8BC;
+    border-radius: 8px;
+    background-color: #F8F7F2;
+    color: #202020;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+/* Highlight fields when the user clicks into them */
+#apply-form input:focus,
+#apply-form select:focus,
+#apply-form textarea:focus {
+    outline: 2px solid #00A99D;
+    outline-offset: 2px;
+    border-color: #00A99D;
+}
+
+/* File input */
+#apply-form input[type="file"] {
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px dashed #00A99D;
+    border-radius: 8px;
+    background-color: #F8F7F2;
+}
+
+/* Schedule fieldset */
+#apply-form fieldset fieldset {
+    margin: 25px 0;
+    border: 1px solid #00A99D;
+    background-color: #F8F7F2;
+}
+
+/* Radio buttons and checkbox */
+#apply-form input[type="radio"],
+#apply-form input[type="checkbox"] {
+    accent-color: #00A99D;
+}
+
+/* Textarea */
+#apply-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Buttons */
+#apply-form button {
+    padding: 11px 22px;
+    margin-right: 10px;
+    border: 2px solid #00A99D;
+    border-radius: 8px;
+    background-color: #00A99D;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Button hover */
+#apply-form button:hover {
+    background-color: #008F85;
+    border-color: #008F85;
+}
+
+/* Reset button */
+#apply-form button[type="reset"] {
+    background-color: #6B4F3A;
+    border-color: #6B4F3A;
+}
