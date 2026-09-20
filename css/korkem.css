@@ -9,7 +9,7 @@
 
 /* Limits the logo size specifically on Korkem's pages */
 header img {
-    width: 45px !important;
+    width: 80px !important;
     height: auto;
     display: block;
     margin: 0 auto 10px;
