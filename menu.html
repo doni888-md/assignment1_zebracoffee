@@ -4,357 +4,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Menu of Zebra Coffee on Mangilik El 38 in Astana.">
-
+    <meta name="description" content="Menu of Zebra Coffee on Mangilik El 38 in Astana.">
     <meta name="author" content="Dana">
-
     <title>Zebra Coffee - Menu</title>
 
-    <link rel="stylesheet" href="css/base.css">
+    <!-- Bootstrap 5.3.3 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9FExlHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdsl" crossorigin="anonymous">
+    <!-- Bootstrap version: 5.3.3 -->
+
+    <!-- Custom Correction Stylesheet -->
     <link rel="stylesheet" href="css/dana.css">
 </head>
 
 <body>
 
-<header>
-    <img src="images/logo.png" alt="Zebra Coffee Logo">
-    <h1>Zebra Coffee</h1>
-    <p>Our menu</p>
+<!-- container-fluid used for full-width header wrapper -->
+<header class="container-fluid bg-white border-bottom shadow-sm py-3 mb-4">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white p-0">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <img src="images/logo.png" alt="Zebra Coffee Logo" width="40" height="40" class="rounded">
+                    <span class="fw-bold fs-4 text-dark">Zebra Coffee</span>
+                </a>
+                
+                <!-- Responsive toggler for mobile navigation -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="career.html">Careers</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-            <li><a href="booking.html">Booking</a></li>
-            <li><a href="contacts.html">Contacts</a></li>
-            <li><a href="colophon.html">Colophon</a></li>
-        </ul>
-        <hr>
-    </nav>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
+                        <li class="nav-item"><a class="nav-link active fw-bold text-primary" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="colophon.html">Colophon</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 </header>
 
-<main>
+<!-- container used for main content grid layout -->
+<main class="container mb-5">
 
-    <section id="menu">
+    <section id="menu" class="bg-white p-4 p-md-5 border border-1 rounded-4 shadow-sm" style="border-top: 4px solid #00A99D !important;">
 
-        <h2>Our Menu</h2>
+        <h2 class="mb-3">Our Menu</h2>
 
-        <p>
+        <p class="lead text-muted mb-4">
             Explore the drinks and other items available at Zebra Coffee.
             Choose your favorite drink and place your order.
         </p>
 
-        <article>
+        <article class="mb-5">
 
-            <h3>Coffee Drinks</h3>
+            <h3 class="mb-4">Coffee Drinks</h3>
 
-            <table>
+            <!-- BOOTSTRAP COMPONENT: Cards Grid (All 6 coffee items) -->
+            <!-- 3 responsive blocks: col-12 col-md-6 col-lg-4 -->
+            <div class="row g-4">
 
-                <caption>Coffee Menu</caption>
+                <!-- 1. Espresso -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <img src="images/americanoespresso.jpg" class="card-img-top object-fit-cover" alt="Americano coffee" style="height: 180px;">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title fs-5 fw-bold">Espresso</h4>
+                            <p class="text-muted small mb-1">Volume: 30 ml</p>
+                            <p class="fw-bold text-success fs-5 mb-3">900 ₸</p>
 
-                <thead>
-                    <tr>
-                        <th>Drink</th>
-                        <th>Volume</th>
-                        <th>Price</th>
-                        <th>Order</th>
-                    </tr>
-                </thead>
+                            <div class="mt-auto">
+                                <div class="mb-2">
+                                    <label for="espresso-quantity" class="form-label small fw-bold">Quantity:</label>
+                                    <input type="number" id="espresso-quantity" class="form-control form-control-sm" min="1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="espresso-comment" class="form-label small fw-bold">Comment:</label>
+                                    <input type="text" id="espresso-comment" class="form-control form-control-sm" placeholder="Your comment">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-primary btn-sm flex-grow-1">Order</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Takeaway</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <tbody>
+                <!-- 2. Americano -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <img src="images/americanoespresso.jpg" class="card-img-top object-fit-cover" alt="Americano coffee" style="height: 180px;">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title fs-5 fw-bold">Americano</h4>
+                            <p class="text-muted small mb-1">Volume: 250 ml</p>
+                            <p class="fw-bold text-success fs-5 mb-3">1200 ₸</p>
 
-                    <tr>
-                        <td>
-                            <img src="images/americanoespresso.jpg"
-                                 alt="Americano coffee">
-                            <p>Espresso</p>
-                        </td>
+                            <div class="mt-auto">
+                                <div class="mb-2">
+                                    <label for="americano-quantity" class="form-label small fw-bold">Quantity:</label>
+                                    <input type="number" id="americano-quantity" class="form-control form-control-sm" min="1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="americano-comment" class="form-label small fw-bold">Comment:</label>
+                                    <input type="text" id="americano-comment" class="form-control form-control-sm" placeholder="Your comment">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-primary btn-sm flex-grow-1">Order</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                        <td>30 ml</td>
-                        <td>900 ₸</td>
+                <!-- 3. Cappuccino -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <img src="images/cappuccinolatte.jpg" class="card-img-top object-fit-cover" alt="Cappuccino coffee" style="height: 180px;">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title fs-5 fw-bold">Cappuccino</h4>
+                            <p class="text-muted small mb-1">Volume: 250 ml</p>
+                            <p class="fw-bold text-success fs-5 mb-3">1400 ₸</p>
 
-                        <td>
-                            <button type="button">Order</button>
+                            <div class="mt-auto">
+                                <div class="mb-2">
+                                    <label for="cappuccino-quantity" class="form-label small fw-bold">Quantity:</label>
+                                    <input type="number" id="cappuccino-quantity" class="form-control form-control-sm" min="1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cappuccino-comment" class="form-label small fw-bold">Comment:</label>
+                                    <input type="text" id="cappuccino-comment" class="form-control form-control-sm" placeholder="Your comment">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-primary btn-sm flex-grow-1">Order</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <p>
-                                <label for="espresso-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="espresso-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
+                <!-- 4. Latte -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <img src="images/cappuccinolatte.jpg" class="card-img-top object-fit-cover" alt="Latte coffee" style="height: 180px;">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title fs-5 fw-bold">Latte</h4>
+                            <p class="text-muted small mb-1">Volume: 300 ml</p>
+                            <p class="fw-bold text-success fs-5 mb-3">1500 ₸</p>
 
-                            <p>
-                                <label for="espresso-comment">Comment:</label>
-                                <input type="text"
-                                       id="espresso-comment"
-                                       placeholder="Your comment">
-                            </p>
+                            <div class="mt-auto">
+                                <div class="mb-2">
+                                    <label for="latte-quantity" class="form-label small fw-bold">Quantity:</label>
+                                    <input type="number" id="latte-quantity" class="form-control form-control-sm" min="1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="latte-comment" class="form-label small fw-bold">Comment:</label>
+                                    <input type="text" id="latte-comment" class="form-control form-control-sm" placeholder="Your comment">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-primary btn-sm flex-grow-1">Order</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
+                <!-- 5. Raf -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <img src="images/raf.jpg" class="card-img-top object-fit-cover" alt="Raf coffee" style="height: 180px;">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title fs-5 fw-bold">Raf</h4>
+                            <p class="text-muted small mb-1">Volume: 300 ml</p>
+                            <p class="fw-bold text-success fs-5 mb-3">1600 ₸</p>
 
-                    <tr>
-                        <td>
-                            <img src="images/americanoespresso.jpg"
-                                 alt="Americano coffee">
-                            <p>Americano</p>
-                        </td>
+                            <div class="mt-auto">
+                                <div class="mb-2">
+                                    <label for="raf-quantity" class="form-label small fw-bold">Quantity:</label>
+                                    <input type="number" id="raf-quantity" class="form-control form-control-sm" min="1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="raf-comment" class="form-label small fw-bold">Comment:</label>
+                                    <input type="text" id="raf-comment" class="form-control form-control-sm" placeholder="Your comment">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-primary btn-sm flex-grow-1">Order</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                        <td>250 ml</td>
-                        <td>1200 ₸</td>
+                <!-- 6. Flat White -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 bg-light">
+                        <img src="images/flatwhite.jpg" class="card-img-top object-fit-cover" alt="Flat White coffee" style="height: 180px;">
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title fs-5 fw-bold">Flat White</h4>
+                            <p class="text-muted small mb-1">Volume: 200 ml</p>
+                            <p class="fw-bold text-success fs-5 mb-3">1500 ₸</p>
 
-                        <td>
-                            <button type="button">Order</button>
+                            <div class="mt-auto">
+                                <div class="mb-2">
+                                    <label for="flatwhite-quantity" class="form-label small fw-bold">Quantity:</label>
+                                    <input type="number" id="flatwhite-quantity" class="form-control form-control-sm" min="1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="flatwhite-comment" class="form-label small fw-bold">Comment:</label>
+                                    <input type="text" id="flatwhite-comment" class="form-control form-control-sm" placeholder="Your comment">
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-primary btn-sm flex-grow-1">Order</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <p>
-                                <label for="americano-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="americano-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="americano-comment">Comment:</label>
-                                <input type="text"
-                                       id="americano-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/cappuccinolatte.jpg"
-                                 alt="Cappuccino coffee">
-                            <p>Cappuccino</p>
-                        </td>
-
-                        <td>250 ml</td>
-                        <td>1400 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="cappuccino-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="cappuccino-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="cappuccino-comment">Comment:</label>
-                                <input type="text"
-                                       id="cappuccino-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/cappuccinolatte.jpg"
-                                 alt="Latte coffee">
-                            <p>Latte</p>
-                        </td>
-
-                        <td>300 ml</td>
-                        <td>1500 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="latte-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="latte-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="latte-comment">Comment:</label>
-                                <input type="text"
-                                       id="latte-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/raf.jpg"
-                                 alt="Raf coffee">
-                            <p>Raf</p>
-                        </td>
-
-                        <td>300 ml</td>
-                        <td>1600 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="raf-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="raf-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="raf-comment">Comment:</label>
-                                <input type="text"
-                                       id="raf-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/flatwhite.jpg"
-                                 alt="Flat White coffee">
-                            <p>Flat White</p>
-                        </td>
-
-                        <td>200 ml</td>
-                        <td>1500 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="flatwhite-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="flatwhite-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="flatwhite-comment">Comment:</label>
-                                <input type="text"
-                                       id="flatwhite-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
+            </div>
 
         </article>
 
-        <article>
-
-            <h3>Other Drinks</h3>
-
-            <ul>
-                <li>Tea</li>
-                <li>Cold drinks</li>
-                <li>Seasonal drinks</li>
-            </ul>
-
+        <!-- Nested Row Example required by assignment -->
+        <article class="p-4 bg-light rounded-3 border mb-4">
+            <h3 class="h5 mb-3">Other Information & Categories</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush rounded shadow-sm">
+                        <li class="list-group-item">Tea</li>
+                        <li class="list-group-item">Cold drinks</li>
+                        <li class="list-group-item">Seasonal drinks</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 mt-3 mt-md-0">
+                    <div class="p-3 bg-white rounded border">
+                        <h4 class="fs-6 fw-bold">Photo of the Menu</h4>
+                        <figure class="mb-0">
+                            <img src="images/IMG_1902..jpg" alt="Zebra Coffee menu" class="img-fluid rounded" style="max-height: 150px;">
+                            <figcaption class="small text-muted mt-1">Zebra Coffee menu.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
         </article>
 
-        <article>
-
-            <h3>Photo of the Menu</h3>
-
-            <figure>
-                <img src="images/IMG_1902..jpg"
-                     alt="Zebra Coffee menu"
-                     width="400">
-                <figcaption>Zebra Coffee menu.</figcaption>
-            </figure>
-
-        </article>
-
-        <aside>
-
-            <h3>Branch Information</h3>
-
-            <p>
-                Zebra Coffee is located at Mangilik El 38 Avenue, Astana.
-            </p>
-
-            <p>
-                Visitors can enjoy coffee, drinks and a comfortable atmosphere.
-            </p>
-
+        <aside class="p-4 bg-light border-start border-4 border-primary rounded mb-4">
+            <h3 class="h5">Branch Information</h3>
+            <p class="mb-1">Zebra Coffee is located at Mangilik El 38 Avenue, Astana.</p>
+            <p class="mb-0">Visitors can enjoy coffee, drinks and a comfortable atmosphere.</p>
         </aside>
 
-        <section>
-
-            <h3>About the Drinks</h3>
-
-            <p>
-                Our coffee menu includes classic drinks prepared with
-                carefully selected coffee beans.
-            </p>
-
-            <p>
-                You can choose different volumes and enjoy your drink
-                at the coffee shop or take it away.
-            </p>
-
+        <section class="mb-4">
+            <h3 class="h5">About the Drinks</h3>
+            <p>Our coffee menu includes classic drinks prepared with carefully selected coffee beans.</p>
+            <p class="mb-0">You can choose different volumes and enjoy your drink at the coffee shop or take it away.</p>
         </section>
 
         <section>
-
-            <h3>Contacts</h3>
-
-            <p>
-                Address: Mangilik El 38 Avenue, Astana.
-            </p>
-
-            <p>
-                Phone:
-                <a href="tel:+77470290043">+7 747 029 00 43</a>
-            </p>
-
+            <h3 class="h5">Contacts</h3>
+            <p class="mb-1">Address: Mangilik El 38 Avenue, Astana.</p>
+            <p class="mb-0">Phone: <a href="tel:+77470290043" class="text-decoration-none fw-bold">+7 747 029 00 43</a></p>
         </section>
 
     </section>
 
 </main>
 
-<footer>
-    <hr>
-    <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-    <p>Phone: <a href="tel:+77470290043"> +7 747 029 00 43</a></p>
-    <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
-    <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
-    <hr>
-    <p>&copy; 2026 Zebra Coffee. All rights reserved.</p>
+<footer class="bg-white border-top py-4 text-center text-muted small">
+    <div class="container">
+        <p class="mb-1">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
+        <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none">+7 747 029 00 43</a></p>
+        <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none">zebracoffee.kz</a></p>
+        <p class="mb-2">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none">info@zebracoffee.kz</a></p>
+        <hr class="w-25 mx-auto my-2">
+        <p class="mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
+    </div>
 </footer>
+
+<!-- Bootstrap 5.3.3 JS Bundle CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdsl" crossorigin="anonymous"></script>
 
 </body>
 </html>
