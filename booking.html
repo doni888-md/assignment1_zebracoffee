@@ -6,139 +6,180 @@
     <meta name="description" content="Table reservation and room booking at Zebra Coffee in Astana.">
     <meta name="author" content="Korkem">
     <title>Table Booking | Zebra Coffee</title>
+    
+    <!-- Bootstrap v5.3.3 CSS CDN Connection -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Correction Layer CSS (Must be included AFTER Bootstrap) -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/korkem.css">
 </head>
 <body>
     <!-- Author: Korkem -->
-    <header>
-        <img src="images/logo.png" alt="Zebra Coffee Logo">
-        <h1>Zebra Coffee</h1>
-        <p>City to-go coffee shop</p>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="career.html">Careers</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="colophon.html">Colophon</a></li>
-            </ul>
-            <hr>
+    
+    <!-- STRUCTURAL DECISION COMMENT:
+         header uses 'container-fluid' (full-width) to stretch the dark navigation bar edge-to-edge.
+         main uses standard 'container' (centered max-width) to align content within a clean reading grid. -->
+    <header class="container-fluid bg-dark text-white p-3 mb-4">
+        <div class="text-center mb-3">
+            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo">
+            <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
+            <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
+        </div>
+        
+        <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
+            <div class="container-fluid">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="booking.html">Booking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="colophon.html">Colophon</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <section id="booking-intro">
-            <h2>Reserve Your Table at Zebra Coffee</h2>
-            <p>Planning a business meeting, a friendly chat, or a quiet study session? Reserve a table in advance at <strong>Zebra Coffee</strong>! We will ensure your place is reserved and ready with fresh coffee and pastries upon your arrival. Enjoy our cozy atmosphere located in <abbr title="Astana">AST</abbr>, <abbr title="Kazakhstan">KZ</abbr>.</p>
-        </section>
+    <main class="container mb-5">
+        
+        <!-- Adaptive Grid Block 1: Intro (8 cols) + Aside Alert (4 cols) -->
+        <div class="row g-4 mb-4">
+            <section id="booking-intro" class="col-12 col-md-8">
+                <div class="p-4 rounded-4 border shadow-sm h-100 bg-white">
+                    <!-- Responsive Alignment & Responsive Display Utility Example 1 -->
+                    <h2 class="h3 mb-3 text-center text-md-start">
+                        Reserve Your Table at Zebra Coffee
+                        <span class="badge bg-info text-dark d-none d-md-inline-block ms-2 fs-6">Online Booking</span>
+                    </h2>
+                    <p class="mb-0">Planning a business meeting, a friendly chat, or a quiet study session? Reserve a table in advance at <strong>Zebra Coffee</strong>! We will ensure your place is reserved and ready with fresh coffee and pastries upon your arrival. Enjoy our cozy atmosphere located in <abbr title="Astana">AST</abbr>, <abbr title="Kazakhstan">KZ</abbr>.</p>
+                </div>
+            </section>
 
-        <!-- Structural Decision Comment: Used aside to visually isolate non-critical warning without diluting main context -->
-        <aside>
-            <h3>Important Notice</h3>
-            <p><strong>Please note:</strong> This online booking form is currently a demonstration and is <em>not yet functional</em>. Submissions will not process active reservations &bull; &copy; Zebra Coffee.</p>
-        </aside>
+            <!-- Bootstrap Alert Component Adaptation -->
+            <!-- STRUCTURAL DECISION COMMENT: Converted custom aside box into Bootstrap alert-warning component to convey non-critical system notice semantically without custom CSS -->
+            <aside class="col-12 col-md-4">
+                <div class="alert alert-warning h-100 m-0 d-flex flex-column justify-content-center" role="alert">
+                    <h3 class="h5 alert-heading">Important Notice</h3>
+                    <p class="mb-0 small"><strong>Please note:</strong> This online booking form is currently a demonstration and is <em>not yet functional</em>. Submissions will not process active reservations &bull; &copy; Zebra Coffee.</p>
+                </div>
+            </aside>
+        </div>
 
-        <section id="reservation-form-section">
-            <h3>Booking Form</h3>
+        <section id="reservation-form-section" class="p-4 rounded-4 border shadow-sm bg-white mb-4">
+            <h3 class="h4 mb-4">Booking Form</h3>
             
             <form action="#" method="post">
-                <!-- Note: This form is static client-side markup only and does not process or send data to a server yet. -->
-                
-                <fieldset>
-                    <legend>Personal Contact Details</legend>
-                    
-                    <p>
-                        <label for="full-name">Full Name:</label><br>
-                        <input type="text" id="full-name" name="full_name" placeholder="Korkem" required>
-                    </p>
+                <!-- Adaptive Grid Block 2: Fieldsets side-by-side on md+ screens -->
+                <div class="row g-4 mb-4">
+                    <fieldset class="col-12 col-md-6 border p-3 rounded bg-light">
+                        <legend class="float-none w-auto px-2 fs-6 fw-bold text-white bg-primary rounded">Personal Contact Details</legend>
+                        
+                        <div class="mb-3">
+                            <label for="full-name" class="form-label">Full Name:</label>
+                            <input type="text" class="form-control" id="full-name" name="full_name" placeholder="Korkem" required>
+                        </div>
 
-                    <p>
-                        <label for="customer-email">Email Address:</label><br>
-                        <input type="email" id="customer-email" name="customer_email" placeholder="info@zebracoffee.kz" required>
-                    </p>
+                        <div class="mb-3">
+                            <label for="customer-email" class="form-label">Email Address:</label>
+                            <input type="email" class="form-control" id="customer-email" name="customer_email" placeholder="info@zebracoffee.kz" required>
+                        </div>
 
-                    <p>
-                        <label for="customer-phone">Phone Number:</label><br>
-                        <input type="tel" id="customer-phone" name="customer_phone" placeholder="+7 747 029 00 43" required>
-                    </p>
-                </fieldset>
+                        <div class="mb-3">
+                            <label for="customer-phone" class="form-label">Phone Number:</label>
+                            <input type="tel" class="form-control" id="customer-phone" name="customer_phone" placeholder="+7 747 029 00 43" required>
+                        </div>
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Reservation Details</legend>
+                    <fieldset class="col-12 col-md-6 border p-3 rounded bg-light">
+                        <legend class="float-none w-auto px-2 fs-6 fw-bold text-white bg-primary rounded">Reservation Details</legend>
 
-                    <p>
-                        <label for="guests-count">Number of Guests (1 to 10):</label><br>
-                        <input type="number" id="guests-count" name="guests_count" min="1" max="10" value="2" required>
-                    </p>
+                        <!-- Adaptive Grid Block 3 (Nested Row Requirement): Guests/Date/Time inside Column -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-12 col-sm-4">
+                                <label for="guests-count" class="form-label small">Guests (1-10):</label>
+                                <input type="number" class="form-control" id="guests-count" name="guests_count" min="1" max="10" value="2" required>
+                            </div>
 
-                    <p>
-                        <label for="booking-date">Date:</label><br>
-                        <input type="date" id="booking-date" name="booking_date" required>
-                    </p>
+                            <div class="col-12 col-sm-4">
+                                <label for="booking-date" class="form-label small">Date:</label>
+                                <input type="date" class="form-control" id="booking-date" name="booking_date" required>
+                            </div>
 
-                    <p>
-                        <label for="booking-time">Time:</label><br>
-                        <input type="time" id="booking-time" name="booking_time" required>
-                    </p>
+                            <div class="col-12 col-sm-4">
+                                <label for="booking-time" class="form-label small">Time:</label>
+                                <input type="time" class="form-control" id="booking-time" name="booking_time" required>
+                            </div>
+                        </div>
 
-                    <!-- Added mandatory Radio Button Group requirement -->
-                    <p>
-                        <strong>Visit Type:</strong><br>
-                        <label><input type="radio" name="visit_type" value="personal" checked> Personal / Study</label><br>
-                        <label><input type="radio" name="visit_type" value="business"> Business Meeting</label>
-                    </p>
+                        <div class="mb-3">
+                            <label class="form-label d-block fw-bold">Visit Type:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="visit_type" id="visit-personal" value="personal" checked>
+                                <label class="form-check-label" for="visit-personal">Personal / Study</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="visit_type" id="visit-business" value="business">
+                                <label class="form-check-label" for="visit-business">Business Meeting</label>
+                            </div>
+                        </div>
 
-                    <p>
-                        <label for="seating-area">Preferred Seating Area:</label><br>
-                        <select id="seating-area" name="seating_area">
-                            <option value="main-hall">Main Hall</option>
-                            <option value="window-side">Window Side Table</option>
-                            <option value="quiet-corner">Quiet Workspace Corner</option>
-                        </select>
-                    </p>
+                        <div class="mb-3">
+                            <label for="seating-area" class="form-label">Preferred Seating Area:</label>
+                            <select class="form-select" id="seating-area" name="seating_area">
+                                <option value="main-hall">Main Hall</option>
+                                <option value="window-side">Window Side Table</option>
+                                <option value="quiet-corner">Quiet Workspace Corner</option>
+                            </select>
+                        </div>
 
-                    <p>
-                        <label>
-                            <input type="checkbox" name="vip_requested" value="yes">
-                            Request high-speed Wi-Fi &amp; power socket table
-                        </label>
-                    </p>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="vip-requested" name="vip_requested" value="yes">
+                            <label class="form-check-label" for="vip-requested">
+                                Request high-speed Wi-Fi &amp; power socket table
+                            </label>
+                        </div>
 
-                    <p>
-                        <label for="special-requests">Special Requests / Notes:</label><br>
-                        <textarea id="special-requests" name="special_requests" rows="4" cols="40" placeholder="Let us know if you need extra space..."></textarea>
-                    </p>
-                </fieldset>
+                        <div class="mb-3">
+                            <label for="special-requests" class="form-label">Special Requests / Notes:</label>
+                            <textarea class="form-control" id="special-requests" name="special_requests" rows="3" placeholder="Let us know if you need extra space..."></textarea>
+                        </div>
+                    </fieldset>
+                </div>
 
-                <p>
-                    <button type="submit">Submit Reservation</button>
-                    <button type="reset">Reset Form</button>
-                </p>
+                <!-- Requirement: 4 Button Classes (btn-primary, btn-lg, btn-outline-secondary, btn-sm, disabled) -->
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit Reservation</button>
+                    <button type="reset" class="btn btn-outline-secondary">Reset Form</button>
+                    <button type="button" class="btn btn-secondary btn-sm" disabled>Call instead</button>
+                </div>
             </form>
         </section>
 
-        <article>
-            <h3>Reservation Rules &amp; Guidelines</h3>
-            <p>To keep everything comfortable for all guests, please arrive within <mark>15 minutes</mark> of your reserved time. If you need to cancel or change your time slot, notify us as early as possible.</p>
-            <dl>
+        <article class="p-4 rounded-4 border shadow-sm bg-white">
+            <h3 class="h4 mb-3">Reservation Rules &amp; Guidelines</h3>
+            <p>"To keep everything comfortable for all guests, please arrive within <mark>15 minutes</mark> of your reserved time. If you need to cancel or change your time slot, notify us as early as possible.</p>
+            <dl class="mb-0">
                 <dt>Cancellation Policy</dt>
-                <dd>Please inform us at least 1 hour before if your plans change.</dd>
+                <dd class="mb-0">Please inform us at least 1 hour before if your plans change.</dd>
             </dl>
         </article>
     </main>
 
-    <footer>
-        <hr>
-        <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-        <p>Phone: <a href="tel:+77470290043"> +7 747 029 00 43</a></p>
-        <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
-        <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
-        <hr>
-        <p>&copy; 2026 Zebra Coffee. All rights reserved.</p>
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-1"><span class="hover-line">Phone:</span> <a href="tel:+77470290043" class="text-white text-decoration-none">+7 747 029 00 43</a></p>
+        <p class="mb-0">&copy; <span class="razmer">2026 Zebra Coffee</span></p>
     </footer>
+    <span class="red-circle"></span>
+
+    <!-- Bootstrap v5.3.3 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

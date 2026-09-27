@@ -7,203 +7,299 @@
     <meta name="author" content="Yasmina Roziyeva">
     <title>Zebra Coffee — Careers</title>
 
+    <!-- Bootstrap v5.3.3 CSS CDN Connection -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Correction Layer CSS (Must be included AFTER Bootstrap) -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/yasmina.css">
-
-    <!-- Cascade demonstration: this internal rule is intentionally overridden by the external stylesheet. -->
-    <!-- Cascade demonstration: this internal rule is intentionally overridden by the external stylesheet. -->
-    <!-- Cascade demonstration: this internal rule is intentionally overridden by the external stylesheet. -->
-    <style>
-        #openings > h3 {
-            color: #6B4F3A;
-        }
-    </style>
 </head>
 <body>
     <!-- Author: Yasmina Roziyeva -->
-    <!-- Rationale: Clear hierarchical structure with dedicated articles for vacancies ensures high readability and automated parser compatibility. -->
-    <header id="top">
-        <img src="images/logo.png" alt="Zebra Coffee logo">
-        <h1>Zebra Coffee</h1>
-        <p>Careers and Opportunities</p>
-
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="career.html">Careers</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="colophon.html">Colophon</a></li>
-            </ul>
+    
+    <!-- STRUCTURAL DECISION COMMENT:
+         header uses 'container-fluid' (full-width) to stretch the dark navigation bar edge-to-edge.
+         main uses standard 'container' (centered max-width) to align content within a clean reading grid. -->
+    <header class="container-fluid bg-dark text-white p-3 mb-4">
+        <div class="text-center mb-3">
+            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo">
+            <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
+            <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
+        </div>
+        
+        <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
+            <div class="container-fluid">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="career.html">Careers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="colophon.html">Colophon</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-        <hr>
     </header>
-    <main>
-        <p>Quick navigation: <a href="#benefits">Team Culture</a> | <a href="#openings">Available Roles</a> | <a href="#apply">How to Apply</a></p>
-        <section id="benefits">
-            <h2>Why work with us</h2>
 
-            <p>
-                <img src="images/img8_team.jpg"
-                    alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar"
-                    class="benefit-float">
-                    At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay,
-                    flexible shift rotations, and accredited espresso training. Located on busy Mangilik El Avenue,
-                    our team thrives on swift service, collaborative spirit, and positive guest interactions every day.
-                    We provide <mark>free weekly cuppings</mark> and professional mentorship.
-            </p>
+    <main class="container mb-5">
+        <p class="quick-links text-center text-md-start mb-4 text-muted">
+            Quick navigation: <a href="#benefits" class="btn btn-sm btn-outline-secondary py-0">Team Culture</a> 
+            <span class="mx-1">|</span> 
+            <a href="#openings" class="btn btn-sm btn-outline-secondary py-0">Available Roles</a> 
+            <span class="mx-1">|</span> 
+            <a href="#apply" class="btn btn-sm btn-outline-secondary py-0">How to Apply</a>
+        </p>
 
-            <blockquote>
-                <p>
-                    Balancing university classes with morning bar shifts was straightforward thanks to flexible scheduling.
-                    I mastered grinder calibration within my first month.
+        <!-- Why Work With Us: 2-column grid instead of float -->
+        <section id="benefits" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start">Why work with us</h2>
+
+            <div class="row g-4 align-items-center mb-4">
+                <div class="col-12 col-md-5">
+                    <img src="images/img8_team.jpg" alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style="height: 260px;">
+                </div>
+                <div class="col-12 col-md-7">
+                    <p class="lead fs-6 mb-3">
+                        At Zebra Coffee, we empower ambitious students and coffee enthusiasts with competitive pay,
+                        flexible shift rotations, and accredited espresso training. Located on busy Mangilik El Avenue,
+                        our team thrives on swift service, collaborative spirit, and positive guest interactions every day.
+                        We provide <mark class="px-2 py-1 rounded">free weekly cuppings</mark> and professional mentorship.
+                    </p>
+                    <p class="text-secondary mb-0">
+                        Our passionate barista crew at the Mangilik El branch is ready to welcome proactive new teammates!
+                    </p>
+                </div>
+            </div>
+
+            <blockquote class="p-3 bg-light border-start border-4 border-info rounded-end text-secondary mb-0">
+                <p class="mb-1 fst-italic">
+                    &ldquo;Balancing university classes with morning bar shifts was straightforward thanks to flexible scheduling.
+                    I mastered grinder calibration within my first month.&rdquo;
                 </p>
-                <cite>&mdash; Daniyar, Shift Supervisor</cite>
+                <cite class="small fw-bold text-dark">&mdash; Daniyar, Shift Supervisor</cite>
             </blockquote>
-
-            <p class="clear-after">
-                Our passionate barista crew at the Mangilik El branch is ready to welcome guests.
-            </p>
         </section>
-        <section id="openings">
-            <h2>Current vacancies in Astana:</h2>
-            <article id="role-barista">
-                <h3>Express Barista (Full-time / Part-time)</h3>
-                <p>
+
+        <!-- Current Vacancies Section -->
+        <section id="openings" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start">Current vacancies in Astana:</h2>
+            
+            <article id="role-barista" class="mb-4">
+                <h3 class="h5 fw-bold text-secondary mb-1">Express Barista (Full-time / Part-time)</h3>
+                <p class="small text-muted mb-3">
                     Posted: <time datetime="2026-09-10">September 10, 2026</time> | Location: Mangilik El 38
                 </p>
-                <p>Key duties include:</p>
-                <ul class="duty-list">
-                    <li>Extracting specialty espresso drinks under the three-minute standard</li>
-                    <li>Handling <abbr title="Point of Sale">POS</abbr> transactions and cash management efficiently</li>
-                    <li>Maintaining workstation sanitation during rush hours</li>
-                </ul>
+                <p class="fw-semibold mb-2">Key duties include:</p>
+                
+                <!-- Responsive grid for duties -->
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 bg-light border rounded-3 h-100">
+                            <span class="fw-bold d-block text-dark mb-1">⏱ Fast Brewing</span>
+                            <small class="text-secondary">Extracting specialty espresso drinks under the three-minute standard.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 bg-light border rounded-3 h-100">
+                            <span class="fw-bold d-block text-dark mb-1">💳 Guest Transactions</span>
+                            <small class="text-secondary">Handling <abbr title="Point of Sale">POS</abbr> orders and payments quickly and accurately.</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="p-3 bg-light border rounded-3 h-100">
+                            <span class="fw-bold d-block text-dark mb-1">✨ Clean Workspace</span>
+                            <small class="text-secondary">Maintaining cleanliness and bean calibration during peak rush hours.</small>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <h3>Overview of Open Positions</h3>
-            <table>
-                <caption>Available positions and shift requirements</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Position</th>
-                        <th scope="col">Schedule</th>
-                        <th scope="col">Experience Needed</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Express Barista</td>
-                        <td>Flexible (4&ndash;8 hour shifts)</td>
-                        <td>No experience required (training provided)</td>
-                    </tr>
-                    <tr>
-                        <td>Shift Lead</td>
-                        <td>Full-time (rotational)</td>
-                        <td>1+ year in specialty coffee</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <h3 class="h5 fw-bold mb-3 text-center text-md-start">Overview of Open Positions</h3>
+            
+            <!-- Responsive table wrapper prevents horizontal scroll at 375px -->
+            <div class="table-responsive mb-4">
+                <table class="table table-striped table-hover align-middle border rounded-3 overflow-hidden">
+                    <caption class="text-secondary small mt-2">Available positions and shift requirements</caption>
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Position</th>
+                            <th scope="col">Schedule</th>
+                            <th scope="col">Experience Needed</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-semibold">Express Barista</td>
+                            <td>Flexible (4&ndash;8 hour shifts)</td>
+                            <td>No experience required (training provided)</td>
+                            <td><span class="badge bg-success">Hiring Now</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-semibold">Shift Lead</td>
+                            <td>Full-time (rotational)</td>
+                            <td>1+ year in specialty coffee</td>
+                            <td><span class="badge bg-warning text-dark">Reviewing</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-semibold">Roastery Assistant</td>
+                            <td>Part-time (weekends)</td>
+                            <td>Basic understanding of coffee roasting</td>
+                            <!-- Button requirement: disabled state -->
+                            <td><button type="button" class="btn btn-sm btn-outline-secondary disabled" aria-disabled="true">Position Filled</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-        <section id="apply">
-            <!-- Cascade demonstration: this inline style is intentionally overridden by the external !important rule. -->
-            <h2 style="color: #00A99D;">Recruitment Process</h2>
-            <ol type="1">
-                <li>Submit the application form below or attach your resume</li>
-                <li>Attend a brief twenty-minute interview at our cafe</li>
-                <li>Complete three paid onboarding shifts with a senior mentor</li>
+
+        <!-- Recruitment Process Section -->
+        <section id="apply" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start text-dark">Recruitment Process</h2>
+            
+            <ol class="list-group list-group-numbered shadow-sm">
+                <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Online Application</div>
+                        Submit the application form below with your current schedule availability.
+                    </div>
+                    <span class="badge bg-secondary rounded-pill">Step 1</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">In-Person Interview</div>
+                        Attend a brief twenty-minute conversational interview at our Mangilik El cafe.
+                    </div>
+                    <span class="badge bg-secondary rounded-pill">Step 2</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Paid Onboarding</div>
+                        Complete three paid onboarding shifts alongside an experienced senior barista.
+                    </div>
+                    <span class="badge bg-info text-dark rounded-pill">Step 3</span>
+                </li>
             </ol>
         </section>
-        <!-- Rationale: Explicit fieldset grouping and strict input type mapping guarantee accessible keyboard navigation and native client-side validation. -->
-        <section id="apply-form">
-            <h2>Apply Online</h2>
+
+        <!-- Application Form Section -->
+        <section id="apply-form" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start">Apply Online</h2>
+            
             <form action="#" method="post">
-                <!-- Note: This form does not send anything yet as there is no backend server configured for this assignment; handling will be implemented later. -->
-                <fieldset>
-                    <legend>Candidate Details</legend>
+                <fieldset class="border p-4 rounded-3 bg-light">
+                    <legend class="float-none w-auto px-3 fs-5 fw-bold text-secondary">Candidate Details</legend>
 
-                    <p>
-                        <label for="full-name">Full Name:</label><br>
-                        <input type="text" id="full-name" name="fullName" placeholder="e.g. Yasmina Rozieva" required>
-                    </p>
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label for="full-name" class="form-label fw-semibold">Full Name:</label>
+                            <input type="text" class="form-control" id="full-name" name="fullName" placeholder="e.g. Yasmina Rozieva" required>
+                        </div>
 
-                    <p>
-                        <label for="email-addr">Email Address:</label><br>
-                        <input type="email" id="email-addr" name="email" placeholder="example@mail.kz" required>
-                    </p>
+                        <div class="col-12 col-md-6">
+                            <label for="email-addr" class="form-label fw-semibold">Email Address:</label>
+                            <input type="email" class="form-control" id="email-addr" name="email" placeholder="example@mail.kz" required>
+                        </div>
 
-                    <p>
-                        <label for="phone-num">Phone Number:</label><br>
-                        <input type="tel" id="phone-num" name="phone" placeholder="+7 (707) 000-00-00" required>
-                    </p>
+                        <div class="col-12 col-md-6">
+                            <label for="phone-num" class="form-label fw-semibold">Phone Number:</label>
+                            <input type="tel" class="form-control" id="phone-num" name="phone" placeholder="+7 (707) 000-00-00" required>
+                        </div>
 
-                    <p>
-                        <label for="hours-available">Available Hours Per Week:</label><br>
-                        <input type="number" id="hours-available" name="hours" min="10" max="40" placeholder="20" required>
-                    </p>
+                        <div class="col-12 col-md-6">
+                            <label for="hours-available" class="form-label fw-semibold">Available Hours Per Week:</label>
+                            <input type="number" class="form-control" id="hours-available" name="hours" min="10" max="40" placeholder="20" required>
+                        </div>
 
-                    <p>
-                        <label for="start-date">Earliest Start Date:</label><br>
-                        <input type="date" id="start-date" name="startDate" required>
-                    </p>
+                        <div class="col-12 col-md-6">
+                            <label for="start-date" class="form-label fw-semibold">Earliest Start Date:</label>
+                            <input type="date" class="form-control" id="start-date" name="startDate" required>
+                        </div>
 
-                    <p>
-                        <label for="desired-role">Desired Position:</label><br>
-                        <select id="desired-role" name="role" required>
-                            <option value="barista">Express Barista</option>
-                            <option value="shift-lead">Shift Lead</option>
-                            <option value="intern">Student Intern</option>
-                        </select>
-                    </p>
+                        <div class="col-12 col-md-6">
+                            <label for="desired-role" class="form-label fw-semibold">Desired Position:</label>
+                            <select class="form-select" id="desired-role" name="role" required>
+                                <option value="barista">Express Barista</option>
+                                <option value="shift-lead">Shift Lead</option>
+                                <option value="intern">Student Intern</option>
+                            </select>
+                        </div>
 
-                    <fieldset>
-                        <legend>Preferred Schedule</legend>
-                        <label>
-                            <input type="radio" name="schedule" value="part-time" checked> Part-time (Student friendly)
-                        </label><br>
-                        <label>
-                            <input type="radio" name="schedule" value="full-time"> Full-time
-                        </label>
-                    </fieldset>
+                        <!-- Schedule Radios -->
+                        <div class="col-12">
+                            <div class="p-3 bg-white border rounded-3">
+                                <label class="form-label fw-semibold d-block mb-2">Preferred Schedule:</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="schedule" id="schedPart" value="part-time" checked>
+                                    <label class="form-check-label" for="schedPart">Part-time (Student friendly)</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="schedule" id="schedFull" value="full-time">
+                                    <label class="form-check-label" for="schedFull">Full-time</label>
+                                </div>
+                            </div>
+                        </div>
 
-                    <p>
-                        <label for="resume-file">Upload Resume (PDF/DOCX):</label><br>
-                        <input type="file" id="resume-file" name="resume" accept=".pdf,.docx">
-                    </p>
+                        <!-- Resume Upload -->
+                        <div class="col-12">
+                            <label for="resume-file" class="form-label fw-semibold">Upload Resume (PDF/DOCX):</label>
+                            <input class="form-control" type="file" id="resume-file" name="resume" accept=".pdf,.docx">
+                        </div>
 
-                    <p>
-                        <label for="cover-letter">Short Cover Letter or Motivation:</label><br>
-                        <textarea id="cover-letter" name="coverLetter" rows="4" cols="40" placeholder="Tell us about yourself and your schedule availability..."></textarea>
-                    </p>
+                        <!-- Cover Letter -->
+                        <div class="col-12">
+                            <label for="cover-letter" class="form-label fw-semibold">Short Motivation / Experience:</label>
+                            <textarea class="form-control" id="cover-letter" name="coverLetter" rows="3" placeholder="Tell us about yourself and your schedule availability..."></textarea>
+                        </div>
 
-                    <p>
-                        <label>
-                            <input type="checkbox" name="terms" required> I confirm that the details provided are accurate and complete.
-                        </label>
-                    </p>
+                        <!-- Confirmation Checkbox -->
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                <label class="form-check-label small" for="terms">
+                                    I confirm that the details provided are accurate and complete.
+                                </label>
+                            </div>
+                            <small class="text-muted d-block mt-1">*We respond to successful applicants within three business days.</small>
+                        </div>
 
-                    <p>
-                        <small>*We respond to successful applicants within three business days.</small>
-                    </p>
-
-                    <p>
-                        <button type="submit">Submit Application</button>
-                        <button type="reset">Clear Form</button>
-                    </p>
+                        <!-- Button Requirements: primary + outline + size variant -->
+                        <div class="col-12 pt-2">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 me-2">Submit Application</button>
+                            <button type="reset" class="btn btn-outline-secondary">Clear Form</button>
+                        </div>
+                    </div>
                 </fieldset>
             </form>
         </section>
-        <p><a class="back-to-top" href="#top">Back to top</a></p>
+
+        <!-- Back to Top Button -->
+        <p class="text-end">
+            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top">Back to top &uarr;</a>
+        </p>
     </main>
-    <footer>
-        <hr>
-        <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-        <p>Phone: <a href="tel:+77470290043">+7 747 029 00 43</a></p>
-        <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
-        <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
-        <hr>
-        <p>&copy; 2026 Zebra Coffee. All rights reserved.</p>
+
+    <!-- Полный единый футер -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <hr class="border-secondary my-3">
+            <p class="mb-1 text-light">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
+            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none">+7 747 029 00 43</a></p>
+            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none">zebracoffee.kz</a></p>
+            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none">info@zebracoffee.kz</a></p>
+            <hr class="border-secondary my-3">
+            <p class="small text-secondary mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- Bootstrap v5.3.3 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

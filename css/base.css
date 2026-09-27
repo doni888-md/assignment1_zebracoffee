@@ -1,136 +1,59 @@
-/* Color palette:
-   Turquoise (#00A99D) — the main Zebra Coffee brand accent.
-   Off-white (#F8F7F2) — the main page background for a clean and warm look.
-   Espresso brown (#6B4F3A) — represents coffee and adds a warm accent.
-   Warm beige (#E8DED2) — creates a soft coffee-inspired background for content blocks.
-   Charcoal (#202020) — used for readable text and dark header/footer elements.
-*/
+/* Zebra Coffee — Global Base CSS (base.css)
+   Project Core Styles & Shared Layout (v5.3.3 Compatible)
+   Color Palette:
+     - Turquoise (#00A99D) — Brand accent
+     - Off-white (#F8F7F2) — Main page background
+     - Espresso brown (#6B4F3A) — Coffee accent & typography
+     - Warm beige (#E8DED2) — Structural borders & soft blocks
+     - Charcoal (#202020) — High contrast text & dark elements
+   */
 
-* {
+/* 1. Global Box Sizing & Root Rules */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
-
-/* body */
 
 body {
     background-color: #F8F7F2;
     color: #202020;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.6;
     letter-spacing: 0.2px;
     margin: 0;
 }
 
-/* headings */
-
-h1, h2, h3 {
+/* 2. Headings & Universal Links */
+h1, h2, h3, h4, h5, h6 {
     font-family: Georgia, "Times New Roman", serif;
 }
-
-/* header */
-
-header {
-    background-color: #202020;
-    color: white;
-    padding: 24px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0 0 8px;
-}
-
-header > p {
-    color: #E8DED2;
-    margin: 0 0 20px;
-}
-
-/* navigation */
-
-nav ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-/* navigation links */
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* hover */
-
-nav a:hover {
-    color: #00A99D;
-}
-
-/* focus */
-
-nav a:focus {
-    outline: 2px solid #00A99D;
-    outline-offset: 3px;
-}
-
-/* links */
 
 a {
     color: #6B4F3A;
     text-decoration: underline;
+    transition: color 0.2s ease-in-out;
 }
 
-/* main */
-
-/* main */
-
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 24px;
-}
-
-/* sections */
-
-section {
-    margin-bottom: 48px;
-}
-
-/* footer */
-
-/* footer */
-
-footer {
-    background-color: #202020;
-    color: white;
-    padding: 32px 24px;
-    text-align: center;
-}
-
-footer a {
+a:hover {
     color: #00A99D;
 }
 
-header img {
-    width: 80px;
-    height: auto;
-    display: block;
-    margin: 0 auto 12px;
+a:focus-visible {
+    outline: 2px solid #00A99D;
+    outline-offset: 3px;
 }
 
-/* ==================================================
-   COLOPHON PAGE
-   Shared styles for Dana, Yasmina and Korkem
-   ================================================== */
+/* 3. Global Structural Elements */
+main > hr {
+    border: none;
+    border-top: 2px solid #E8DED2;
+    margin: 2.5rem 0;
+}
 
+/* 4. Shared Colophon & Documentation Blocks */
 #about,
 #authors,
 #structure,
@@ -138,12 +61,12 @@ header img {
 #elements,
 #project,
 #quote {
-    background-color: white;
-    padding: 28px;
-    margin-bottom: 32px;
+    background-color: #ffffff;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
     border: 1px solid #E8DED2;
     border-top: 4px solid #00A99D;
-    border-radius: 16px;
+    border-radius: 1rem;
 }
 
 #about h2,
@@ -152,10 +75,7 @@ header img {
 #forms h2,
 #elements h2,
 #project h2,
-#quote h2 {
-    color: #6B4F3A;
-}
-
+#quote h2,
 #structure h3,
 #forms h3,
 #elements h3 {
@@ -166,95 +86,91 @@ header img {
 #forms article,
 #elements article {
     background-color: #F8F7F2;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
     border: 1px solid #E8DED2;
-    border-radius: 12px;
+    border-radius: 0.75rem;
 }
 
+/* Definition Lists (Authors & Project Info) */
 #authors dl,
 #project dl {
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 #authors dt,
 #project dt {
     color: #6B4F3A;
-    font-weight: bold;
-    margin-top: 12px;
+    font-weight: 700;
+    margin-top: 0.75rem;
 }
 
 #authors dd,
 #project dd {
-    margin-left: 20px;
-    margin-bottom: 8px;
+    margin-left: 1.25rem;
+    margin-bottom: 0.5rem;
 }
 
+/* Code & Formatting Tags */
 #structure code,
 #forms code,
 #elements code {
     color: #6B4F3A;
     background-color: #E8DED2;
-    padding: 2px 5px;
-    border-radius: 4px;
+    padding: 0.125rem 0.3125rem;
+    border-radius: 0.25rem;
 }
 
 #structure kbd {
     background-color: #202020;
-    color: white;
-    padding: 3px 7px;
-    border-radius: 5px;
+    color: #ffffff;
+    padding: 0.1875rem 0.4375rem;
+    border-radius: 0.3125rem;
 }
 
 #structure pre {
     background-color: #202020;
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
+    color: #ffffff;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
     overflow-x: auto;
 }
 
 #forms samp {
     background-color: #E8DED2;
     color: #6B4F3A;
-    padding: 3px 6px;
-    border-radius: 4px;
+    padding: 0.1875rem 0.375rem;
+    border-radius: 0.25rem;
 }
 
 #elements mark {
     background-color: #E8DED2;
-    padding: 2px 5px;
-    border-radius: 4px;
+    padding: 0.125rem 0.3125rem;
+    border-radius: 0.25rem;
 }
 
 #elements div {
     background-color: #F8F7F2;
     border-left: 4px solid #00A99D;
-    padding: 16px;
-    margin: 20px 0;
-    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.25rem 0;
+    border-radius: 0.5rem;
 }
 
 #elements span {
     color: #00A99D;
-    font-weight: bold;
-}
-
-main > hr {
-    border: none;
-    border-top: 2px solid #E8DED2;
-    margin: 40px 0;
+    font-weight: 700;
 }
 
 #quote blockquote {
     background-color: #F8F7F2;
     border-left: 4px solid #00A99D;
-    padding: 20px 24px;
-    margin: 20px 0;
-    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+    border-radius: 0.75rem;
 }
 
 #quote cite {
     color: #6B4F3A;
-    font-weight: bold;
+    font-weight: 700;
 }

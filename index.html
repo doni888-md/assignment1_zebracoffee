@@ -7,106 +7,183 @@
     <meta name="author" content="Yasmina Roziyeva">
     <title>Zebra Coffee — Homepage</title>
 
+    <!-- Bootstrap v5.3.3 CSS CDN Connection -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Correction Layer CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/yasmina.css">
 </head>
- 
 <body>
     <!-- Author: Yasmina Roziyeva -->
-    <header id="top">
-        <img src="images/logo.png" alt="Zebra Coffee logo">
-        <h1>Zebra Coffee</h1>
-        <p>City to-go coffee shop</p>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="career.html">Careers</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-                <li><a href="colophon.html">Colophon</a></li>
-            </ul>
+    
+    <!-- STRUCTURAL DECISION COMMENT:
+         header uses 'container-fluid' (full-width) to stretch the dark navigation bar edge-to-edge.
+         main uses standard 'container' (centered max-width) to align content within a clean reading grid. -->
+    <header class="container-fluid bg-dark text-white p-3 mb-4">
+        <div class="text-center mb-3">
+            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo">
+            <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
+            <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
+        </div>
+        
+        <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
+            <div class="container-fluid">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="colophon.html">Colophon</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-        <hr>
     </header>
 
-    <main>
-        <p class="quick-links">Quick links: <a href="#highlights">Highlights</a> | <a href="#photo-gallery">Gallery</a></p>
-        <section id="welcome">
-            <h2>Welcome to Zebra Coffee on Mangilik El</h2>
-            <p>
-                <strong><i>Zebra Coffee</i></strong> is a popular express-format coffee chain. 
-                Our branch at <mark>38 Mangilik El Avenue in Astana</mark> offers quick 
+    <main class="container mb-5">
+        <p class="quick-links text-center text-md-start mb-4 text-muted">
+            Quick links: <a href="#highlights" class="btn btn-sm btn-outline-secondary py-0">Highlights</a> 
+            <span class="mx-1">|</span> 
+            <a href="#photo-gallery" class="btn btn-sm btn-outline-secondary py-0">Gallery</a>
+        </p>
+
+        <!-- Welcome Section -->
+        <section id="welcome" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-3 text-center text-md-start">Welcome to Zebra Coffee on Mangilik El</h2>
+            <p class="lead fs-6 mb-2">
+                <strong><em>Zebra Coffee</em></strong> is a popular express-format coffee chain. 
+                Our branch at <mark class="px-2 py-1 rounded">38 Mangilik El Avenue in Astana</mark> offers quick 
                 takeaway coffee for local residents and students.
             </p>
-            <p>
-                We serve <em>freshly roasted beans</em> and guarantee <b>consistent taste</b> 
-                with every single cup.
+            <p class="text-secondary mb-0">
+                We serve <em>freshly roasted beans</em> and guarantee <b>consistent taste</b> with every single cup.
             </p>
         </section>
 
-        <section id="highlights">
-            <h2>What makes our Spot unique?</h2>
-            <p>
-                Our extensive menu features specialty drinks, dairy-free alternatives 
-                such as oat and almond milk, and innovative sugar-free fruit and berry 
-                extracts. Customers enjoy <i>complimentary syrup additions</i>, extra 
-                espresso shots, and free splashes of milk to build their personal 
-                favorite beverage.
-            </p>
-            <aside class="discount-area">
-                <h3>Discounts and Grab-and-Go</h3>
-                <p>
-                    We appreciate guests visiting us around the clock. The express <abbr title="To-Go format">TG</abbr> setup ensures your order is ready in under three minutes.
-                </p>
-                <p>
-                    <!-- span is used to mark the numeric discount value because HTML5 lacks a semantic tag for percentages/discounts -->
-                    <span class="discount-badge">10% discount</span>
-                    Ask our barista for the loyalty program to receive a special on regular visits.
-                </p>
-            </aside>
+        <!-- Highlights Section with Nested Grid -->
+        <section id="highlights" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start">What makes our Spot unique?</h2>
+            
+            <div class="row g-4 align-items-center">
+                <div class="col-12 col-lg-7">
+                    <p class="mb-3">
+                        Our extensive menu features specialty drinks, dairy-free alternatives 
+                        such as oat and almond milk, and innovative sugar-free fruit and berry 
+                        extracts. Customers enjoy <i>complimentary syrup additions</i>, extra 
+                        espresso shots, and free splashes of milk to build their personal 
+                        favorite beverage.
+                    </p>
+                    
+                    <!-- Nested Row inside column -->
+                    <div class="row g-2 pt-2">
+                        <div class="col-6">
+                            <div class="p-2 border rounded text-center bg-light">
+                                <span class="fw-bold d-block text-dark">⚡ 3 Min</span>
+                                <small class="text-muted">Average prep time</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-2 border rounded text-center bg-light">
+                                <span class="fw-bold d-block text-dark">☕ 100% Arabica</span>
+                                <small class="text-muted">Fresh local roast</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-5">
+                    <aside class="p-4 rounded-3 border position-relative bg-light">
+                        <span class="badge position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill badge-zebra fw-bold">
+                            10% discount
+                        </span>
+                        
+                        <h3 class="h5 fw-bold mb-2">Discounts &amp; Grab-and-Go</h3>
+                        <p class="small text-secondary mb-3">
+                            We appreciate guests visiting us around the clock. The express <abbr title="To-Go format">TG</abbr> setup ensures your order is ready in under three minutes.
+                        </p>
+                        <p class="small text-secondary mb-0">
+                            Ask our barista for the loyalty program to receive a special on regular visits.
+                        </p>
+                    </aside>
+                </div>
+            </div>
         </section>
-        <!-- Independent section with figure elements encapsulates visual assets, ensuring image-caption pairs remain semantically coupled even if rendered outside standard document flow. -->
-        <section id="photo-gallery" class="gallery-grid">
-            <h2>Photo Gallery</h2>
-            <p>Authentic photos taken at our Mangilik El location:</p>
-            <figure class="gallery-item">
-                <img src="images/img1_street.jpg" alt="Cozy street view of Zebra Coffee entrance on Mangilik El with warm lighting">
-                <figcaption>Exterior view of our cozy Mangilik El branch welcoming guests with evening lights.</figcaption>
-            </figure>
-            <figure class="gallery-item">
-                <img src="images/img2_kassa.jpg" alt="Main entrance and cash desk of Zebra Coffee with pastry showcase and menu board">
-                <figcaption>Main entrance and cash counter where guests place takeaway orders and pick up fresh pastries.</figcaption>
-            </figure>
-            <figure class="gallery-item">
-                <img src="images/img3_2floor.jpg" alt="Second floor seating area of Zebra Coffee featuring white modern chairs, wooden tables, and study spaces">
-                <figcaption>Cozy second-floor mezzanine with white chairs and tables, offering a quiet space for studying and working.</figcaption>
-            </figure>
-            <figure class="gallery-item">
-                <img src="images/img4_style.jpg" alt="Sleek and modern interior of Zebra Coffee with illuminated white walls, ambient LED lighting, and contemporary seating">
-                <figcaption>Stylish coffee shop interior with bright white backlighting and a clean minimalist aesthetic.</figcaption>
-            </figure>
+
+        <!-- Bootstrap Alert Component -->
+        <!-- STRUCTURAL DECISION COMMENT: Converted announcement into Bootstrap alert-info component with action button -->
+        <div class="alert alert-info d-flex align-items-center justify-content-between mb-4 shadow-sm rounded-3" role="alert">
+            <div>
+                <strong>Night Owls Welcome!</strong> Visiting between 00:00 and 06:00? Show your student ID for an extra stamp on your loyalty card.
+            </div>
+            <a href="menu.html" class="btn btn-sm btn-outline-info text-nowrap ms-3 d-none d-sm-inline-block">View Menu</a>
+        </div>
+
+        <!-- Asymmetric Photo Gallery -->
+        <section id="photo-gallery" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+            <h2 class="h3 fw-bold mb-1 text-center text-md-start">Photo Gallery</h2>
+            <p class="text-muted mb-4 text-center text-md-start">Authentic photos taken at our Mangilik El location:</p>
+            
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-7">
+                    <figure class="m-0 h-100 d-flex flex-column">
+                        <img src="images/img1_street.jpg" class="img-fluid rounded-3 object-fit-cover w-100" style="height: 290px;" alt="Cozy street view">
+                        <figcaption class="small text-muted mt-2">Exterior view of our cozy Mangilik El branch welcoming guests with evening lights.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5">
+                    <figure class="m-0 h-100 d-flex flex-column">
+                        <img src="images/img2_kassa.jpg" class="img-fluid rounded-3 object-fit-cover w-100" style="height: 290px;" alt="Main entrance and cash desk">
+                        <figcaption class="small text-muted mt-2">Main entrance and cash counter where guests place takeaway orders.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5">
+                    <figure class="m-0 h-100 d-flex flex-column">
+                        <img src="images/img3_2floor.jpg" class="img-fluid rounded-3 object-fit-cover w-100" style="height: 290px;" alt="Second floor seating area">
+                        <figcaption class="small text-muted mt-2">Cozy second-floor mezzanine with study spaces.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-12 col-md-6 col-lg-7">
+                    <figure class="m-0 h-100 d-flex flex-column">
+                        <img src="images/img4_style.jpg" class="img-fluid rounded-3 object-fit-cover w-100" style="height: 290px;" alt="Sleek and modern interior">
+                        <figcaption class="small text-muted mt-2">Stylish coffee shop interior with bright white backlighting.</figcaption>
+                    </figure>
+                </div>
+            </div>
         </section>
-        <section id="schedule" class="opening-hours">
-            <h2>Opening Hours</h2>
-            <p>Our doors are open <strong>24 hours a day</strong>, welcoming guests day and night without breaks.</p>
-            <p><small>&quot;Quality and care in every single cup&quot; &mdash; that is the core commitment of our team.</small></p>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4 text-center">
+            <h2 class="h3 fw-bold mb-3">Opening Hours</h2>
+            <p class="fs-5 mb-2">Our doors are open <strong>24 hours a day</strong>, welcoming guests day and night without breaks.</p>
+            <p class="text-muted small mb-0">&quot;Quality and care in every single cup&quot; &mdash; that is the core commitment of our team.</p>
         </section>
-        <p><a class="back-to-top" href="#top">Back to top</a></p>
-        
+
+        <p class="text-end">
+            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top">Back to top &uarr;</a>
+        </p>
     </main>
 
-    <footer>
-        <hr>
-        <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-        <p>Phone: <a href="tel:+77470290043"> +7 747 029 00 43</a></p>
-        <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
-        <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
-        
-        <hr>
-        <p>&copy; 2026 Zebra Coffee. All rights reserved.</p>
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <hr class="border-secondary my-3">
+            <p class="mb-1 text-light">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
+            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none">+7 747 029 00 43</a></p>
+            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none">zebracoffee.kz</a></p>
+            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none">info@zebracoffee.kz</a></p>
+            <hr class="border-secondary my-3">
+            <p class="small text-secondary mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- Bootstrap v5.3.3 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
