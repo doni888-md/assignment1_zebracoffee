@@ -12,6 +12,11 @@
 
     <title>Zebra Coffee - Menu</title>
 
+    <!-- Bootstrap 5.3.8 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- My original CSS stays after Bootstrap -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/dana.css">
 </head>
@@ -19,342 +24,765 @@
 <body>
 
 <header>
-    <img src="images/logo.png" alt="Zebra Coffee Logo">
+
+    <img src="images/logo.png"
+         alt="Zebra Coffee Logo">
+
     <h1>Zebra Coffee</h1>
+
     <p>Our menu</p>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="career.html">Careers</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-            <li><a href="booking.html">Booking</a></li>
-            <li><a href="contacts.html">Contacts</a></li>
-            <li><a href="colophon.html">Colophon</a></li>
-        </ul>
-        <hr>
+    <!-- Bootstrap responsive navigation -->
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse"
+             id="mainNavbar">
+
+            <ul>
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="career.html">Careers</a>
+                </li>
+
+                <li>
+                    <a href="menu.html">Menu</a>
+                </li>
+
+                <li>
+                    <a href="reviews.html">Reviews</a>
+                </li>
+
+                <li>
+                    <a href="booking.html">Booking</a>
+                </li>
+
+                <li>
+                    <a href="contacts.html">Contacts</a>
+                </li>
+
+                <li>
+                    <a href="colophon.html">Colophon</a>
+                </li>
+
+            </ul>
+
+        </div>
+
     </nav>
+
+    <hr>
+
 </header>
 
-<main>
+
+<main class="container my-4">
 
     <section id="menu">
 
-        <h2>Our Menu</h2>
+        <div class="row g-4">
 
-        <p>
-            Explore the drinks and other items available at Zebra Coffee.
-            Choose your favorite drink and place your order.
-        </p>
+            <div class="col-12">
 
-        <article>
+                <h2>Our Menu</h2>
 
-            <h3>Coffee Drinks</h3>
+                <p class="lead">
+                    Explore the drinks and other items available at Zebra Coffee.
+                    Choose your favorite drink and place your order.
+                </p>
 
-            <table>
+            </div>
 
-                <caption>Coffee Menu</caption>
 
-                <thead>
-                    <tr>
-                        <th>Drink</th>
-                        <th>Volume</th>
-                        <th>Price</th>
-                        <th>Order</th>
-                    </tr>
-                </thead>
+            <div class="col-12">
 
-                <tbody>
+                <article>
 
-                    <tr>
-                        <td>
-                            <img src="images/americanoespresso.jpg"
-                                 alt="Americano coffee">
-                            <p>Espresso</p>
-                        </td>
+                    <h3>Coffee Drinks</h3>
 
-                        <td>30 ml</td>
-                        <td>900 ₸</td>
+                    <div class="table-responsive">
 
-                        <td>
-                            <button type="button">Order</button>
+                        <table class="table table-bordered table-hover align-middle">
+
+                            <caption class="caption-top">
+                                Coffee Menu
+                            </caption>
+
+                            <thead>
+                            <tr>
+                                <th scope="col">Drink</th>
+                                <th scope="col">Volume</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Order</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <img src="images/americanoespresso.jpg"
+                                         alt="Americano coffee"
+                                         class="img-fluid menu-image">
+
+                                    <p class="mb-0 mt-2">
+                                        Espresso
+                                    </p>
+                                </td>
+
+                                <td>
+                                    30 ml
+                                </td>
+
+                                <td>
+                                    900 ₸
+                                </td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-primary mb-2">
+                                        Order
+                                    </button>
+
+                                    <div class="row g-2">
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="espresso-quantity"
+                                                   class="form-label">
+                                                Quantity:
+                                            </label>
+
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="espresso-quantity"
+                                                   min="1"
+                                                   value="1">
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="espresso-comment"
+                                                   class="form-label">
+                                                Comment:
+                                            </label>
+
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="espresso-comment"
+                                                   placeholder="Your comment">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-sm">
+                                            Here
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm">
+                                            Takeaway
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <img src="images/americanoespresso.jpg"
+                                         alt="Americano coffee"
+                                         class="img-fluid menu-image">
+
+                                    <p class="mb-0 mt-2">
+                                        Americano
+                                    </p>
+                                </td>
+
+                                <td>250 ml</td>
+
+                                <td>790 ₸</td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-primary mb-2">
+                                        Order
+                                    </button>
+
+                                    <div class="row g-2">
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="americano-quantity"
+                                                   class="form-label">
+                                                Quantity:
+                                            </label>
+
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="americano-quantity"
+                                                   min="1"
+                                                   value="1">
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="americano-comment"
+                                                   class="form-label">
+                                                Comment:
+                                            </label>
+
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="americano-comment"
+                                                   placeholder="Your comment">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-sm">
+                                            Here
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm">
+                                            Takeaway
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <img src="images/cappuccinolatte.jpg"
+                                         alt="Cappuccino coffee"
+                                         class="img-fluid menu-image">
+
+                                    <p class="mb-0 mt-2">
+                                        Cappuccino
+                                    </p>
+                                </td>
+
+                                <td>250 ml</td>
+
+                                <td>990 ₸</td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-primary mb-2">
+                                        Order
+                                    </button>
+
+                                    <div class="row g-2">
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="cappuccino-quantity"
+                                                   class="form-label">
+                                                Quantity:
+                                            </label>
+
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="cappuccino-quantity"
+                                                   min="1"
+                                                   value="1">
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="cappuccino-comment"
+                                                   class="form-label">
+                                                Comment:
+                                            </label>
+
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="cappuccino-comment"
+                                                   placeholder="Your comment">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-sm">
+                                            Here
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm">
+                                            Takeaway
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <img src="images/cappuccinolatte.jpg"
+                                         alt="Latte coffee"
+                                         class="img-fluid menu-image">
+
+                                    <p class="mb-0 mt-2">
+                                        Latte
+                                    </p>
+                                </td>
+
+                                <td>250 ml</td>
+
+                                <td>990 ₸</td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-primary mb-2">
+                                        Order
+                                    </button>
+
+                                    <div class="row g-2">
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="latte-quantity"
+                                                   class="form-label">
+                                                Quantity:
+                                            </label>
+
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="latte-quantity"
+                                                   min="1"
+                                                   value="1">
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="latte-comment"
+                                                   class="form-label">
+                                                Comment:
+                                            </label>
+
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="latte-comment"
+                                                   placeholder="Your comment">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-sm">
+                                            Here
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm">
+                                            Takeaway
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <img src="images/raf.jpg"
+                                         alt="Raf coffee"
+                                         class="img-fluid menu-image">
+
+                                    <p class="mb-0 mt-2">
+                                        Raf
+                                    </p>
+                                </td>
+
+                                <td>250 ml</td>
+
+                                <td>1190 ₸</td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-primary mb-2">
+                                        Order
+                                    </button>
+
+                                    <div class="row g-2">
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="raf-quantity"
+                                                   class="form-label">
+                                                Quantity:
+                                            </label>
+
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="raf-quantity"
+                                                   min="1"
+                                                   value="1">
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="raf-comment"
+                                                   class="form-label">
+                                                Comment:
+                                            </label>
+
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="raf-comment"
+                                                   placeholder="Your comment">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-sm">
+                                            Here
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm">
+                                            Takeaway
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <img src="images/flatwhite.jpg"
+                                         alt="Flat White coffee"
+                                         class="img-fluid menu-image">
+
+                                    <p class="mb-0 mt-2">
+                                        Flat White
+                                    </p>
+                                </td>
+
+                                <td>250 ml</td>
+
+                                <td>1090 ₸</td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-primary mb-2">
+                                        Order
+                                    </button>
+
+                                    <div class="row g-2">
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="flatwhite-quantity"
+                                                   class="form-label">
+                                                Quantity:
+                                            </label>
+
+                                            <input type="number"
+                                                   class="form-control"
+                                                   id="flatwhite-quantity"
+                                                   min="1"
+                                                   value="1">
+
+                                        </div>
+
+                                        <div class="col-12 col-lg-6">
+
+                                            <label for="flatwhite-comment"
+                                                   class="form-label">
+                                                Comment:
+                                            </label>
+
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="flatwhite-comment"
+                                                   placeholder="Your comment">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="d-flex flex-wrap gap-2 mt-3">
+
+                                        <button type="button"
+                                                class="btn btn-outline-secondary btn-sm">
+                                            Here
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm">
+                                            Takeaway
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- Responsive block -->
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <article>
+
+                    <h3>Other Drinks</h3>
+
+                    <ul>
+                        <li>Tea</li>
+                        <li>Cold drinks</li>
+                        <li>Seasonal drinks</li>
+                    </ul>
+
+                </article>
+
+            </div>
+
+
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <article>
+
+                    <h3>Photo of the Menu</h3>
+
+                    <figure>
+
+                        <img src="images/IMG_1902..jpg"
+                             alt="Zebra Coffee menu"
+                             width="400"
+                             class="img-fluid">
+
+                        <figcaption>
+                            Zebra Coffee menu.
+                        </figcaption>
+
+                    </figure>
+
+                </article>
+
+            </div>
+
+
+            <div class="col-12 col-lg-4">
+
+                <aside>
+
+                    <h3>Branch Information</h3>
+
+                    <p>
+                        Zebra Coffee is located at Mangilik El 38 Avenue, Astana.
+                    </p>
+
+                    <p>
+                        Visitors can enjoy coffee, drinks and a comfortable atmosphere.
+                    </p>
+
+                </aside>
+
+            </div>
+
+
+            <!-- Nested row -->
+            <div class="col-12">
+
+                <section>
+
+                    <h3>About the Drinks</h3>
+
+                    <div class="row g-3">
+
+                        <div class="col-12 col-md-6">
 
                             <p>
-                                <label for="espresso-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="espresso-quantity"
-                                       min="1"
-                                       value="1">
+                                Our coffee menu includes classic drinks prepared with
+                                carefully selected coffee beans.
                             </p>
+
+                        </div>
+
+                        <div class="col-12 col-md-6">
 
                             <p>
-                                <label for="espresso-comment">Comment:</label>
-                                <input type="text"
-                                       id="espresso-comment"
-                                       placeholder="Your comment">
+                                You can choose different volumes and enjoy your drink
+                                at the coffee shop or take it away.
                             </p>
 
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
+                        </div>
 
-                    <tr>
-                        <td>
-                            <img src="images/americanoespresso.jpg"
-                                 alt="Americano coffee">
-                            <p>Americano</p>
-                        </td>
+                    </div>
 
-                        <td>250 ml</td>
-                        <td>1200 ₸</td>
+                </section>
 
-                        <td>
-                            <button type="button">Order</button>
+            </div>
 
-                            <p>
-                                <label for="americano-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="americano-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
 
-                            <p>
-                                <label for="americano-comment">Comment:</label>
-                                <input type="text"
-                                       id="americano-comment"
-                                       placeholder="Your comment">
-                            </p>
+            <div class="col-12">
 
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
+                <section>
 
-                    <tr>
-                        <td>
-                            <img src="images/cappuccinolatte.jpg"
-                                 alt="Cappuccino coffee">
-                            <p>Cappuccino</p>
-                        </td>
+                    <h3>Contacts</h3>
 
-                        <td>250 ml</td>
-                        <td>1400 ₸</td>
+                    <p>
+                        Address: Mangilik El 38 Avenue, Astana.
+                    </p>
 
-                        <td>
-                            <button type="button">Order</button>
+                    <p>
+                        Phone:
+                        <a href="tel:+77470290043">
+                            +7 747 029 00 43
+                        </a>
+                    </p>
 
-                            <p>
-                                <label for="cappuccino-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="cappuccino-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
+                </section>
 
-                            <p>
-                                <label for="cappuccino-comment">Comment:</label>
-                                <input type="text"
-                                       id="cappuccino-comment"
-                                       placeholder="Your comment">
-                            </p>
+            </div>
 
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/cappuccinolatte.jpg"
-                                 alt="Latte coffee">
-                            <p>Latte</p>
-                        </td>
-
-                        <td>300 ml</td>
-                        <td>1500 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="latte-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="latte-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="latte-comment">Comment:</label>
-                                <input type="text"
-                                       id="latte-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/raf.jpg"
-                                 alt="Raf coffee">
-                            <p>Raf</p>
-                        </td>
-
-                        <td>300 ml</td>
-                        <td>1600 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="raf-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="raf-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="raf-comment">Comment:</label>
-                                <input type="text"
-                                       id="raf-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src="images/flatwhite.jpg"
-                                 alt="Flat White coffee">
-                            <p>Flat White</p>
-                        </td>
-
-                        <td>200 ml</td>
-                        <td>1500 ₸</td>
-
-                        <td>
-                            <button type="button">Order</button>
-
-                            <p>
-                                <label for="flatwhite-quantity">Quantity:</label>
-                                <input type="number"
-                                       id="flatwhite-quantity"
-                                       min="1"
-                                       value="1">
-                            </p>
-
-                            <p>
-                                <label for="flatwhite-comment">Comment:</label>
-                                <input type="text"
-                                       id="flatwhite-comment"
-                                       placeholder="Your comment">
-                            </p>
-
-                            <button type="button">Here</button>
-                            <button type="button">Takeaway</button>
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </article>
-
-        <article>
-
-            <h3>Other Drinks</h3>
-
-            <ul>
-                <li>Tea</li>
-                <li>Cold drinks</li>
-                <li>Seasonal drinks</li>
-            </ul>
-
-        </article>
-
-        <article>
-
-            <h3>Photo of the Menu</h3>
-
-            <figure>
-                <img src="images/IMG_1902..jpg"
-                     alt="Zebra Coffee menu"
-                     width="400">
-                <figcaption>Zebra Coffee menu.</figcaption>
-            </figure>
-
-        </article>
-
-        <aside>
-
-            <h3>Branch Information</h3>
-
-            <p>
-                Zebra Coffee is located at Mangilik El 38 Avenue, Astana.
-            </p>
-
-            <p>
-                Visitors can enjoy coffee, drinks and a comfortable atmosphere.
-            </p>
-
-        </aside>
-
-        <section>
-
-            <h3>About the Drinks</h3>
-
-            <p>
-                Our coffee menu includes classic drinks prepared with
-                carefully selected coffee beans.
-            </p>
-
-            <p>
-                You can choose different volumes and enjoy your drink
-                at the coffee shop or take it away.
-            </p>
-
-        </section>
-
-        <section>
-
-            <h3>Contacts</h3>
-
-            <p>
-                Address: Mangilik El 38 Avenue, Astana.
-            </p>
-
-            <p>
-                Phone:
-                <a href="tel:+77470290043">+7 747 029 00 43</a>
-            </p>
-
-        </section>
+        </div>
 
     </section>
 
 </main>
 
+
 <footer>
-    <hr>
-    <p>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-    <p>Phone: <a href="tel:+77470290043"> +7 747 029 00 43</a></p>
-    <p>Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a></p>
-    <p>Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a></p>
-    <hr>
-    <p>&copy; 2026 Zebra Coffee. All rights reserved.</p>
+
+    <div class="container py-3">
+
+        <hr>
+
+        <div class="row g-2">
+
+            <div class="col-12 col-md-6">
+                <p class="small mb-0">
+                    Address: Mangilik El 38 Avenue, Astana, Kazakhstan
+                </p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <p class="small mb-0">
+                    Phone:
+                    <a href="tel:+77470290043">
+                        +7 747 029 00 43
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <p class="small mb-0">
+                    Official website:
+                    <a href="https://zebracoffee.kz"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        zebracoffee.kz
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <p class="small mb-0">
+                    Email:
+                    <a href="mailto:info@zebracoffee.kz">
+                        info@zebracoffee.kz
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="text-center text-md-start small">
+            &copy; 2026 Zebra Coffee. All rights reserved.
+        </p>
+
+    </div>
+
 </footer>
+
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
