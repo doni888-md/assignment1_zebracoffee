@@ -6,19 +6,19 @@
 <meta name="description" content="Menu of Zebra Coffee on Mangilik El 38 in Astana.">
 <meta name="author" content="Dana">
 <title>Zebra Coffee - Menu</title>
+<!-- Bootstrap 5.3.8 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/dana.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="dana.css">
 </head>
 <body>
-
+<!-- container-fluid is used for the full-width dark header -->
 <header class="container-fluid bg-dark text-white p-3 mb-4">
 <div class="text-center mb-3">
 <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo">
 <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
 <p class="lead text-muted mb-0 fs-6">Our menu</p>
 </div>
-
 <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
 <div class="container-fluid">
 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,8 +28,8 @@
 <ul class="navbar-nav">
 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-<li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
-<li class="nav-item"><a class="nav-link active" href="menu.html">Menu</a></li>
+<li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="menu.html">Menu</a></li>
 <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
 <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
 <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
@@ -39,253 +39,138 @@
 </div>
 </nav>
 </header>
-
+<!-- container keeps the main content centered and readable -->
 <main class="container mb-5">
-<section id="menu">
-
+<section id="menu" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
 <div class="row g-4">
-
 <div class="col-12">
-<h2 class="h3 fw-bold">Our Menu</h2>
-<p class="lead fs-6">Explore the drinks and other items available at Zebra Coffee. Choose your favorite drink and place your order.</p>
+<h2 class="display-6 fw-bold text-center text-md-start">Our Menu</h2>
+<p class="lead text-muted">Explore the drinks and other items available at Zebra Coffee. Choose your favorite drink and place your order.</p>
 </div>
-
 <div class="col-12">
-<article>
-<h3 class="h5 fw-bold">Coffee Drinks</h3>
-
+<!-- Bootstrap table component adapted to the Zebra Coffee menu -->
 <div class="table-responsive">
-<table class="table table-striped table-hover align-middle border rounded-3 overflow-hidden">
-<caption class="caption-top">Coffee Menu</caption>
-
+<table class="table table-bordered table-hover align-middle">
+<caption class="caption-top h4">Coffee Drinks</caption>
 <thead>
 <tr>
 <th scope="col">Drink</th>
+<th scope="col">Photo</th>
 <th scope="col">Volume</th>
 <th scope="col">Price</th>
 <th scope="col">Order</th>
+<th scope="col">Quantity</th>
+<th scope="col">Comment</th>
+<th scope="col">Place</th>
 </tr>
 </thead>
-
 <tbody>
-
 <tr>
-<td>
-<img src="images/americanoespresso.jpg" alt="Americano coffee" class="img-fluid menu-image">
-<p class="mb-0 mt-2">Espresso</p>
-</td>
+<th scope="row">Espresso</th>
+<td><img src="images/americanoespresso.jpg" alt="Americano coffee" class="menu-image"></td>
 <td>30 ml</td>
 <td>900 ₸</td>
-<td>
-<button type="button" class="btn btn-primary mb-2">Order</button>
-<div class="row g-2">
-<div class="col-12 col-lg-6">
-<label for="espresso-quantity" class="form-label">Quantity:</label>
-<input type="number" class="form-control" id="espresso-quantity" min="1" value="1">
-</div>
-<div class="col-12 col-lg-6">
-<label for="espresso-comment" class="form-label">Comment:</label>
-<input type="text" class="form-control" id="espresso-comment" placeholder="Your comment">
-</div>
-</div>
-<div class="d-flex flex-wrap gap-2 mt-3">
-<button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
-<button type="button" class="btn btn-primary btn-sm">Takeaway</button>
-</div>
-</td>
+<td><button type="button" class="btn btn-primary">Order</button></td>
+<td><input type="number" class="form-control" min="1" value="1" aria-label="Espresso quantity"></td>
+<td><input type="text" class="form-control" aria-label="Espresso comment"></td>
+<td><div class="d-flex flex-column gap-1"><button type="button" class="btn btn-success btn-sm">Here</button><button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button></div></td>
 </tr>
-
 <tr>
-<td>
-<img src="images/americanoespresso.jpg" alt="Americano coffee" class="img-fluid menu-image">
-<p class="mb-0 mt-2">Americano</p>
-</td>
+<th scope="row">Americano</th>
+<td><img src="images/americanoespresso.jpg" alt="Americano coffee" class="menu-image"></td>
 <td>250 ml</td>
 <td>790 ₸</td>
-<td>
-<button type="button" class="btn btn-primary mb-2">Order</button>
-<div class="row g-2">
-<div class="col-12 col-lg-6">
-<label for="americano-quantity" class="form-label">Quantity:</label>
-<input type="number" class="form-control" id="americano-quantity" min="1" value="1">
-</div>
-<div class="col-12 col-lg-6">
-<label for="americano-comment" class="form-label">Comment:</label>
-<input type="text" class="form-control" id="americano-comment" placeholder="Your comment">
-</div>
-</div>
-<div class="d-flex flex-wrap gap-2 mt-3">
-<button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
-<button type="button" class="btn btn-primary btn-sm">Takeaway</button>
-</div>
-</td>
+<td><button type="button" class="btn btn-primary">Order</button></td>
+<td><input type="number" class="form-control" min="1" value="1" aria-label="Americano quantity"></td>
+<td><input type="text" class="form-control" aria-label="Americano comment"></td>
+<td><div class="d-flex flex-column gap-1"><button type="button" class="btn btn-success btn-sm">Here</button><button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button></div></td>
 </tr>
-
 <tr>
-<td>
-<img src="images/cappuccinolatte.jpg" alt="Cappuccino coffee" class="img-fluid menu-image">
-<p class="mb-0 mt-2">Cappuccino</p>
-</td>
+<th scope="row">Cappuccino</th>
+<td><img src="images/cappuccinolatte.jpg" alt="Cappuccino coffee" class="menu-image"></td>
 <td>250 ml</td>
 <td>990 ₸</td>
-<td>
-<button type="button" class="btn btn-primary mb-2">Order</button>
-<div class="row g-2">
-<div class="col-12 col-lg-6">
-<label for="cappuccino-quantity" class="form-label">Quantity:</label>
-<input type="number" class="form-control" id="cappuccino-quantity" min="1" value="1">
-</div>
-<div class="col-12 col-lg-6">
-<label for="cappuccino-comment" class="form-label">Comment:</label>
-<input type="text" class="form-control" id="cappuccino-comment" placeholder="Your comment">
-</div>
-</div>
-<div class="d-flex flex-wrap gap-2 mt-3">
-<button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
-<button type="button" class="btn btn-primary btn-sm">Takeaway</button>
-</div>
-</td>
+<td><button type="button" class="btn btn-primary">Order</button></td>
+<td><input type="number" class="form-control" min="1" value="1" aria-label="Cappuccino quantity"></td>
+<td><input type="text" class="form-control" aria-label="Cappuccino comment"></td>
+<td><div class="d-flex flex-column gap-1"><button type="button" class="btn btn-success btn-sm">Here</button><button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button></div></td>
 </tr>
-
 <tr>
-<td>
-<img src="images/cappuccinolatte.jpg" alt="Latte coffee" class="img-fluid menu-image">
-<p class="mb-0 mt-2">Latte</p>
-</td>
+<th scope="row">Latte</th>
+<td><img src="images/cappuccinolatte.jpg" alt="Latte coffee" class="menu-image"></td>
 <td>250 ml</td>
 <td>990 ₸</td>
-<td>
-<button type="button" class="btn btn-primary mb-2">Order</button>
-<div class="row g-2">
-<div class="col-12 col-lg-6">
-<label for="latte-quantity" class="form-label">Quantity:</label>
-<input type="number" class="form-control" id="latte-quantity" min="1" value="1">
-</div>
-<div class="col-12 col-lg-6">
-<label for="latte-comment" class="form-label">Comment:</label>
-<input type="text" class="form-control" id="latte-comment" placeholder="Your comment">
-</div>
-</div>
-<div class="d-flex flex-wrap gap-2 mt-3">
-<button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
-<button type="button" class="btn btn-primary btn-sm">Takeaway</button>
-</div>
-</td>
+<td><button type="button" class="btn btn-primary">Order</button></td>
+<td><input type="number" class="form-control" min="1" value="1" aria-label="Latte quantity"></td>
+<td><input type="text" class="form-control" aria-label="Latte comment"></td>
+<td><div class="d-flex flex-column gap-1"><button type="button" class="btn btn-success btn-sm">Here</button><button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button></div></td>
 </tr>
-
 <tr>
-<td>
-<img src="images/raf.jpg" alt="Raf coffee" class="img-fluid menu-image">
-<p class="mb-0 mt-2">Raf</p>
-</td>
+<th scope="row">Raf</th>
+<td><img src="images/raf.jpg" alt="Raf coffee" class="menu-image"></td>
 <td>250 ml</td>
 <td>1190 ₸</td>
-<td>
-<button type="button" class="btn btn-primary mb-2">Order</button>
-<div class="row g-2">
-<div class="col-12 col-lg-6">
-<label for="raf-quantity" class="form-label">Quantity:</label>
-<input type="number" class="form-control" id="raf-quantity" min="1" value="1">
-</div>
-<div class="col-12 col-lg-6">
-<label for="raf-comment" class="form-label">Comment:</label>
-<input type="text" class="form-control" id="raf-comment" placeholder="Your comment">
-</div>
-</div>
-<div class="d-flex flex-wrap gap-2 mt-3">
-<button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
-<button type="button" class="btn btn-primary btn-sm">Takeaway</button>
-</div>
-</td>
+<td><button type="button" class="btn btn-primary">Order</button></td>
+<td><input type="number" class="form-control" min="1" value="1" aria-label="Raf quantity"></td>
+<td><input type="text" class="form-control" aria-label="Raf comment"></td>
+<td><div class="d-flex flex-column gap-1"><button type="button" class="btn btn-success btn-sm">Here</button><button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button></div></td>
 </tr>
-
 <tr>
-<td>
-<img src="images/flatwhite.jpg" alt="Flat White coffee" class="img-fluid menu-image">
-<p class="mb-0 mt-2">Flat White</p>
-</td>
+<th scope="row">Flat White</th>
+<td><img src="images/flatwhite.jpg" alt="Flat White coffee" class="menu-image"></td>
 <td>250 ml</td>
 <td>1090 ₸</td>
-<td>
-<button type="button" class="btn btn-primary mb-2">Order</button>
-<div class="row g-2">
-<div class="col-12 col-lg-6">
-<label for="flatwhite-quantity" class="form-label">Quantity:</label>
-<input type="number" class="form-control" id="flatwhite-quantity" min="1" value="1">
-</div>
-<div class="col-12 col-lg-6">
-<label for="flatwhite-comment" class="form-label">Comment:</label>
-<input type="text" class="form-control" id="flatwhite-comment" placeholder="Your comment">
-</div>
-</div>
-<div class="d-flex flex-wrap gap-2 mt-3">
-<button type="button" class="btn btn-outline-secondary btn-sm">Here</button>
-<button type="button" class="btn btn-primary btn-sm">Takeaway</button>
-</div>
-</td>
+<td><button type="button" class="btn btn-primary">Order</button></td>
+<td><input type="number" class="form-control" min="1" value="1" aria-label="Flat White quantity"></td>
+<td><input type="text" class="form-control" aria-label="Flat White comment"></td>
+<td><div class="d-flex flex-column gap-1"><button type="button" class="btn btn-success btn-sm">Here</button><button type="button" class="btn btn-outline-secondary btn-sm">Takeaway</button></div></td>
 </tr>
-
 </tbody>
 </table>
 </div>
-</article>
 </div>
-
 <div class="col-12 col-md-6 col-lg-4">
-<article>
-<h3 class="h5 fw-bold">Other Drinks</h3>
-<ul>
-<li>Tea</li>
-<li>Cold drinks</li>
-<li>Seasonal drinks</li>
-</ul>
+<article class="card border-0 shadow-sm h-100 p-3">
+<h3 class="h4 fw-bold">Other Drinks</h3>
+<p class="mb-1">Tea</p>
+<p class="mb-1">Cold drinks</p>
+<p class="mb-0">Seasonal drinks</p>
 </article>
 </div>
-
 <div class="col-12 col-md-6 col-lg-4">
-<article>
-<h3 class="h5 fw-bold">Photo of the Menu</h3>
-<figure>
-<img src="images/IMG_1902..jpg" alt="Zebra Coffee menu" width="400" class="img-fluid rounded-2">
-<figcaption>Zebra Coffee menu.</figcaption>
-</figure>
-</article>
-</div>
-
-<div class="col-12 col-lg-4">
-<aside>
-<h3 class="h5 fw-bold">Branch Information</h3>
+<article class="card border-0 shadow-sm h-100 p-3">
+<h3 class="h4 fw-bold">Branch Information</h3>
 <p>Zebra Coffee is located at Mangilik El 38 Avenue, Astana.</p>
-<p>Visitors can enjoy coffee, drinks and a comfortable atmosphere.</p>
-</aside>
+<p class="mb-0">Visitors can enjoy coffee, drinks and a comfortable atmosphere.</p>
+</article>
 </div>
-
-<div class="col-12">
-<section>
-<h3 class="h5 fw-bold">About the Drinks</h3>
-<div class="row g-3">
-<div class="col-12 col-md-6">
+<div class="col-12 col-md-12 col-lg-4">
+<article class="card border-0 shadow-sm h-100 p-3">
+<h3 class="h4 fw-bold">About the Drinks</h3>
 <p>Our coffee menu includes classic drinks prepared with carefully selected coffee beans.</p>
+<p class="mb-0">You can choose different volumes and enjoy your drink at the coffee shop or take it away.</p>
+</article>
 </div>
-<div class="col-12 col-md-6">
-<p>You can choose different volumes and enjoy your drink at the coffee shop or take it away.</p>
-</div>
-</div>
-</section>
-</div>
-
+<div class="col-12 col-lg-8">
+<div class="row g-4">
 <div class="col-12">
-<section>
-<h3 class="h5 fw-bold">Contacts</h3>
-<p>Address: Mangilik El 38 Avenue, Astana.</p>
-<p>Phone: <a href="tel:+77470290043">+7 747 029 00 43</a></p>
-</section>
+<figure class="card border-0 shadow-sm p-3 mb-0 text-center">
+<img src="images/IMG_1902..jpg" alt="Zebra Coffee menu" width="400" class="img-fluid rounded-3 mx-auto">
+<figcaption class="small mt-2">Zebra Coffee menu.</figcaption>
+</figure>
 </div>
-
+</div>
+</div>
+<div class="col-12 col-lg-4">
+<article class="card border-0 shadow-sm p-3 h-100">
+<h3 class="h4 fw-bold">Contacts</h3>
+<p>Address: Mangilik El 38 Avenue, Astana.</p>
+<p class="mb-0">Phone: +7 747 029 00 43</p>
+</article>
+</div>
 </div>
 </section>
 </main>
-
 <footer class="bg-dark text-white text-center py-4">
 <div class="container">
 <hr class="border-secondary my-3">
@@ -297,7 +182,6 @@
 <p class="small text-secondary mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
 </div>
 </footer>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
