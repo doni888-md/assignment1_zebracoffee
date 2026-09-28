@@ -3,314 +3,241 @@
    Bootstrap 5.3.8 correction layer
    ================================================== */
 
+.brand-logo{
+    max-height:70px;
+    width:auto;
+}
 
-/* ==================================================
-   MENU PAGE
-   ================================================== */
+header.bg-dark{
+    background-color:#202020!important;
+}
 
-#menu {
-    background-color: white;
-    border: 1px solid #E8DED2;
-    border-top: 4px solid #00A99D;
-    border-radius: 16px;
+header h1{
+    color:#ffffff;
+}
+
+header p{
+    color:#adb5bd!important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color:#ffffff;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active{
+    color:#00A99D;
+}
+
+.navbar-dark .navbar-toggler{
+    border-color:#6B4F3A;
+}
+
+main{
+    min-height:500px;
+}
+
+#menu,
+#reviews{
+    background-color:#ffffff;
+    border:1px solid #E8DED2;
+    border-radius:16px;
+    padding:24px;
 }
 
 #menu h2,
-#menu h3 {
-    color: #6B4F3A;
-}
-
-
-/* Table colours */
-
-#menu table {
-    background-color: white;
-    border-color: #E8DED2;
-}
-
-#menu caption {
-    color: #6B4F3A;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-#menu th {
-    background-color: #00A99D;
-    color: white;
-    border-color: #E8DED2;
-}
-
-#menu td {
-    border-color: #E8DED2;
-}
-
-#menu tr:nth-child(even) {
-    background-color: #F8F7F2;
-}
-
-#menu tr:hover {
-    background-color: #E8DED2;
-}
-
-
-/* Menu images */
-
-#menu .menu-image {
-    width: 150px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 12px;
-    display: block;
-}
-
-
-/* Keep original brand colours on Bootstrap buttons */
-
-#menu .btn-primary {
-    background-color: #00A99D;
-    border-color: #00A99D;
-}
-
-#menu .btn-primary:hover {
-    background-color: #6B4F3A;
-    border-color: #6B4F3A;
-}
-
-#menu .btn-outline-secondary {
-    color: #6B4F3A;
-    border-color: #6B4F3A;
-}
-
-#menu .btn-outline-secondary:hover {
-    background-color: #6B4F3A;
-    border-color: #6B4F3A;
-}
-
-
-/* Menu inputs */
-
-#menu .form-control {
-    background-color: #F8F7F2;
-    border-color: #E8DED2;
-}
-
-#menu .form-control:focus {
-    border-color: #00A99D;
-    box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.15);
-}
-
-
-/* Other information blocks */
-
-#menu aside,
-#menu > section {
-    background-color: white;
-    border: 1px solid #E8DED2;
-    border-radius: 12px;
-}
-
-#menu aside {
-    border-left: 4px solid #00A99D;
-    padding: 28px;
-}
-
-
-/* Links */
-
-#menu a {
-    color: #6B4F3A;
-    font-weight: 600;
-}
-
-#menu a:hover {
-    color: #00A99D;
-}
-
-
-/* ==================================================
-   REVIEWS PAGE
-   ================================================== */
-
-#reviews {
-    background-color: white;
-    border: 1px solid #E8DED2;
-    border-top: 4px solid #00A99D;
-    border-radius: 16px;
-}
-
+#menu h3,
 #reviews h2,
-#reviews h3 {
-    color: #6B4F3A;
+#reviews h3{
+    color:#6B4F3A;
+    font-weight:700;
 }
 
-
-/* Review image */
-
-#reviews img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
+#menu .lead,
+#reviews .lead{
+    color:#6c757d;
 }
 
-
-/* Bootstrap Card */
-
-#reviews .card {
-    background-color: #F8F7F2;
-    border-color: #E8DED2;
+#menu article,
+#menu aside,
+#menu section section{
+    background-color:#ffffff;
+    border:1px solid #E8DED2;
+    border-radius:12px;
+    padding:24px;
 }
 
-#reviews .card-body {
-    background-color: #F8F7F2;
+#menu table{
+    margin-bottom:0;
+    border-color:#E8DED2;
 }
 
-
-/* Quote */
-
-#reviews blockquote {
-    border-left: 4px solid #00A99D;
+#menu caption{
+    color:#6B4F3A;
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;
 }
 
-#reviews cite {
-    color: #6B4F3A;
-    font-weight: bold;
+#menu thead th{
+    background-color:#202020;
+    color:#ffffff;
+    border-color:#202020;
 }
 
-
-/* Figures */
-
-#reviews figure {
-    background-color: #F8F7F2;
-    padding: 16px;
-    border: 1px solid #E8DED2;
-    border-radius: 12px;
+#menu tbody tr:hover{
+    background-color:#F8F7F2;
 }
 
-#reviews figcaption {
-    color: #6B4F3A;
-    text-align: center;
-    font-weight: bold;
+#menu .menu-image{
+    width:150px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
-
-/* Form */
-
-#reviews fieldset {
-    background-color: white;
-    border: 2px solid #E8DED2;
-    border-radius: 18px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(32, 32, 32, 0.08);
+#menu .btn-primary,
+#reviews .btn-primary{
+    background-color:#00A99D;
+    border-color:#00A99D;
 }
 
-#reviews legend {
-    color: #6B4F3A;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.3rem;
-    font-weight: bold;
+#menu .btn-primary:hover,
+#reviews .btn-primary:hover{
+    background-color:#6B4F3A;
+    border-color:#6B4F3A;
 }
 
+#menu .btn-outline-secondary,
+#reviews .btn-outline-secondary{
+    color:#6B4F3A;
+    border-color:#6B4F3A;
+}
 
-/* Bootstrap form controls */
+#menu .btn-outline-secondary:hover,
+#reviews .btn-outline-secondary:hover{
+    background-color:#6B4F3A;
+    border-color:#6B4F3A;
+    color:#ffffff;
+}
 
+#menu .form-control,
 #reviews .form-control,
-#reviews .form-select {
-    background-color: #F8F7F2;
-    border-color: #E8DED2;
+#reviews .form-select{
+    background-color:#F8F7F2;
+    border-color:#E8DED2;
 }
 
+#menu .form-control:focus,
 #reviews .form-control:focus,
-#reviews .form-select:focus {
-    border-color: #00A99D;
-    box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.15);
+#reviews .form-select:focus{
+    border-color:#00A99D;
+    box-shadow:0 0 0 0.2rem rgba(0,169,157,.15);
 }
 
-
-/* Bootstrap radio and checkbox */
-
-#reviews .form-check-input:checked {
-    background-color: #00A99D;
-    border-color: #00A99D;
+#menu a,
+#reviews a{
+    color:#6B4F3A;
+    font-weight:600;
 }
 
-
-/* Review buttons */
-
-#reviews .btn-primary {
-    background-color: #00A99D;
-    border-color: #00A99D;
+#menu a:hover,
+#reviews a:hover{
+    color:#00A99D;
 }
 
-#reviews .btn-primary:hover {
-    background-color: #6B4F3A;
-    border-color: #6B4F3A;
+#menu figure,
+#reviews figure{
+    margin:0;
 }
 
-#reviews .btn-outline-secondary {
-    color: #6B4F3A;
-    border-color: #6B4F3A;
+#menu figcaption,
+#reviews figcaption{
+    color:#6c757d;
+    text-align:center;
+    padding-top:8px;
 }
 
-
-/* Review tips */
-
-#reviews aside {
-    background-color: #F8F7F2;
-    padding: 24px;
-    border: 1px solid #E8DED2;
-    border-left: 4px solid #00A99D;
-    border-radius: 12px;
+#menu aside{
+    border-left:4px solid #00A99D;
 }
 
-
-/* Links */
-
-#reviews a {
-    color: #6B4F3A;
-    font-weight: 600;
+#reviews .card{
+    border-color:#E8DED2;
+    background-color:#F8F7F2;
 }
 
-#reviews a:hover {
-    color: #00A99D;
+#reviews .card-body{
+    background-color:#F8F7F2;
+    border-radius:8px;
 }
 
-
-/* ==================================================
-   BOOTSTRAP NAVIGATION
-   Only brand colours are corrected here.
-   Layout is done by Bootstrap.
-   ================================================== */
-
-.navbar .nav-link {
-    color: #6B4F3A;
+#reviews blockquote{
+    border-left:4px solid #00A99D;
+    padding-left:20px;
 }
 
-.navbar .nav-link:hover,
-.navbar .nav-link.active {
-    color: #00A99D;
+#reviews cite{
+    color:#6B4F3A;
+    font-weight:700;
 }
 
+#reviews fieldset{
+    background-color:#ffffff;
+    border:1px solid #E8DED2;
+    border-radius:12px;
+    padding:24px;
+}
 
-/* ==================================================
-   RESPONSIVE CORRECTIONS
-   Bootstrap handles the layout.
-   ================================================== */
+#reviews legend{
+    color:#6B4F3A;
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;
+}
 
-@media (max-width: 575.98px) {
+#reviews .form-check-input:checked{
+    background-color:#00A99D;
+    border-color:#00A99D;
+}
 
+#reviews aside{
+    background-color:#F8F7F2;
+    border:1px solid #E8DED2;
+    border-left:4px solid #00A99D;
+    border-radius:12px;
+    padding:24px;
+}
+
+footer.bg-dark{
+    background-color:#202020!important;
+}
+
+footer a{
+    color:#ffffff;
+    text-decoration:none;
+}
+
+footer a:hover{
+    color:#00A99D;
+}
+
+@media(max-width:575.98px){
     #menu,
-    #reviews {
-        padding: 18px;
+    #reviews{
+        padding:18px;
     }
 
-    #menu .menu-image {
-        width: 100px;
-        height: 90px;
+    #menu .menu-image{
+        width:100px;
+        height:90px;
     }
 
-    #reviews fieldset {
-        padding: 18px;
+    #reviews fieldset{
+        padding:18px;
     }
 
+    #menu table{
+        font-size:.9rem;
+    }
 }
