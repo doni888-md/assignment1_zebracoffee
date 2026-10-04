@@ -4,32 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn about Zebra Coffee – our brand story, mission, and dedication to fast quality coffee.">
-    <meta name="author" content="Yasmina Roziyeva">
     <title>About Us — Zebra Coffee</title>
 
     <!-- Bootstrap v5.3.3 CSS CDN Connection -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Custom Correction Layer CSS (Must be included AFTER Bootstrap) -->
+    <!-- Custom CSS Layer -->
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/yasmina.css">
+    <link rel="stylesheet" href="css/homepage.css">
 </head>
-<body>
-    <!-- Author: Yasmina Roziyeva -->
+<body id="top">
     
-    <!-- STRUCTURAL DECISION COMMENT:
-         header uses 'container-fluid' (full-width) to stretch the dark navigation bar edge-to-edge.
-         main uses standard 'container' (centered max-width) to align content within a clean reading grid. -->
     <header class="container-fluid bg-dark text-white p-3 mb-4">
         <div class="text-center mb-3">
-            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo">
+            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo" id="about-brand-logo">
             <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
             <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
         </div>
         
         <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
             <div class="container-fluid">
-                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" id="about-nav-toggle-btn">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="mainNav">
@@ -50,10 +45,13 @@
 
     <main class="container mb-5">
         <p class="quick-links text-center text-md-start mb-4 text-muted">
-            Quick links: <a href="#history" class="btn btn-sm btn-outline-secondary py-0">Brand Heritage</a> 
+            Quick links: <a href="#history" class="btn btn-sm btn-outline-secondary py-0" id="quick-link-history">Brand Heritage</a> 
             <span class="mx-1">|</span> 
-            <a href="#values" class="btn btn-sm btn-outline-secondary py-0">Core Values</a>
+            <a href="#values" class="btn btn-sm btn-outline-secondary py-0" id="quick-link-values">Core Values</a>
         </p>
+
+        <!-- Dynamic notification / status container prepared for future JS -->
+        <div id="standards-status-container" class="hidden mb-3"></div>
 
         <!-- Brand History & Photos Section -->
         <section id="history" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
@@ -68,17 +66,21 @@
                     of students from nearby <abbr title="Astana IT University">AITU</abbr>, busy commuters, and city professionals every single morning. 
                     We prioritize <em>uncompromising bean freshness</em> and <b>craft precision</b>.
                 </p>
-                <p class="text-secondary">
+                <p class="text-secondary mb-3">
                     Our flagship branch on Mangilik El Avenue represents our latest interior vision&mdash;combining 
                     swift counter service with comfortable second-floor collaborative workspaces open 
                     <mark class="px-2 py-1 rounded">24/7</mark> for late-night study sessions. We rank among the top 10<sup>th</sup> 
                     percentile of fast-service coffee chains for customer satisfaction in Astana, offering 
                     <i>quiet corners</i> alongside active urban energy.
                 </p>
+                <div class="d-flex gap-2">
+                    <a href="career.html" class="btn btn-dark btn-sm rounded-pill px-3" id="about-join-team-btn">Join Our Team</a>
+                    <a href="booking.html" class="btn btn-outline-dark btn-sm rounded-pill px-3" id="about-book-table-btn">Book Study Space</a>
+                </div>
             </article>
 
             <!-- Responsive 3-column photo grid: 1 col on mobile (<768px), 3 cols on tablet/desktop -->
-            <div class="row g-4 pt-2">
+            <div class="row g-4 pt-2" id="about-gallery-grid">
                 <div class="col-12 col-md-4">
                     <figure class="m-0 h-100 d-flex flex-column bg-light rounded-3 p-2 border">
                         <img src="images/img5_kassa.jpg" class="img-fluid rounded-2 object-fit-cover w-100" style="height: 220px;" alt="Order counter at Zebra Coffee">
@@ -104,14 +106,10 @@
         <section id="values" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
             <h2 class="h3 fw-bold mb-4 text-center text-md-start">Our Core Principles</h2>
 
-            <!-- Official Bootstrap Component: Accordion -->
-            <!-- STRUCTURAL DECISION COMMENT:
-                 Converted custom definition list into interactive Bootstrap Accordion component.
-                 Configured with collapse toggles and styled with brand-consistent borders. -->
             <div class="accordion mb-5" id="valuesAccordion">
                 <div class="accordion-item border rounded-3 mb-2 overflow-hidden">
                     <h3 class="accordion-header" id="headingOne">
-                        <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="btn-accordion-quality">
                             ☕ Quality First
                         </button>
                     </h3>
@@ -124,7 +122,7 @@
                 
                 <div class="accordion-item border rounded-3 mb-2 overflow-hidden">
                     <h3 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" id="btn-accordion-speed">
                             ⚡ Express Speed
                         </button>
                     </h3>
@@ -137,7 +135,7 @@
 
                 <div class="accordion-item border rounded-3 overflow-hidden">
                     <h3 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="btn-accordion-hospitality">
                             🤝 Warm Hospitality
                         </button>
                     </h3>
@@ -151,9 +149,9 @@
 
             <h3 class="h4 fw-bold mb-3 text-center text-md-start">Service Benchmarks</h3>
 
-            <!-- Responsive Table Wrapper prevents horizontal overflow on narrow mobile screens (375px) -->
+            <!-- Responsive Table Wrapper -->
             <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle border rounded-3 overflow-hidden">
+                <table class="table table-striped table-hover align-middle border rounded-3 overflow-hidden mb-0" id="standards-table">
                     <caption class="text-secondary small mt-2">Key operational standards at our Mangilik El location</caption>
                     <thead class="table-dark">
                         <tr>
@@ -162,7 +160,7 @@
                             <th scope="col">Frequency</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="standards-table-body">
                         <tr>
                             <td class="fw-semibold">Order Prep Time</td>
                             <td>&lt; 3 minutes</td>
@@ -185,7 +183,7 @@
 
         <!-- Back to Top Button -->
         <p class="text-end">
-            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top">Back to top &uarr;</a>
+            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top" id="back-to-top-btn">Back to top &uarr;</a>
         </p>
     </main>
 
@@ -193,9 +191,9 @@
         <div class="container">
             <hr class="border-secondary my-3">
             <p class="mb-1 text-light">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none">+7 747 029 00 43</a></p>
-            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none">zebracoffee.kz</a></p>
-            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none">info@zebracoffee.kz</a></p>
+            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none text-light">+7 747 029 00 43</a></p>
+            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">zebracoffee.kz</a></p>
+            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none text-light">info@zebracoffee.kz</a></p>
             <hr class="border-secondary my-3">
             <p class="small text-secondary mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
         </div>

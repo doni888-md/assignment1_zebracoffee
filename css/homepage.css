@@ -1,15 +1,7 @@
-/*
-   Zebra Coffee — Yasmina's Correction Stylesheet
-   Bootstrap builds layout; this file only sets brand colors and logo size.
+/* Zebra Coffee — Main Pages Correction Stylesheet (main-pages.css)
+   Applies visual refinements for Homepage, About, and Careers pages.
+   Bootstrap handles grid & responsiveness; this file refines components.
 */
-
-/* Header brand logo */
-.brand-logo {
-    width: 80px;
-    height: auto;
-    display: block;
-    margin: 0 auto 0.75rem;
-}
 
 /* Brand typography and heading colors */
 h1, h2, h3, .h3, .h4, .h5 {
@@ -18,7 +10,7 @@ h1, h2, h3, .h3, .h4, .h5 {
 }
 
 header h1 {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 /* Brand white card blocks with turquoise top accent */
@@ -27,13 +19,6 @@ main section.card {
     border: 1px solid #E8DED2;
     border-top: 4px solid #00A99D;
     border-radius: 1rem;
-}
-
-/* Navigation: active link and hover highlight in brand turquoise */
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link:focus,
-.navbar-dark .navbar-nav .nav-link.active {
-    color: #00A99D !important;
 }
 
 /* Brand buttons */
@@ -56,7 +41,7 @@ main section.card {
     color: #FFFFFF;
 }
 
-/* Back to top button */
+/* Floating Back to top button */
 .back-to-top {
     position: fixed;
     right: 1.5rem;
@@ -68,20 +53,22 @@ main section.card {
     color: #FFFFFF;
     font-weight: 600;
     box-shadow: 0 4px 14px rgba(32, 32, 32, 0.25);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.back-to-top:hover {
+.back-to-top:hover,
+.back-to-top:focus {
     background-color: #6B4F3A;
     color: #FFFFFF;
+    transform: translateY(-2px);
 }
 
-footer a {
-    color: #00A99D;
-    transition: color 0.2s ease;
+/* Vacancy table and application form refinements */
+#vacancies-table td, 
+#vacancies-table th {
+    vertical-align: middle;
 }
 
-footer a:hover {
-    color: #008F85;
-    text-decoration: underline;
+#career-application-form fieldset {
+    border: 1px solid #E8DED2 !important;
 }

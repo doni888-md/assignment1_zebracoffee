@@ -4,32 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Zebra Coffee – a cozy coffee shop in a convenient location.">
-    <meta name="author" content="Yasmina Roziyeva">
     <title>Zebra Coffee — Homepage</title>
 
     <!-- Bootstrap v5.3.3 CSS CDN Connection -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Custom Correction Layer CSS -->
+    <!-- Custom CSS Layer -->
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/yasmina.css">
+    <link rel="stylesheet" href="css/homepage.css">
 </head>
-<body>
-    <!-- Author: Yasmina Roziyeva -->
+<body id="top">
     
-    <!-- STRUCTURAL DECISION COMMENT:
-         header uses 'container-fluid' (full-width) to stretch the dark navigation bar edge-to-edge.
-         main uses standard 'container' (centered max-width) to align content within a clean reading grid. -->
     <header class="container-fluid bg-dark text-white p-3 mb-4">
         <div class="text-center mb-3">
-            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo">
+            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo" id="main-brand-logo">
             <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
             <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
         </div>
         
         <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
             <div class="container-fluid">
-                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" id="nav-toggle-btn">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="mainNav">
@@ -49,10 +44,13 @@
     </header>
 
     <main class="container mb-5">
+        <!-- Dynamic notification / status container prepared for future JS -->
+        <div id="live-announcement-container" class="hidden mb-3"></div>
+
         <p class="quick-links text-center text-md-start mb-4 text-muted">
-            Quick links: <a href="#highlights" class="btn btn-sm btn-outline-secondary py-0">Highlights</a> 
+            Quick links: <a href="#highlights" class="btn btn-sm btn-outline-secondary py-0" id="quick-link-highlights">Highlights</a> 
             <span class="mx-1">|</span> 
-            <a href="#photo-gallery" class="btn btn-sm btn-outline-secondary py-0">Gallery</a>
+            <a href="#photo-gallery" class="btn btn-sm btn-outline-secondary py-0" id="quick-link-gallery">Gallery</a>
         </p>
 
         <!-- Welcome Section -->
@@ -63,9 +61,13 @@
                 Our branch at <mark class="px-2 py-1 rounded">38 Mangilik El Avenue in Astana</mark> offers quick 
                 takeaway coffee for local residents and students.
             </p>
-            <p class="text-secondary mb-0">
+            <p class="text-secondary mb-3">
                 We serve <em>freshly roasted beans</em> and guarantee <b>consistent taste</b> with every single cup.
             </p>
+            <div class="d-flex gap-2">
+                <a href="menu.html" class="btn btn-dark btn-sm rounded-pill px-3" id="welcome-menu-btn">Explore Menu</a>
+                <a href="booking.html" class="btn btn-outline-dark btn-sm rounded-pill px-3" id="welcome-booking-btn">Book a Table</a>
+            </div>
         </section>
 
         <!-- Highlights Section with Nested Grid -->
@@ -109,21 +111,21 @@
                         <p class="small text-secondary mb-3">
                             We appreciate guests visiting us around the clock. The express <abbr title="To-Go format">TG</abbr> setup ensures your order is ready in under three minutes.
                         </p>
-                        <p class="small text-secondary mb-0">
+                        <p class="small text-secondary mb-3">
                             Ask our barista for the loyalty program to receive a special on regular visits.
                         </p>
+                        <a href="menu.html" class="btn btn-outline-secondary btn-sm" id="hero-discount-link">Check Drinks on Offer</a>
                     </aside>
                 </div>
             </div>
         </section>
 
         <!-- Bootstrap Alert Component -->
-        <!-- STRUCTURAL DECISION COMMENT: Converted announcement into Bootstrap alert-info component with action button -->
-        <div class="alert alert-info d-flex align-items-center justify-content-between mb-4 shadow-sm rounded-3" role="alert">
+        <div class="alert alert-info d-flex align-items-center justify-content-between mb-4 shadow-sm rounded-3" role="alert" id="student-promo-alert">
             <div>
                 <strong>Night Owls Welcome!</strong> Visiting between 00:00 and 06:00? Show your student ID for an extra stamp on your loyalty card.
             </div>
-            <a href="menu.html" class="btn btn-sm btn-outline-info text-nowrap ms-3 d-none d-sm-inline-block">View Menu</a>
+            <a href="menu.html" class="btn btn-sm btn-outline-info text-nowrap ms-3 d-none d-sm-inline-block" id="promo-alert-btn">View Menu</a>
         </div>
 
         <!-- Asymmetric Photo Gallery -->
@@ -131,7 +133,7 @@
             <h2 class="h3 fw-bold mb-1 text-center text-md-start">Photo Gallery</h2>
             <p class="text-muted mb-4 text-center text-md-start">Authentic photos taken at our Mangilik El location:</p>
             
-            <div class="row g-4">
+            <div class="row g-4" id="gallery-container">
                 <div class="col-12 col-md-6 col-lg-7">
                     <figure class="m-0 h-100 d-flex flex-column">
                         <img src="images/img1_street.jpg" class="img-fluid rounded-3 object-fit-cover w-100" style="height: 290px;" alt="Cozy street view">
@@ -167,7 +169,7 @@
         </section>
 
         <p class="text-end">
-            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top">Back to top &uarr;</a>
+            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top" id="back-to-top-btn">Back to top &uarr;</a>
         </p>
     </main>
 
@@ -175,9 +177,9 @@
         <div class="container">
             <hr class="border-secondary my-3">
             <p class="mb-1 text-light">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none">+7 747 029 00 43</a></p>
-            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none">zebracoffee.kz</a></p>
-            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none">info@zebracoffee.kz</a></p>
+            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none text-light">+7 747 029 00 43</a></p>
+            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">zebracoffee.kz</a></p>
+            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none text-light">info@zebracoffee.kz</a></p>
             <hr class="border-secondary my-3">
             <p class="small text-secondary mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
         </div>

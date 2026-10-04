@@ -6,7 +6,7 @@
      - Espresso brown (#6B4F3A) — Coffee accent & typography
      - Warm beige (#E8DED2) — Structural borders & soft blocks
      - Charcoal (#202020) — High contrast text & dark elements
-   */
+*/
 
 /* 1. Global Box Sizing & Root Rules */
 *,
@@ -46,14 +46,81 @@ a:focus-visible {
     outline-offset: 3px;
 }
 
-/* 3. Global Structural Elements */
+/* 3. Global Structural Elements & Brand Logo */
 main > hr {
     border: none;
     border-top: 2px solid #E8DED2;
     margin: 2.5rem 0;
 }
 
-/* 4. Shared Colophon & Documentation Blocks */
+.brand-logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto 0.75rem;
+    object-fit: contain;
+}
+
+/* 4. Navigation Links Highlighting */
+.navbar-dark .navbar-nav .nav-link {
+    transition: color 0.2s ease-in-out;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #00A99D !important;
+}
+
+/* 5. Footer Shared Styles & Turquoise Links */
+footer a,
+footer a:link,
+footer a:visited {
+    color: #00A99D !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+
+footer a:hover,
+footer a:focus {
+    color: #33cfc4 !important;
+    text-decoration: underline;
+}
+
+/* 6. JavaScript Preparation State Classes (Midterm Requirement) */
+/* Elements with .hidden stay hidden until toggled by JS */
+.hidden {
+    display: none !important;
+}
+
+/* Active navigation item, tab or step */
+.active-state {
+    font-weight: 700;
+    color: #00A99D !important;
+}
+
+/* Selected option, product card or table row */
+.selected {
+    border-color: #00A99D !important;
+    background-color: rgba(0, 169, 157, 0.08) !important;
+}
+
+/* Form validation error states */
+.error,
+.is-invalid-state {
+    border-color: #dc3545 !important;
+    color: #dc3545 !important;
+}
+
+/* Form validation success states */
+.success,
+.is-valid-state {
+    border-color: #198754 !important;
+    color: #198754 !important;
+}
+
+/* 7. Shared Colophon & Documentation Blocks */
 #about,
 #authors,
 #structure,
