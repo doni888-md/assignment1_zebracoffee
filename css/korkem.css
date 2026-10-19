@@ -62,3 +62,16 @@ dl dt {
     border-radius: 50%;
     margin-left: 5px;
 }
+.back-to-top {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 1030;
+    padding: 0.6rem 1.1rem;
+    background-color: #00A99D;
+    border: none;
+    color: #FFFFFF;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(32, 32, 32, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
