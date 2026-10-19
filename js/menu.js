@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Espresso',
             category: 'hot',
             hasVolume: true,
-            volumes: { '250': 900, '350': 1100, '480': 1300 },
+            volumes: { '250': 790, '350': 890, '480': 990 },
             hasCustomOption: true,
             optionLabel: 'Sugar & Syrup',
             options: ['With sugar', 'Without sugar', 'Vanilla syrup', 'Chocolate syrup', 'Caramel syrup'],
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Americano',
             category: 'hot',
             hasVolume: true,
-            volumes: { '250': 790, '350': 990, '480': 1190 },
+            volumes: { '250': 790, '350': 890, '480': 990 },
             hasCustomOption: true,
             optionLabel: 'Sugar & Syrup',
             options: ['With sugar', 'Without sugar', 'Vanilla syrup', 'Chocolate syrup', 'Caramel syrup'],
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Cappuccino',
             category: 'hot',
             hasVolume: true,
-            volumes: { '250': 990, '350': 1250, '480': 1490 },
+            volumes: { '250': 990, '350': 1040, '480': 1090 },
             hasCustomOption: true,
             optionLabel: 'Sugar & Syrup',
             options: ['With sugar', 'Without sugar', 'Vanilla syrup', 'Chocolate syrup', 'Caramel syrup'],
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Latte',
             category: 'hot',
             hasVolume: true,
-            volumes: { '250': 990, '350': 1250, '480': 1490 },
+            volumes: { '250': 990, '350': 1040, '480': 1090 },
             hasCustomOption: true,
             optionLabel: 'Sugar & Syrup',
             options: ['With sugar', 'Without sugar', 'Vanilla syrup', 'Chocolate syrup', 'Caramel syrup'],
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Raf',
             category: 'hot',
             hasVolume: true,
-            volumes: { '250': 1190, '350': 1450, '480': 1690 },
+            volumes: { '250': 1190, '350': 1290, '480': 1390 },
             hasCustomOption: false,
             image: 'images/raf.jpg'
         },
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Flat White',
             category: 'hot',
             hasVolume: true,
-            volumes: { '250': 1090, '350': 1350, '480': 1590 },
+            volumes: { '250': 1090, '350': 1190, '480': 1290 },
             hasCustomOption: false,
             image: 'images/flatwhite.jpg'
         },
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 990,
             hasCustomOption: false,
-            image: 'images/logo.png' // Замените на вашу фото
+            image: '/Users/danamaratova/Downloads/IMG_0932.jpg' 
         },
         {
             id: 'cocoa',
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 990,
             hasCustomOption: false,
-            image: 'images/logo.png' // Замените на вашу фото
+            image: '/Users/danamaratova/Downloads/IMG_0932.jpg' 
         },
 
         // --- COLD DRINKS (Standard volume, specific choices) ---
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor / Syrup',
             options: ['Pomegranate', 'Raspberry', 'Mango', 'Cherry', 'Mint', 'Blackcurrant'],
-            image: 'images/cappuccinolatte.jpg'
+            image: '/Users/danamaratova/Downloads/IMG_0931.jpg'
         },
         {
             id: 'espresso-tonic',
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1290,
             hasCustomOption: false,
-            image: 'images/americanoespresso.jpg'
+            image: '/Users/danamaratova/Downloads/IMG_0753.jpg'
         },
         {
             id: 'limonade',
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor',
             options: ['Pomegranate-Rose', 'Strawberry-Watermelon', 'Tropical', 'Taiga Berries'],
-            image: 'images/logo.png' // Замените на вашу фото
+            image: '/Users/danamaratova/Downloads/IMG_0930.jpg' 
         },
         {
             id: 'matcha',
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Type',
             options: ['Green Matcha', 'Blue Matcha', 'Mango Green Matcha'],
-            image: 'images/logo.png' // Замените на вашу фото
+            image: '/Users/danamaratova/Downloads/IMG_0754.jpg' 
         },
         {
             id: 'frappe',
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor',
             options: ['Chocolate', 'Salted Caramel', 'Hazelnut'],
-            image: 'images/logo.png' // Замените на вашу фото
+            image: '/Users/danamaratova/Downloads/IMG_0929.jpg'
         },
 
         // --- DESSERTS ---
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 990,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0757.jpg'
         },
         {
             id: 'spanish-cheesecake',
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0756.jpg'
         },
         {
             id: 'mochi',
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor',
             options: ['Blackcurrant', 'Strawberry', 'Mango', 'Strawberry-Coconut', 'Vanilla', 'Nutella'],
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0939.jpg'
         },
         {
             id: 'napoleon',
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0934.jpg'
         },
         {
             id: 'honey-cake',
@@ -186,25 +186,16 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0933.jpg'
         },
         {
-            id: 'almond-croissant',
-            name: 'Almond Croissant',
-            category: 'desserts',
-            hasVolume: false,
-            standardPrice: 1050,
-            hasCustomOption: false,
-            image: 'images/IMG_0046.jpg'
-        },
-        {
-            id: 'ssyrniki',
-            name: 'Ssyrniki',
+            id: 'syrniki',
+            name: 'Syrniki',
             category: 'desserts',
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0935.jpg'
         },
         {
             id: 'donut',
@@ -213,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 690,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0936.jpg'
         },
         {
             id: 'art-desserts',
@@ -222,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1990,
             hasCustomOption: false,
-            image: 'images/logo.png'
+            image: '/Users/danamaratova/Downloads/IMG_0937.jpg'
         }
     ];
 
