@@ -1,7 +1,6 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Массив данных меню с точными ценами, категориями и уникальными опциями (на английском языке)
     const menuItems = [
         // --- HOT DRINKS ---
         {
@@ -222,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tbody.innerHTML = '';
 
-    // Группировка по категориям
     const categories = {
         hot: { title: '🔥 Hot Drinks', items: [] },
         cold: { title: '❄️ Cold Drinks', items: [] },
@@ -235,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Рендеринг категорий со стрелками сворачивания (Collapse/Expand)
     Object.keys(categories).forEach(catKey => {
         const catData = categories[catKey];
         if (catData.items.length === 0) return;
@@ -286,7 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             tr.setAttribute('data-price', defaultPrice);
 
-            // Генерация кастомных опций (сиропы, вкусы, типы)
             let customOptionHtml = '';
             if (item.hasCustomOption && item.options) {
                 let optionsHtml = '';
@@ -330,7 +326,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Обработчик кнопки скрытия/показа категории
     document.querySelectorAll('.toggle-cat-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const targetKey = e.currentTarget.getAttribute('data-target');
@@ -346,7 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Динамическое обновление цены при выборе мл
     document.querySelectorAll('.volume-select').forEach(select => {
         select.addEventListener('change', (e) => {
             const selectedOption = e.target.options[e.target.selectedIndex];
@@ -361,7 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Переключение Here / Takeaway
     document.querySelectorAll('.place-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const parentDiv = e.target.closest('div');
@@ -373,7 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Логика корзины (Your Order)
     let orderItems = [];
 
     tbody.addEventListener('click', (e) => {
