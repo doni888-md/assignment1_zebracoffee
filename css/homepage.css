@@ -72,7 +72,7 @@ main section.card {
 #career-application-form fieldset {
     border: 1px solid #E8DED2 !important;
 }
-/* Разрешаем отображение динамического блока при удалении класса hidden */
+
 #standards-status-container:not(.hidden) {
     display: block !important;
 }

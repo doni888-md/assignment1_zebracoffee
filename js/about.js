@@ -57,16 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Перемещаем блок управления ровно перед таблицей
   const tableWrapper = standardsTable.closest('.table-responsive');
   if (tableWrapper) {
     tableWrapper.before(controlBox);
   }
 
-  // Полностью очищаем старые классы и убираем hidden
   controlBox.className = 'card p-3 mb-3 bg-light border-0 shadow-sm rounded-3';
 
-  // Разметка поиска и фильтра
+
   const row = document.createElement('div');
   row.className = 'row g-2 align-items-center';
 

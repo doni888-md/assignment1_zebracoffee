@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!form) return;
 
-  // Отключаем стандартные HTML5 подсказки браузера, чтобы работала наша кастомная JS-валидация
   form.setAttribute('novalidate', 'true');
 
   const fullNameInput = document.getElementById('full-name');
@@ -156,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
       termsCheckbox.classList.remove('is-invalid');
     }
 
-    // Если есть ошибки — показываем красный блок
     if (!isFormValid) {
       if (errorAlert) {
         errorAlert.classList.remove('hidden');
@@ -170,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Если всё верно — скрываем ошибки и показываем успех
     if (errorAlert) {
       errorAlert.classList.add('hidden');
       errorAlert.textContent = '';

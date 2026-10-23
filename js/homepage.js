@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const promoContainer = document.getElementById('live-announcement-container');
   if (!promoContainer) return;
 
-  // Случайный выбор напитка дня (Math.random)
   const randomIndex = Math.floor(Math.random() * dailySpecials.length);
   const todaysDrink = dailySpecials[randomIndex];
 
@@ -47,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
   promoContainer.appendChild(textBlock);
   promoContainer.appendChild(buttonWrapper);
 
-  // По клику генерируем купон для кассы
   promoBtn.addEventListener('click', () => {
     const randomCoupon = `ZEB-${Math.floor(1000 + Math.random() * 9000)}`;
     promoBtn.className = 'badge bg-success fs-6 p-2 text-wrap';
