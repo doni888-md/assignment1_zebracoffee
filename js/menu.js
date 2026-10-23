@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 990,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0932.jpg' 
+            image: 'images/IMG_0932.jpg' 
         },
         {
             id: 'cocoa',
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 990,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0932.jpg' 
+            image: 'images/IMG_0932.jpg' 
         },
 
         // --- COLD DRINKS (Standard volume, specific choices) ---
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor / Syrup',
             options: ['Pomegranate', 'Raspberry', 'Mango', 'Cherry', 'Mint', 'Blackcurrant'],
-            image: '/Users/danamaratova/Downloads/IMG_0931.jpg'
+            image: 'images/IMG_0931.jpg'
         },
         {
             id: 'espresso-tonic',
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1290,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0753.jpg'
+            image: 'images/IMG_0753.jpg'
         },
         {
             id: 'limonade',
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor',
             options: ['Pomegranate-Rose', 'Strawberry-Watermelon', 'Tropical', 'Taiga Berries'],
-            image: '/Users/danamaratova/Downloads/IMG_0930.jpg' 
+            image: 'images/IMG_0930.jpg' 
         },
         {
             id: 'matcha',
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Type',
             options: ['Green Matcha', 'Blue Matcha', 'Mango Green Matcha'],
-            image: '/Users/danamaratova/Downloads/IMG_0754.jpg' 
+            image: 'images/IMG_0754.jpg' 
         },
         {
             id: 'frappe',
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor',
             options: ['Chocolate', 'Salted Caramel', 'Hazelnut'],
-            image: '/Users/danamaratova/Downloads/IMG_0929.jpg'
+            image: 'images/IMG_0929.jpg'
         },
 
         // --- DESSERTS ---
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 990,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0757.jpg'
+            image: 'images/IMG_0757.jpg'
         },
         {
             id: 'spanish-cheesecake',
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0756.jpg'
+            image: 'images/IMG_0756.jpg'
         },
         {
             id: 'mochi',
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasCustomOption: true,
             optionLabel: 'Flavor',
             options: ['Blackcurrant', 'Strawberry', 'Mango', 'Strawberry-Coconut', 'Vanilla', 'Nutella'],
-            image: '/Users/danamaratova/Downloads/IMG_0939.jpg'
+            image: 'images/IMG_0939.jpg'
         },
         {
             id: 'napoleon',
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0934.jpg'
+            image: 'images/IMG_0934.jpg'
         },
         {
             id: 'honey-cake',
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0933.jpg'
+            image: 'images/IMG_0933.jpg'
         },
         {
             id: 'syrniki',
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1390,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0935.jpg'
+            image: 'images/IMG_0935.jpg'
         },
         {
             id: 'donut',
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 690,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0936.jpg'
+            image: 'images/IMG_0936.jpg'
         },
         {
             id: 'art-desserts',
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasVolume: false,
             standardPrice: 1990,
             hasCustomOption: false,
-            image: '/Users/danamaratova/Downloads/IMG_0937.jpg'
+            image: 'images/IMG_0937.jpg'
         }
     ];
 
