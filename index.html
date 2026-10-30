@@ -69,11 +69,12 @@
             </div>
         </section>
 
-        <!-- Highlights Section with Nested Grid -->
-        <section id="highlights" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
+        <!-- Highlights Section with Interactive Spotlight Widget -->
+        <section id="highlights" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4 bg-white">
             <h2 class="h3 fw-bold mb-4 text-center text-md-start">What makes our Spot unique?</h2>
             
             <div class="row g-4 align-items-center">
+                <!-- Left Column: Highlights Info -->
                 <div class="col-12 col-lg-7">
                     <p class="mb-3">
                         Our extensive menu features specialty drinks, dairy-free alternatives 
@@ -83,7 +84,6 @@
                         favorite beverage.
                     </p>
                     
-                    <!-- Nested Row inside column -->
                     <div class="row g-2 pt-2">
                         <div class="col-6">
                             <div class="p-2 border rounded text-center bg-light">
@@ -100,31 +100,58 @@
                     </div>
                 </div>
 
+                <!-- Right Column: Interactive Spotlight Widget (Instead of static discounts) -->
                 <div class="col-12 col-lg-5">
-                    <aside class="p-4 rounded-3 border position-relative bg-light">
-                        <span class="badge position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill badge-zebra fw-bold">
-                            10% discount
-                        </span>
-                        
-                        <h3 class="h5 fw-bold mb-2">Discounts &amp; Grab-and-Go</h3>
-                        <p class="small text-secondary mb-3">
-                            We appreciate guests visiting us around the clock. The express <abbr title="To-Go format">TG</abbr> setup ensures your order is ready in under three minutes.
-                        </p>
-                        <p class="small text-secondary mb-3">
-                            Ask our barista for the loyalty program to receive a special on regular visits.
-                        </p>
-                        <a href="menu.html" class="btn btn-outline-secondary btn-sm" id="hero-discount-link">Check Drinks on Offer</a>
-                    </aside>
+                    <div class="card border rounded-4 shadow-sm p-4 bg-light position-relative" id="drink-widget-box">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-white text-dark border px-2 py-1 fw-bold text-uppercase" style="letter-spacing: 0.5px;">
+                                Spotlight Drink
+                            </span>
+                            <span class="small fw-semibold text-muted font-monospace" id="widget-price">890 KZT</span>
+                        </div>
+
+                        <!-- Filter Buttons (Energy / Sweet / Zero) -->
+                        <div class="btn-group btn-group-sm w-100 mb-3" role="group" id="drink-preset-filters">
+                            <button type="button" class="btn btn-dark active filter-preset-btn" data-preset="energy">Energy Boost</button>
+                            <button type="button" class="btn btn-outline-dark filter-preset-btn" data-preset="sweet">Sweet &amp; Creamy</button>
+                            <button type="button" class="btn btn-outline-dark filter-preset-btn" data-preset="zero">Zero Caffeine</button>
+                        </div>
+
+                        <!-- Target Display Box -->
+                        <div id="drink-display-panel" class="bg-white p-3 rounded-3 border">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h3 class="h6 fw-bold text-dark mb-1" id="drink-title">Espresso Tonic</h3>
+                                    <p class="small text-muted mb-2" id="drink-subtitle">Chilled tonic water with rich espresso crema</p>
+                                </div>
+                                <span class="badge bg-secondary rounded-pill" id="drink-calories">45 kcal</span>
+                            </div>
+                            
+                            <hr class="my-2">
+                            
+                            <div class="small text-secondary mb-3" id="drink-details">
+                                <strong>Barista Note:</strong> Pulled on fresh Ethiopian blend. Balanced acidity with zero added sugar.
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="small text-muted" id="drink-portion">Standard / 350 ml</span>
+                                <a href="menu.html" class="btn btn-sm btn-outline-dark rounded-pill px-3" id="drink-order-link">View in Menu &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Bootstrap Alert Component -->
-        <div class="alert alert-info d-flex align-items-center justify-content-between mb-4 shadow-sm rounded-3" role="alert" id="student-promo-alert">
-            <div>
-                <strong>Night Owls Welcome!</strong> Visiting between 00:00 and 06:00? Show your student ID for an extra stamp on your loyalty card.
-            </div>
-            <a href="menu.html" class="btn btn-sm btn-outline-info text-nowrap ms-3 d-none d-sm-inline-block" id="promo-alert-btn">View Menu</a>
+        <!-- Zebra Teal Night Owls Alert -->
+        <div class="d-flex align-items-center justify-content-between mb-4 p-3 shadow-sm rounded-4 text-white" 
+             style="background-color: #00A99D;" 
+             role="alert" 
+             id="student-promo-alert">
+             <div>
+                <strong>Night Owls Welcome:</strong> Visiting between 00:00 and 06:00? Show your student ID for an extra stamp on your loyalty card.
+             </div>
+            <a href="menu.html" class="btn btn-sm btn-outline-light rounded-pill text-nowrap ms-3 d-none d-sm-inline-block px-3" id="promo-alert-btn">View Offers</a>
         </div>
 
         <!-- Asymmetric Photo Gallery -->
