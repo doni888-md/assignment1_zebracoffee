@@ -2,7 +2,17 @@
 
 /**
  * Zebra Coffee - Career Application Script
- * Features: Form validation, field-level feedback, logic checks, demo confirmation
+ * jQuery Version: 3.7.1
+ * Initialized via $(function() { ... }) to guarantee full DOM availability.
+ *
+ * Comparison Comment (Feature Rewrite: Form Validation & Interactive Feedback):
+ * Replaced vanilla element queries and manual DOM manipulation with jQuery selectors,
+ * traversal (.closest, .parent), .slideDown() animation, and event delegation.
+ * The jQuery approach is more expressive, resilient, and enables seamless dynamic feedback.
+ *
+ * Security Note:
+ * Browser-side validation is solely for instant UX and does not guarantee security.
+ * Malicious actors can bypass client JS easily, so the server must always perform its own checks.
  */
 
 function generateApplicationId() {
@@ -11,13 +21,11 @@ function generateApplicationId() {
 }
 
 function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function isValidPhone(phone) {
-  const phoneRegex = /^(\+7|8)?[\s-]?\(?[0-9]{3}\)?[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/;
-  return phoneRegex.test(phone.trim());
+  return /^(\+7|8)?[\s-]?\(?[0-9]{3}\)?[\s-]?[0-9]{2,3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/.test(phone.trim());
 }
 
 function isFutureOrTodayDate(dateString) {
@@ -28,169 +36,167 @@ function isFutureOrTodayDate(dateString) {
   return selectedDate >= today;
 }
 
-function setFieldStatus(inputElement, isValid, errorMessage = '') {
-  let feedback = inputElement.parentElement.querySelector('.invalid-feedback');
+$(function () {
+  const $form =$('#career-application-form');
+  const $confirmationAlert =$('#career-confirmation-message');
 
-  if (!isValid) {
-    inputElement.classList.add('is-invalid');
-    inputElement.classList.remove('is-valid');
+  if (!$form.length) return;
 
-    if (!feedback) {
-      feedback = document.createElement('div');
-      feedback.className = 'invalid-feedback small';
-      inputElement.parentElement.appendChild(feedback);
-    }
-    feedback.textContent = errorMessage;
-  } else {
-    inputElement.classList.remove('is-invalid');
-    inputElement.classList.add('is-valid');
-    if (feedback) {
-      feedback.textContent = '';
-    }
-  }
-}
+  $form.attr('novalidate', 'true');
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('career-application-form');
-  const errorAlert = document.getElementById('career-form-errors');
-  const confirmationAlert = document.getElementById('career-confirmation-message');
+  const $fullName =$('#full-name');
+  const $email =$('#email-addr');
+  const $phone =$('#phone-num');
+  const $hours =$('#hours-available');
+  const $startDate =$('#start-date');
+  const $role =$('#desired-role');
+  const $terms =$('#terms');
+  const $coverLetter =$('#cover-letter');
 
-  if (!form) return;
+  const $charCounter =$('<small>')
+    .addClass('text-muted d-block mt-1 text-end')
+    .text('Characters: 0 / 300');
+  $coverLetter.after($charCounter);
 
-  form.setAttribute('novalidate', 'true');
-
-  const fullNameInput = document.getElementById('full-name');
-  const emailInput = document.getElementById('email-addr');
-  const phoneInput = document.getElementById('phone-num');
-  const hoursInput = document.getElementById('hours-available');
-  const startDateInput = document.getElementById('start-date');
-  const roleSelect = document.getElementById('desired-role');
-  const termsCheckbox = document.getElementById('terms');
-
-  form.addEventListener('reset', () => {
-    const inputs = form.querySelectorAll('.form-control, .form-select, .form-check-input');
-    inputs.forEach(input => {
-      input.classList.remove('is-invalid', 'is-valid');
-    });
-    if (errorAlert) {
-      errorAlert.classList.add('hidden');
-      errorAlert.textContent = '';
+  $coverLetter.on('input', function () {
+    const len = $(this).val().length;
+    $charCounter.text(`Characters: ${len} / 300`);
+    if (len > 300) {
+      $charCounter.removeClass('text-muted').addClass('text-danger fw-bold');
+    } else {
+      $charCounter.removeClass('text-danger fw-bold').addClass('text-muted');
     }
   });
 
-  form.addEventListener('submit', (event) => {
+  function setFieldStatus($field, isValid, errorMsg = '') {
+    let $feedback =$field.parent().find('.invalid-feedback');
+
+    if (!isValid) {
+      $field.addClass('is-invalid').removeClass('is-valid');
+      if (!$feedback.length) {
+        $feedback =$('<div>').addClass('invalid-feedback small');
+        $field.parent().append($feedback);
+      }
+      $feedback.text(errorMsg).slideDown(200); } else {$field.removeClass('is-invalid').addClass('is-valid');
+      if ($feedback.length) {
+        $feedback.slideUp(150, function () {$(this).text('');
+        });
+      }
+    }
+  }
+
+  $form.on('input change', '.form-control, .form-select, .form-check-input', function () {
+    const $field =$(this);
+    if ($field.hasClass('is-invalid')) {
+      $field.removeClass('is-invalid');$field.parent().find('.invalid-feedback').slideUp(150);
+    }
+  });
+
+  $form.on('reset', function () {$form.find('.form-control, .form-select, .form-check-input').removeClass('is-invalid is-valid');
+    $form.find('.invalid-feedback').hide();$charCounter.text('Characters: 0 / 300').removeClass('text-danger fw-bold').addClass('text-muted');
+  });
+
+  $form.on('submit', function (event) {
     event.preventDefault();
 
     let isFormValid = true;
-    let firstInvalidField = null;
-    const errorsList = [];
+    let $firstInvalid = null;
 
-    // 1. Full Name
-    const trimmedName = fullNameInput.value.trim();
-    if (trimmedName.length < 3) {
-      setFieldStatus(fullNameInput, false, 'Please enter your full name (minimum 3 characters).');
+    const nameVal = $fullName.val().trim();
+    if (nameVal.length < 3) {
+      setFieldStatus($fullName, false, 'Please enter your full name (minimum 3 characters).');
       isFormValid = false;
-      errorsList.push('Full Name is required (min 3 chars).');
-      if (!firstInvalidField) firstInvalidField = fullNameInput;
+      if (!$firstInvalid) $firstInvalid =$fullName;
     } else {
-      setFieldStatus(fullNameInput, true);
+      setFieldStatus($fullName, true);
     }
 
-    // 2. Email
-    if (!isValidEmail(emailInput.value)) {
-      setFieldStatus(emailInput, false, 'Please enter a valid email address.');
+    const emailVal = $email.val().trim();
+    if (!isValidEmail(emailVal)) {
+      setFieldStatus($email, false, 'Please enter a valid email address.');
       isFormValid = false;
-      errorsList.push('Valid Email address is required.');
-      if (!firstInvalidField) firstInvalidField = emailInput;
+      if (!$firstInvalid) $firstInvalid =$email;
     } else {
-      setFieldStatus(emailInput, true);
+      setFieldStatus($email, true);
     }
 
-    // 3. Phone
-    if (!isValidPhone(phoneInput.value)) {
-      setFieldStatus(phoneInput, false, 'Please enter a valid phone number.');
+    const phoneVal = $phone.val().trim();
+    if (!isValidPhone(phoneVal)) {
+      setFieldStatus($phone, false, 'Please enter a valid phone number (+7...).');
       isFormValid = false;
-      errorsList.push('Valid Phone Number is required.');
-      if (!firstInvalidField) firstInvalidField = phoneInput;
+      if (!$firstInvalid) $firstInvalid =$phone;
     } else {
-      setFieldStatus(phoneInput, true);
+      setFieldStatus($phone, true);
     }
 
-    // 4. Hours
-    const hours = parseInt(hoursInput.value, 10);
-    if (isNaN(hours) || hours < 10 || hours > 40) {
-      setFieldStatus(hoursInput, false, 'Available hours must be between 10 and 40.');
+    const hoursVal = parseInt($hours.val().trim(), 10);
+    if (isNaN(hoursVal) || hoursVal < 10 || hoursVal > 40) {
+      setFieldStatus($hours, false, 'Hours per week must be between 10 and 40.');
       isFormValid = false;
-      errorsList.push('Hours per week must be between 10 and 40.');
-      if (!firstInvalidField) firstInvalidField = hoursInput;
+      if (!$firstInvalid) $firstInvalid =$hours;
     } else {
-      setFieldStatus(hoursInput, true);
+      setFieldStatus($hours, true);
     }
 
-    // 5. Start Date
-    if (!isFutureOrTodayDate(startDateInput.value)) {
-      setFieldStatus(startDateInput, false, 'Earliest start date cannot be in the past.');
+    const dateVal = $startDate.val();
+    if (!isFutureOrTodayDate(dateVal)) {
+      setFieldStatus($startDate, false, 'Start date cannot be in the past.');
       isFormValid = false;
-      errorsList.push('Start Date must be today or in the future.');
-      if (!firstInvalidField) firstInvalidField = startDateInput;
+      if (!$firstInvalid) $firstInvalid =$startDate;
     } else {
-      setFieldStatus(startDateInput, true);
+      setFieldStatus($startDate, true);
     }
 
-    // 6. Role Rule
-    if (roleSelect.value === 'shift-lead' && hours < 30) {
-      setFieldStatus(hoursInput, false, 'Shift Lead requires at least 30 hours per week.');
+    if ($role.val() === 'shift-lead' && hoursVal < 30) {
+      setFieldStatus($hours, false, 'Shift Lead position requires at least 30 hours per week.');
       isFormValid = false;
-      errorsList.push('Shift Lead requires at least 30 hours per week.');
-      if (!firstInvalidField) firstInvalidField = hoursInput;
+      if (!$firstInvalid) $firstInvalid =$hours;
     }
 
-    // 7. Terms
-    if (!termsCheckbox.checked) {
-      termsCheckbox.classList.add('is-invalid');
+    if (!$terms.prop('checked')) {$terms.addClass('is-invalid');
       isFormValid = false;
-      errorsList.push('You must confirm that details are accurate.');
-      if (!firstInvalidField) firstInvalidField = termsCheckbox;
+      if (!$firstInvalid) $firstInvalid =$terms;
     } else {
-      termsCheckbox.classList.remove('is-invalid');
+      $terms.removeClass('is-invalid');
     }
-
     if (!isFormValid) {
-      if (errorAlert) {
-        errorAlert.classList.remove('hidden');
-        errorAlert.className = 'alert alert-danger mb-4 shadow-sm rounded-3';
-        errorAlert.innerHTML = `<strong>Please correct the following:</strong><ul class="mb-0 mt-2 ps-3">${errorsList.map(err => `<li>${err}</li>`).join('')}</ul>`;
-        errorAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      if (firstInvalidField) {
-        firstInvalidField.focus();
+      if ($firstInvalid) {$firstInvalid.focus();
       }
       return;
     }
 
-    if (errorAlert) {
-      errorAlert.classList.add('hidden');
-      errorAlert.textContent = '';
-    }
-
     const demoAppId = generateApplicationId();
+    const selectedRoleTitle = $role.find('option:selected').text();
 
-    if (confirmationAlert) {
-      confirmationAlert.classList.remove('hidden');
-      confirmationAlert.className = 'alert alert-success mt-4 p-4 rounded-3 shadow-sm';
-      confirmationAlert.innerHTML = `
-        <h4 class="alert-heading fw-bold mb-2">🎉 Application Submitted! (Demo Mode)</h4>
-        <p class="mb-1">Thank you, <strong>${fullNameInput.value.trim()}</strong>! Application ID: <mark class="fw-bold px-2 py-1 rounded">${demoAppId}</mark>.</p>
-        <p class="mb-1"><strong>Position:</strong> ${roleSelect.options[roleSelect.selectedIndex].text}</p>
-        <p class="mb-1"><strong>Availability:</strong> ${hours} hrs/week, starting from ${startDateInput.value}</p>
-        <hr>
-        <p class="mb-0 small text-muted"><em>Notice: Academic front-end simulation. No real data has been sent to a server.</em></p>
-      `;
-      confirmationAlert.scrollIntoView({ behavior: 'smooth' });
-    }
+    $confirmationAlert
+      .removeClass('hidden')
+      .hide()
+      .html(`
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h4 class="alert-heading fw-bold mb-0 text-success">Application Submitted Successfully!</h4>
+          <button type="button" class="btn-close" id="close-confirmation-btn" aria-label="Close"></button>
+        </div>
+        <p class="fs-6 mb-2">Thank you, <strong>${nameVal}</strong>! Your application ID is: <mark class="fw-bold px-2 py-1 rounded bg-white shadow-sm">${demoAppId}</mark>.</p>
+        <div class="p-3 bg-white rounded-3 border mb-3">
+          <p class="mb-1"><strong>Selected Position:</strong> ${selectedRoleTitle}</p>
+          <p class="mb-1"><strong>Commitment:</strong> ${hoursVal} hours/week</p>
+          <p class="mb-0"><strong>Earliest Start:</strong> ${dateVal}</p>
+        </div>
+        <p class="small text-secondary mb-0">Our barista team manager will reach out via <strong>${phoneVal}</strong> within 3 business days.</p>
+      `)
+      
+      .slideDown(500, function () {
+        
+        $('html, body').animate({
+          scrollTop: $confirmationAlert.offset().top - 40
+        }, 400);
+      });
 
-    form.reset();
-    const inputs = form.querySelectorAll('.form-control, .form-select, .form-check-input');
-    inputs.forEach(input => input.classList.remove('is-valid'));
+    $form[0].reset();
+    $form.find('.form-control, .form-select, .form-check-input').removeClass('is-valid is-invalid');$charCounter.text('Characters: 0 / 300');
+  });
+
+  $confirmationAlert.on('click', '#close-confirmation-btn', function () {
+    $confirmationAlert.slideUp(400);
   });
 });

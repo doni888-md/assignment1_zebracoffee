@@ -1,8 +1,12 @@
 'use strict';
 
 /**
- * Zebra Coffee - Homepage Daily Special Feature (Offline / In-Store Perk)
- * Features: Math.random selection, DOM creation, counter/reference generation
+ * jQuery Version: 3.7.1
+ * Enclosed in $(function() { ... }) to avoid DOM lookup bottlenecks.
+ *
+ * Feature Rewrite: Daily In-Store Special
+ * Replaced verbose document.createElement and native listeners with jQuery DOM generation,
+ * chaining, and .fadeIn() animation.
  */
 
 const dailySpecials = [
@@ -12,43 +16,46 @@ const dailySpecials = [
   { name: 'Filter Geisha', desc: 'Fresh local roast from Astana roastery', discount: '15%' }
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const promoContainer = document.getElementById('live-announcement-container');
-  if (!promoContainer) return;
+$(function () {
+  const $promoContainer = $('#live-announcement-container');
+  if (!$promoContainer.length) return;
 
   const randomIndex = Math.floor(Math.random() * dailySpecials.length);
   const todaysDrink = dailySpecials[randomIndex];
 
-  promoContainer.classList.remove('hidden');
-  promoContainer.className = 'alert alert-warning border-dark d-flex flex-column flex-md-row justify-content-between align-items-md-center shadow-sm rounded-3 p-3 mb-4';
+  $promoContainer
+    .removeClass('hidden')
+    .addClass('alert alert-warning border-dark d-flex flex-column flex-md-row justify-content-between align-items-md-center shadow rounded-4 p-3 mb-4')
+    .hide();
 
-  const textBlock = document.createElement('div');
-  textBlock.className = 'mb-2 mb-md-0';
+  const $textBlock = $('<div>').addClass('mb-2 mb-md-0');
+  const $title = $('<h6>').addClass('fw-bold mb-1 fs-5').text(`⚡ Today's Special: ${todaysDrink.name} (${todaysDrink.discount} OFF)`);
+  const $desc = $('<p>').addClass('mb-0 small text-secondary').text(`${todaysDrink.desc}. Click button to claim your bar coupon!`);
+  $textBlock.append($title, $desc);
 
-  const title = document.createElement('h6');
-  title.className = 'fw-bold mb-1';
-  title.textContent = `⭐ In-Store Special: ${todaysDrink.name} (${todaysDrink.discount} OFF)`;
+  const $buttonWrapper = $('<div>');
+  const $promoBtn = $('<button>')
+    .attr('type', 'button')
+    .addClass('btn btn-dark btn-sm rounded-pill px-4 py-2 text-nowrap coupon-btn shadow-sm')
+    .text('Claim Coupon');
 
-  const desc = document.createElement('p');
-  desc.className = 'mb-0 small text-secondary';
-  desc.textContent = `${todaysDrink.desc}. Show this offline voucher to your barista at Mangilik El branch!`;
+  $buttonWrapper.append($promoBtn);
+  $promoContainer.append($textBlock, $buttonWrapper);
 
-  textBlock.appendChild(title);
-  textBlock.appendChild(desc);
+  $promoContainer.fadeIn(700, function () {
+    console.log('Special promo loaded successfully via jQuery.');
+  });
 
-  const buttonWrapper = document.createElement('div');
-  const promoBtn = document.createElement('button');
-  promoBtn.type = 'button';
-  promoBtn.className = 'btn btn-dark btn-sm rounded-pill px-3 text-nowrap';
-  promoBtn.textContent = 'Generate Cash Desk Coupon';
-
-  buttonWrapper.appendChild(promoBtn);
-  promoContainer.appendChild(textBlock);
-  promoContainer.appendChild(buttonWrapper);
-
-  promoBtn.addEventListener('click', () => {
+  $promoContainer.on('click', '.coupon-btn', function () {
     const randomCoupon = `ZEB-${Math.floor(1000 + Math.random() * 9000)}`;
-    promoBtn.className = 'badge bg-success fs-6 p-2 text-wrap';
-    promoBtn.textContent = `Coupon #${randomCoupon} (Active at Till)`;
-  }, { once: true });
+    
+    $(this)
+      .fadeOut(200, function () {
+        $(this)
+          .removeClass('btn btn-dark btn-sm rounded-pill coupon-btn')
+          .addClass('badge bg-success fs-6 p-2 text-wrap shadow-sm')
+          .text(`✅ Active Coupon: #${randomCoupon}`)
+          .fadeIn(300);
+      });
+  });
 });
