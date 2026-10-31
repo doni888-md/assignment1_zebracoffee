@@ -1,250 +1,750 @@
-
 'use strict';
-// Booking: demo only. No data goes to a server.
-(() => {
-  const form = document.getElementById('booking-form');
-  if (!form) return;
-  form.noValidate = true;
-  const $ = (id) => document.getElementById(id);
-  const field = {
-    name: $('full-name'), email: $('customer-email'), phone: $('customer-phone'),
-    guests: $('guests-count'), date: $('booking-date'), time: $('booking-time'),
-    seat: $('seating-area'), notes: $('special-requests')
+
+/**
+ * Zebra Coffee - Booking Form & Demo Request Manager
+ * jQuery Version: 3.7.1 (full build, including effects).
+ * $(function () { ... }) waits for the DOM before finding fields or attaching handlers.
+ * Browser validation improves feedback but can be bypassed; a real server must validate again.
+ * This page is a front-end demonstration: requests stay in memory and are not real bookings.
+ */
+$(function () {
+  const $form = $('#booking-form');
+  if (!$form.length) return;
+
+  const $fields = {
+    name: $('#full-name'),
+    email: $('#customer-email'),
+    phone: $('#customer-phone'),
+    guests: $('#guests-count'),
+    date: $('#booking-date'),
+    time: $('#booking-time'),
+    seat: $('#seating-area'),
+    notes: $('#special-requests')
   };
-  const banner = $('booking-form-errors');
-  const confirmation = $('booking-confirmation');
-  const submit = $('booking-submit-btn');
+
+  const $visitOptions = $form.find('input[name="visit_type"]');
+  const $wifi = $('#vip-requested');
+  const $banner = $('#booking-form-errors');
+  const $confirmation = $('#booking-confirmation').addClass('text-break');
+  const $submit = $('#booking-submit-btn');
+
   const seatNames = {
-    'main-hall': 'Main Hall', 'window-side': 'Window Side Table',
+    'main-hall': 'Main Hall',
+    'window-side': 'Window Side Table',
     'quiet-corner': 'Quiet Workspace Corner'
   };
+
   const saved = [];
-  const errors = new Map();
+  const feedbackById = new Map();
+
   let editing = null;
   let pending = null;
+  let validationStarted = false;
+  let invalidCheckQueued = false;
+  let resetAfterSuccess = false;
+  let $returnFocus = $submit;
 
-  function el(tag, classes = '', text = '') {
-    const item = document.createElement(tag);
-    if (classes) item.className = classes;
-    item.textContent = text;
-    return item;
-  }
   function localNow() {
     const parts = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Asia/Almaty', year: 'numeric', month: '2-digit',
-      day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+      timeZone: 'Asia/Almaty',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23'
     }).formatToParts(new Date());
-    const p = Object.fromEntries(parts.map(x => [x.type, x.value]));
-    return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
+
+    const value = Object.fromEntries(
+      parts.map(part => [part.type, part.value])
+    );
+
+    return `${value.year}-${value.month}-${value.day}T${value.hour}:${value.minute}`;
   }
-  function values() {
+
+  // Rewrite 1: .val(), .prop() and .find() replace value/checked/querySelector reads.
+  // Reading the form is shorter; the actual validation rules still need explicit checks.
+  function readValues() {
     return {
-      name: field.name.value.trim(), email: field.email.value.trim(),
-      phone: field.phone.value.trim(), guests: Number(field.guests.value),
-      guestsText: field.guests.value.trim(), date: field.date.value,
-      time: field.time.value, seat: field.seat.value,
-      visit: form.querySelector('[name="visit_type"]:checked')?.value || '',
-      wifi: $('vip-requested').checked, notes: field.notes.value.trim()
+      name: $fields.name.val().trim(),
+      email: $fields.email.val().trim(),
+      phone: $fields.phone.val().trim(),
+      guests: Number($fields.guests.val()),
+      guestsText: $fields.guests.val().trim(),
+      date: $fields.date.val().trim(),
+      time: $fields.time.val().trim(),
+      seat: $fields.seat.val() || '',
+      visit: $form.find('input[name="visit_type"]:checked').val() || '',
+
+      // .prop('checked') is the live boolean; .attr('checked') describes the HTML default.
+      wifi: $wifi.prop('checked'),
+
+      notes: $fields.notes.val().trim()
     };
   }
-  function check(v) {
-    const problems = [];
-    const bad = (key, text) => problems.push([field[key], text]);
-    if (v.name.length < 2 || v.name.length > 80) bad('name', 'Name: 2–80 characters.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) bad('email', 'Enter a valid email.');
-    if (!/^\d{10,15}$/.test(v.phone.replace(/\D/g, ''))) bad('phone', 'Phone: 10–15 digits.');
-    if (!/^\d+$/.test(v.guestsText) || v.guests < 1 || v.guests > 10)
-      bad('guests', 'Guests: whole number from 1 to 10.');
-    const actualDate = /^\d{4}-\d\d-\d\d$/.test(v.date) &&
-      !Number.isNaN(Date.parse(v.date)) &&
-      new Date(v.date).toISOString().slice(0, 10) === v.date;
-    if (!actualDate) bad('date', 'Choose a valid date.');
-    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(v.time)) bad('time', 'Choose a valid time.');
-    if (actualDate && v.time && `${v.date}T${v.time}` <= localNow())
-      bad('time', 'Choose a future time (Astana).');
-    if (!seatNames[v.seat]) bad('seat', 'Choose a seating area.');
-    if (v.notes.length > 500) bad('notes', 'Notes: maximum 500 characters.');
-    if (saved.some(x => x.ref !== editing && x.email === v.email &&
-      x.date === v.date && x.time === v.time))
-      bad('time', 'You already have this demo request. Edit it below.');
+
+  function isValidPhone(phone) {
+    const validCharacters = /^\+?(?:\d|\(\d{2,4}\))[\d ()-]*\d$/.test(phone);
+
+    const validBrackets =
+      !/[()]/.test(phone) ||
+      /^[^()]*\(\d{2,4}\)[^()]*$/.test(phone);
+
+    const digits = phone.replace(/[ ()-]/g, '');
+
+    return validCharacters &&
+      validBrackets &&
+      /^\+?\d{10,15}$/.test(digits);
+  }
+
+  function validate(values) {
+    const problems = {};
+    const now = localNow();
+
+    if (values.name.length < 2 || values.name.length > 80) {
+      problems.name = 'Please enter a name with 2–80 characters.';
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      problems.email = 'Please enter a valid email address.';
+    }
+
+    if (!isValidPhone(values.phone)) {
+      problems.phone =
+        'Use 10–15 digits, with an optional leading +, spaces, hyphens or area-code brackets.';
+    }
+
+    if (
+      !/^\d+$/.test(values.guestsText) ||
+      values.guests < 1 ||
+      values.guests > 10
+    ) {
+      problems.guests = 'Choose a whole number of guests from 1 to 10.';
+    }
+
+    const dateIsValid =
+      /^\d{4}-\d{2}-\d{2}$/.test(values.date) &&
+      !Number.isNaN(Date.parse(values.date)) &&
+      new Date(values.date).toISOString().slice(0, 10) === values.date;
+
+    if (!dateIsValid) {
+      problems.date = 'Please choose a valid date.';
+    } else if (values.date < now.slice(0, 10)) {
+      problems.date = 'The booking date cannot be in the past (Astana time).';
+    }
+
+    const timeIsValid = /^([01]\d|2[0-3]):[0-5]\d$/.test(values.time);
+
+    if (!timeIsValid) {
+      problems.time = 'Please choose a valid time.';
+    } else if (
+      dateIsValid &&
+      !problems.date &&
+      `${values.date}T${values.time}` <= now
+    ) {
+      problems.time = 'Please choose a future time in Astana.';
+    }
+
+    if (!Object.hasOwn(seatNames, values.seat)) {
+      problems.seat = 'Choose a seating area.';
+    }
+
+    if (!['personal', 'business'].includes(values.visit)) {
+      problems.visit = 'Choose a visit type.';
+    }
+
+    if (values.notes.length > 500) {
+      problems.notes = 'Notes must contain at most 500 characters.';
+    }
+
+    if (
+      !problems.email &&
+      !problems.date &&
+      !problems.time &&
+      saved.some(item =>
+        item.ref !== editing &&
+        item.email.toLowerCase() === values.email.toLowerCase() &&
+        item.date === values.date &&
+        item.time === values.time
+      )
+    ) {
+      problems.time =
+        'You already have this demo request. Use Edit in the list below.';
+    }
+
+    // Keep native required/type/min/max constraints effective.
+    Object.entries($fields).forEach(([key, $field]) => {
+      const validity = $field.prop('validity');
+
+      if (!problems[key] && validity && !validity.valid) {
+        problems[key] =
+          $field.prop('validationMessage') ||
+          'Please check this field.';
+      }
+    });
+
     return problems;
   }
-  function clearErrors() {
-    for (const [input, message] of errors) {
-      input.classList.remove('error', 'success', 'is-invalid', 'is-valid');
-      input.removeAttribute('aria-invalid');
-      message.textContent = '';
-      message.classList.add('hidden');
-    }
-    banner.classList.add('hidden');
-  }
-  function showErrors(problems) {
-    clearErrors();
-    banner.textContent = 'Please correct the fields below. Nothing was submitted.';
-    banner.classList.remove('hidden');
-    for (const [input, text] of problems) {
-      input.classList.add('error', 'is-invalid');
-      input.setAttribute('aria-invalid', 'true');
-      errors.get(input).textContent = text;
-      errors.get(input).classList.remove('hidden');
-    }
-    problems[0][0].focus();
-  }
-  function facts(target, entries) {
-    target.replaceChildren();
-    for (const [label, value] of entries) {
-      const li = el('li', 'list-group-item');
-      li.append(el('strong', 'me-2', `${label}:`), document.createTextNode(String(value)));
-      target.append(li);
-    }
-    return entries.length;
-  }
-  function summary(v) {
-    facts(previewList, [
-      ['Name', v.name || '—'], ['Guests', v.guestsText || '—'],
-      ['Visit', v.visit === 'business' ? 'Business Meeting' : 'Personal / Study'],
-      ['Date', v.date || '—'], ['Time (Astana)', v.time || '—'],
-      ['Seating', seatNames[v.seat] || '—'],
-      ['Socket/Wi-Fi', v.wifi ? 'Requested, not guaranteed' : 'Not requested']
-    ]);
-    field.seat.classList.toggle('selected', Boolean(seatNames[v.seat]));
-  }
-  const preview = el('section', 'border rounded p-3 bg-light mb-3');
-  preview.append(el('h4', 'h6 fw-bold', 'Live booking summary'));
-  const previewList = el('ul', 'list-group mb-2');
-  preview.append(previewList, el('p', 'small mb-0 text-muted',
-    'Demo only: no live availability check, booking, or payment.'));
-  submit.parentElement.before(preview);
 
-  const manager = el('section', 'border rounded bg-white p-4 mb-4');
-  manager.append(el('h3', 'h4', 'Manage demo requests'));
-  const count = el('p', 'text-muted');
-  const list = el('div', 'd-flex flex-column gap-2');
-  const notice = el('p', 'small', 'Requests exist on this page only; refreshing clears them.');
-  const feedback = el('p', 'small', '');
-  feedback.setAttribute('role', 'status');
-  const clearAll = el('button', 'btn btn-outline-danger btn-sm mt-3', 'Clear all'); clearAll.type = 'button';
-  const prompt = el('div', 'alert alert-warning mt-3 hidden');
-  const question = el('p', 'mb-2');
-  const yes = el('button', 'btn btn-danger btn-sm me-2', 'Confirm');
-  const no = el('button', 'btn btn-outline-secondary btn-sm', 'Cancel'); yes.type = no.type = 'button';
-  prompt.append(question, yes, no);
-  manager.append(count, notice, feedback, list, clearAll, prompt);
-  $('reservation-form-section').after(manager);
+  // Feedback is created in code; no new error elements are handwritten in HTML.
+  $form.find('.form-control, .form-select').each(function () {
+    const $field = $(this);
+    const id = $field.attr('id');
 
-  function render() {
-    list.replaceChildren();
-    count.textContent = `${saved.length} demo request(s), ` +
-      `${saved.reduce((total, x) => total + x.guests, 0)} guest(s).`;
-    clearAll.disabled = saved.length === 0;
-    if (saved.length === 0) list.append(el('p', 'text-muted', 'No demo requests yet.'));
-    for (const x of saved) {
-      const card = el('article', 'card p-3');
-      card.classList.toggle('selected', editing === x.ref);
-      card.append(el('strong', '', `${x.ref} · ${x.name}`),
-        el('p', 'mb-2', `${x.date}, ${x.time} · ${x.guests} guests · ${seatNames[x.seat]}`));
-      for (const action of ['Edit', 'Remove']) {
-        const button = el('button', 'btn btn-outline-secondary btn-sm me-2', action);
-        button.type = 'button';
-        button.dataset.action = action.toLowerCase();
-        button.dataset.ref = x.ref;
-        card.append(button);
+    const $message = $('<div>')
+      .attr('id', `${id}-error`)
+      .addClass('small text-danger mt-1 hidden');
+
+    const descriptions = [
+      $field.attr('aria-describedby'),
+      $message.attr('id')
+    ].filter(Boolean);
+
+    $field
+      .attr('aria-describedby', descriptions.join(' '))
+      .after($message);
+
+    feedbackById.set(id, $message);
+  });
+
+  const $visitMessage = $('<div>')
+    .attr('id', 'booking-visit-error')
+    .addClass('small text-danger mt-1 hidden');
+
+  $visitOptions.last().parent().after($visitMessage);
+
+  $visitOptions
+    .attr('aria-describedby', 'booking-visit-error')
+    .prop('required', true);
+
+  function setFieldStatus($field, $message, message) {
+    if (message) {
+      $field
+        .removeClass('success is-valid')
+        .addClass('error is-invalid')
+        .attr('aria-invalid', 'true');
+
+      $message.text(message).removeClass('hidden');
+    } else {
+      const wasInvalid = $field.hasClass('is-invalid');
+
+      $field
+        .removeClass('error is-invalid')
+        .removeAttr('aria-invalid');
+
+      $message.text('').addClass('hidden');
+
+      if (wasInvalid) {
+        $field.addClass('success is-valid');
       }
-      list.append(card);
     }
   }
+
+  function displayProblems(problems, focusFirst = false) {
+    let $firstInvalid = null;
+
+    Object.entries($fields).forEach(([key, $field]) => {
+      setFieldStatus(
+        $field,
+        feedbackById.get($field.attr('id')),
+        problems[key]
+      );
+
+      if (problems[key] && !$firstInvalid) {
+        $firstInvalid = $field;
+      }
+    });
+
+    setFieldStatus($visitOptions, $visitMessage, problems.visit);
+
+    if (problems.visit && !$firstInvalid) {
+      $firstInvalid = $visitOptions.first();
+    }
+
+    $banner
+      .text('Please correct the fields below. Nothing was submitted.')
+      .toggleClass('hidden', !$firstInvalid);
+
+    if (focusFirst && $firstInvalid) {
+      $firstInvalid.trigger('focus');
+    }
+  }
+
+  function clearErrors() {
+    $form.find('input, select, textarea')
+      .removeClass('error success is-invalid is-valid')
+      .removeAttr('aria-invalid');
+
+    feedbackById.forEach($message => {
+      $message.text('').addClass('hidden');
+    });
+
+    $visitMessage.text('').addClass('hidden');
+    $banner.addClass('hidden');
+  }
+
+  const $preview = $('<section>')
+    .attr('id', 'booking-preview')
+    .addClass('border rounded p-3 bg-light mb-3');
+
+  const $previewList = $('<ul>').addClass('list-group mb-2');
+
+  $preview.append(
+    $('<h4>').addClass('h6 fw-bold').text('Live booking summary'),
+    $previewList,
+    $('<p>')
+      .addClass('small mb-0 text-muted')
+      .text('Demo only: no live availability check, booking or payment.')
+  );
+
+  $submit.parent().before($preview);
+
+  // Rewrite 2: .empty(), .append() and .text() replace replaceChildren/createElement/textContent.
+  // The list builder is shorter and treats visitor-provided values as plain text.
+  function updateSummary(values) {
+    const visitName = values.visit === 'business'
+      ? 'Business Meeting'
+      : values.visit === 'personal'
+        ? 'Personal / Study'
+        : '—';
+
+    const entries = [
+      ['Name', values.name || '—'],
+      ['Guests', values.guestsText || '—'],
+      ['Visit', visitName],
+      ['Date', values.date || '—'],
+      ['Time (Astana)', values.time || '—'],
+      ['Seating', seatNames[values.seat] || '—'],
+      ['Socket/Wi-Fi', values.wifi ? 'Requested, not guaranteed' : 'Not requested']
+    ];
+
+    $previewList.empty();
+
+    entries.forEach(([label, value]) => {
+      $('<li>')
+        .addClass('list-group-item text-break')
+        .append(
+          $('<strong>').addClass('me-2').text(`${label}:`),
+          $('<span>').text(String(value))
+        )
+        .appendTo($previewList);
+    });
+
+    $fields.seat.toggleClass(
+      'selected',
+      Object.hasOwn(seatNames, values.seat)
+    );
+  }
+
+  const $manager = $('<section>')
+    .attr('id', 'booking-manager')
+    .addClass('border rounded bg-white p-4 mb-4');
+
+  const $count = $('<p>')
+    .attr({
+      id: 'booking-request-count',
+      'aria-live': 'polite'
+    })
+    .addClass('text-muted');
+
+  const $list = $('<div>')
+    .attr('id', 'booking-request-list')
+    .addClass('d-flex flex-column gap-2');
+
+  const $feedback = $('<p>')
+    .attr({
+      role: 'status',
+      'aria-live': 'polite'
+    })
+    .addClass('small');
+
+  const $clearAll = $('<button>')
+    .attr({
+      type: 'button',
+      id: 'booking-clear-all'
+    })
+    .addClass('btn btn-outline-danger btn-sm mt-3')
+    .text('Clear all');
+
+  const $prompt = $('<div>')
+    .attr({
+      id: 'booking-delete-prompt',
+      role: 'group',
+      'aria-labelledby': 'booking-delete-question'
+    })
+    .addClass('alert alert-warning mt-3 hidden');
+
+  const $question = $('<p>')
+    .attr('id', 'booking-delete-question')
+    .addClass('mb-2');
+
+  const $yes = $('<button>')
+    .attr({
+      type: 'button',
+      id: 'booking-confirm-delete'
+    })
+    .addClass('btn btn-danger btn-sm me-2')
+    .text('Confirm');
+
+  const $no = $('<button>')
+    .attr({
+      type: 'button',
+      id: 'booking-cancel-delete'
+    })
+    .addClass('btn btn-outline-secondary btn-sm')
+    .text('Cancel');
+
+  $prompt.append($question, $yes, $no);
+
+  $manager.append(
+    $('<h3>').addClass('h4').text('Manage demo requests'),
+    $count,
+    $('<p>')
+      .addClass('small')
+      .text('Requests exist on this page only; refreshing clears them.'),
+    $feedback,
+    $list,
+    $clearAll,
+    $prompt
+  ).insertAfter('#reservation-form-section');
+
+  // Rewrite 3: .append() and a delegated .on() replace manual nodes and native click handling.
+  // Rendering is clearer; the saved-array and edit/remove rules remain explicit.
+  function renderRequests() {
+    $list.empty();
+
+    const totalGuests = saved.reduce(
+      (sum, item) => sum + item.guests,
+      0
+    );
+
+    $count.text(
+      `${saved.length} demo request(s), ${totalGuests} guest(s).`
+    );
+
+    $clearAll.prop('disabled', saved.length === 0);
+
+    if (!saved.length) {
+      $list.append(
+        $('<p>').addClass('text-muted').text('No demo requests yet.')
+      );
+    }
+
+    saved.forEach(item => {
+      const $card = $('<article>')
+        .attr('data-ref', item.ref)
+        .addClass('card p-3 text-break')
+        .toggleClass('selected', editing === item.ref);
+
+      $card.append(
+        $('<strong>').text(`${item.ref} · ${item.name}`),
+        $('<p>')
+          .addClass('mb-2')
+          .text(
+            `${item.date}, ${item.time} · ${item.guests} guests · ${seatNames[item.seat]}`
+          )
+      );
+
+      const $actions = $('<div>').addClass('d-flex gap-2');
+
+      ['Edit', 'Remove'].forEach(action => {
+        $('<button>')
+          .attr({
+            type: 'button',
+            'data-action': action.toLowerCase(),
+            'data-ref': item.ref
+          })
+          .addClass('btn btn-outline-secondary btn-sm')
+          .text(action)
+          .appendTo($actions);
+      });
+
+      $card.append($actions).appendTo($list);
+    });
+  }
+
   function newReference() {
-    let ref;
-    do { ref = `ZC-DEMO-${Math.floor(100000 + Math.random() * 900000)}`; }
-    while (saved.some(x => x.ref === ref));
-    return ref;
+    let reference;
+
+    do {
+      reference = `ZC-DEMO-${Math.floor(100000 + Math.random() * 900000)}`;
+    } while (saved.some(item => item.ref === reference));
+
+    return reference;
   }
-  function ask(type, ref = '') {
-    pending = { type, ref };
-    question.textContent = type === 'all'
-      ? 'Remove all demo requests?' : `Remove demo request ${ref}?`;
-    prompt.classList.remove('hidden'); yes.focus();
+
+  function hideConfirmation() {
+    $confirmation.stop(true, true).fadeOut(150, function () {
+      $(this).addClass('hidden');
+    });
   }
-  list.addEventListener('click', event => {
-    const button = event.target.closest('button[data-action]');
-    if (!button) return;
-    const x = saved.find(item => item.ref === button.dataset.ref);
-    if (!x) return;
-    if (button.dataset.action === 'remove') { ask('one', x.ref); return; }
-    for (const key of ['name', 'email', 'phone', 'guests', 'date', 'time', 'notes'])
-      field[key].value = x[key];
-    field.seat.value = x.seat; $('vip-requested').checked = x.wifi;
-    form.querySelector(`[name="visit_type"][value="${x.visit}"]`).checked = true;
-    editing = x.ref; submit.textContent = 'Save Demo Changes';
-    confirmation.classList.add('hidden'); clearErrors();
-    summary(values());
-    render();
-    field.name.focus();
-    feedback.textContent = `Editing ${x.ref}. Save to update it.`;
-  });
-  clearAll.addEventListener('click', () => ask('all'));
-  no.addEventListener('click', () => { pending = null; prompt.classList.add('hidden'); });
-  yes.addEventListener('click', () => {
-    if (!pending) return;
-    if (pending.type === 'all') saved.length = 0;
-    else saved.splice(saved.findIndex(x => x.ref === pending.ref), 1);
-    if (pending.type === 'all' || editing === pending.ref) {
-      editing = null;
-      submit.textContent = 'Submit Reservation';
+
+  function closePrompt(restoreFocus = false) {
+    pending = null;
+
+    $prompt.stop(true, true).slideUp(180, function () {
+      $(this).addClass('hidden');
+
+      if (restoreFocus) {
+        $returnFocus.trigger('focus');
+      }
+    });
+  }
+
+  // Rewrite 4: .slideDown()/.slideUp() replace abrupt classList visibility changes.
+  // This is longer, but the callback focuses confirmation only after it becomes visible.
+  function askToRemove(type, reference, $button) {
+    pending = { type, reference };
+    $returnFocus = $button;
+
+    $question.text(
+      type === 'all'
+        ? 'Remove all demo requests?'
+        : `Remove demo request ${reference}?`
+    );
+
+    $prompt
+      .stop(true, true)
+      .removeClass('hidden')
+      .slideUp(0)
+      .slideDown(220, function () {
+        $yes.trigger('focus');
+      });
+  }
+
+  // The list exists now, but renderRequests() creates and replaces its buttons later.
+  // Direct binding would miss future buttons; delegation handles every generated button.
+  $list.on('click', 'button[data-action]', function () {
+    const $button = $(this);
+    const $card = $button.closest('article');
+    const reference = $card.attr('data-ref');
+    const item = saved.find(request => request.ref === reference);
+
+    if (!item) return;
+
+    if ($button.attr('data-action') === 'remove') {
+      askToRemove('one', reference, $button);
+      return;
     }
-    feedback.textContent = 'Demo request(s) removed. No real bookings affected.';
-    pending = null; prompt.classList.add('hidden');
-    confirmation.classList.add('hidden');
-    render();
+
+    closePrompt();
+    editing = reference;
+
+    Object.entries($fields).forEach(([key, $field]) => {
+      $field.val(item[key]);
+    });
+
+    $visitOptions
+      .prop('checked', false)
+      .filter(`[value="${item.visit}"]`)
+      .prop('checked', true);
+
+    $wifi.prop('checked', item.wifi);
+    $submit.text('Save Demo Changes');
+
+    validationStarted = false;
+    clearErrors();
+    hideConfirmation();
+    updateSummary(readValues());
+
+    // addClass selects this card, siblings finds other cards, removeClass clears their selection.
+    $card
+      .addClass('selected')
+      .siblings('article')
+      .removeClass('selected');
+
+    $feedback.text(`Editing ${reference}. Save to update it.`);
+    $fields.name.trigger('focus');
   });
 
-  for (const input of Object.values(field)) {
-    const message = el('div', 'small text-danger mt-1 hidden');
-    input.after(message);
-    errors.set(input, message);
-  }
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const v = values();
-    const problems = check(v);
-    if (problems.length) { confirmation.classList.add('hidden'); showErrors(problems); return; }
-    clearErrors();
-    for (const input of Object.values(field)) if (input.value) input.classList.add('success', 'is-valid');
-    const ref = editing || newReference();
-    const index = saved.findIndex(x => x.ref === editing);
-    const item = { ...v, ref };
-    if (index >= 0) saved[index] = item;
-    else saved.push(item);
-    editing = null; submit.textContent = 'Submit Reservation';
-    confirmation.replaceChildren(
-      el('h4', 'h5', index >= 0 ? 'Demo request updated' : 'Demo request saved'),
-      el('p', '', `${v.name}: ${v.guests} guests, ${v.date} at ${v.time}, ${seatNames[v.seat]}.`),
-      el('p', 'fw-bold', `Reference: ${ref}`),
-      el('p', 'small mb-0', 'This is not a real reservation. No data was sent to a server.')
-    );
-    confirmation.classList.remove('hidden');
-    feedback.textContent = 'You can edit or remove this demo request below.';
-    render();
-  });
-  form.addEventListener('input', event => {
-    const input = event.target;
-    if (errors.has(input)) {
-      input.classList.remove('error', 'success', 'is-invalid', 'is-valid');
-      errors.get(input).classList.add('hidden');
-      input.removeAttribute('aria-invalid');
+  $clearAll.on('click', function () {
+    if (saved.length) {
+      askToRemove('all', '', $(this));
     }
-    banner.classList.add('hidden'); confirmation.classList.add('hidden');
-    summary(values());
   });
-  form.addEventListener('change', () => { confirmation.classList.add('hidden'); summary(values()); });
-  form.addEventListener('reset', () => {
-    editing = null; submit.textContent = 'Submit Reservation';
-    confirmation.classList.add('hidden');
+
+  $no.on('click', function () {
+    closePrompt(true);
+  });
+
+  $yes.on('click', function () {
+    if (!pending) return;
+
+    const removingEdited =
+      pending.type === 'all' ||
+      pending.reference === editing;
+
+    if (pending.type === 'all') {
+      saved.length = 0;
+    } else {
+      const index = saved.findIndex(
+        item => item.ref === pending.reference
+      );
+
+      if (index >= 0) {
+        saved.splice(index, 1);
+      }
+    }
+
+    if (removingEdited) {
+      $form.trigger('reset');
+    }
+
+    closePrompt();
+    hideConfirmation();
+    renderRequests();
+
+    if (validationStarted) {
+      displayProblems(validate(readValues()));
+    }
+
+    $feedback.text(
+      'Demo request(s) removed. No real bookings were affected.'
+    );
+
+    $submit.trigger('focus');
+  });
+
+  $form.on('submit', function (event) {
+    // Without preventDefault(), the browser would POST to booking.html and leave this page.
+    event.preventDefault();
+
+    validationStarted = true;
+
+    const values = readValues();
+    const problems = validate(values);
+
+    displayProblems(problems, true);
+
+    if (Object.keys(problems).length) {
+      hideConfirmation();
+      return;
+    }
+
+    const reference = editing || newReference();
+    const index = saved.findIndex(item => item.ref === editing);
+    const request = { ...values, ref: reference };
+
+    if (index >= 0) {
+      saved[index] = request;
+    } else {
+      saved.push(request);
+    }
+
+    resetAfterSuccess = true;
+    $form.trigger('reset');
+    resetAfterSuccess = false;
+
+    updateSummary(readValues());
+    renderRequests();
+
+    // .html() is for fixed, trusted markup; visitor input always uses .text().
+    $confirmation.empty().append(
+      $('<div>')
+        .addClass('d-flex justify-content-between align-items-start gap-2')
+        .append(
+          $('<h4>')
+            .addClass('h5')
+            .text(index >= 0 ? 'Demo request updated' : 'Demo request saved'),
+
+          $('<button>')
+            .attr({
+              type: 'button',
+              id: 'booking-close-confirmation',
+              'aria-label': 'Close confirmation'
+            })
+            .addClass('btn-close')
+        ),
+
+      $('<p>').text(
+        `${values.name}: ${values.guests} guests, ${values.date} at ${values.time}, ${seatNames[values.seat]}.`
+      ),
+
+      $('<p>')
+        .html('<strong>Reference:</strong> ')
+        .append($('<span>').text(reference)),
+
+      $('<p>')
+        .addClass('small mb-0')
+        .text('This is not a real reservation. No data was sent to a server.')
+    );
+
+    $confirmation
+      .stop(true, true)
+      .removeClass('hidden')
+      .fadeOut(0)
+      .fadeIn(250);
+
+    $feedback.text('You can edit or remove this demo request below.');
+  });
+
+  // Native validation runs before submit. Required/type/min/max remain enabled.
+  $form.find('input, select, textarea').on('invalid', function (event) {
+    // Suppress only the browser tooltip; the browser still blocks invalid submission.
+    event.preventDefault();
+
+    validationStarted = true;
+
+    if (invalidCheckQueued) return;
+    invalidCheckQueued = true;
+
+    setTimeout(function () {
+      invalidCheckQueued = false;
+
+      if (!validationStarted) return;
+
+      hideConfirmation();
+      displayProblems(validate(readValues()), true);
+    }, 0);
+  });
+
+  $form.on(
+    'input change',
+    '.form-control, .form-select, .form-check-input',
+    function () {
+      const $field = $(this);
+
+      if ($field.is('[type="date"]')) {
+        $field.attr('min', localNow().slice(0, 10));
+      }
+
+      hideConfirmation();
+      updateSummary(readValues());
+
+      // Recheck all rules so date/email changes also clear dependent errors.
+      if (validationStarted) {
+        displayProblems(validate(readValues()));
+      }
+    }
+  );
+
+  $form.on('reset', function () {
+    editing = null;
+    validationStarted = false;
+
+    $submit.text('Submit Reservation');
     clearErrors();
-    feedback.textContent = 'Form reset. Saved demo requests remain.';
-    setTimeout(() => { summary(values()); render(); }, 0);
+    closePrompt();
+
+    if (!resetAfterSuccess) {
+      hideConfirmation();
+      $feedback.text('Form reset. Saved demo requests remain.');
+    }
+
+    // The reset event happens before the browser restores default values.
+    setTimeout(function () {
+      updateSummary(readValues());
+      renderRequests();
+    }, 0);
   });
-  field.date.min = localNow().slice(0, 10);
-  summary(values());
-  render();
-})();
+
+  $confirmation.on('click', '#booking-close-confirmation', function () {
+    hideConfirmation();
+    $submit.trigger('focus');
+  });
+
+  $fields.date.attr('min', localNow().slice(0, 10));
+
+  updateSummary(readValues());
+  renderRequests();
+});
