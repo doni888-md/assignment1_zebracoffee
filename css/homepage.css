@@ -80,3 +80,109 @@ main section.card {
 #career-form-errors:not(.hidden) {
     display: block !important;
 }
+/* ===== Brand colour helpers (used instead of inline styles in JS) ===== */
+.text-zebra {
+    color: #008B82;
+}
+
+.border-zebra {
+    border-color: #00A99D !important;
+}
+
+/* Accordion on About: brand colours instead of default Bootstrap blue */
+.accordion {
+    --bs-accordion-active-bg: #E6F6F5;
+    --bs-accordion-active-color: #6B4F3A;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.25);
+    --bs-accordion-btn-focus-border-color: #00A99D;
+}
+
+/* About: benchmark table rows built in about.js */
+.benchmark-row {
+    cursor: pointer;
+}
+
+.benchmark-toggle {
+    color: #00A99D;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.benchmark-row:hover .benchmark-toggle {
+    text-decoration: underline;
+}
+
+.benchmark-detail-cell {
+    border-left: 4px solid #008B82 !important;
+}
+
+.benchmark-detail-title {
+    letter-spacing: 0.5px;
+}
+
+/* One badge colour per standard category */
+.badge-cat-quality {
+    background-color: #00A99D;
+}
+
+.badge-cat-speed {
+    background-color: #F2B705;
+    color: #202020;
+}
+
+.badge-cat-hospitality {
+    background-color: #6B4F3A;
+}
+
+.badge-cat-hygiene {
+    background-color: #4A7FA7;
+}
+
+/* Brand colour for radio buttons and checkboxes (Careers form) */
+.form-check-input:checked {
+    background-color: #00A99D;
+    border-color: #00A99D;
+}
+
+.form-check-input:focus {
+    border-color: #00A99D;
+    box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.25);
+}
+
+/* Spotlight label on the homepage (was an inline style) */
+.label-spaced {
+    letter-spacing: 0.5px;
+}
+
+/* Gallery photos on the homepage (was style="height: 290px") */
+.gallery-photo {
+    height: 290px;
+}
+
+.bg-zebra {
+    background-color: #00A99D;
+}
+
+/* Daily perk banner and coupon built in homepage.js */
+.promo-banner {
+    background-color: #E6F6F5;
+    border: 1.5px solid #00A99D;
+    color: #005751;
+}
+
+.promo-title {
+    color: #007068;
+}
+
+.coupon-code {
+    background-color: #007068;
+    color: #FFFFFF;
+}
+
+.about-photo {
+    height: 220px;
+}
+
+.team-photo {
+    height: 260px;
+}

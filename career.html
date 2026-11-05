@@ -19,7 +19,7 @@
         <div class="text-center mb-3">
             <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo" id="career-brand-logo">
             <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
-            <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
+            <p class="lead text-white-50 mb-0 fs-6">City to-go coffee shop</p>
         </div>
         
         <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
@@ -57,7 +57,7 @@
 
             <div class="row g-4 align-items-center mb-4">
                 <div class="col-12 col-md-5">
-                    <img src="images/img8_team.jpg" alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover" style="height: 260px;">
+                    <img src="images/img8_team.jpg" alt="Friendly Zebra Coffee baristas in black branded aprons smiling behind the espresso bar" class="img-fluid rounded-3 shadow-sm w-100 object-fit-cover team-photo">
                 </div>
                 <div class="col-12 col-md-7">
                     <p class="lead fs-6 mb-3">
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <blockquote class="p-3 bg-light border-start border-4 border-info rounded-end text-secondary mb-0">
+            <blockquote class="p-3 bg-light border-start border-4 border-zebra rounded-end text-secondary mb-0">
                 <p class="mb-1 fst-italic">
                     &ldquo;Balancing university classes with morning bar shifts was straightforward thanks to flexible scheduling.
                     I mastered grinder calibration within my first month.&rdquo;
@@ -83,7 +83,7 @@
 
         <!-- Current Vacancies Section -->
         <section id="openings" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
-            <h2 class="h3 fw-bold mb-4 text-center text-md-start">Current vacancies in Astana:</h2>
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start">Current vacancies in Astana</h2>
             
             <article id="role-barista" class="mb-4">
                 <h3 class="h5 fw-bold text-secondary mb-1">Express Barista (Full-time / Part-time)</h3>
@@ -123,7 +123,7 @@
                         <tr>
                             <th scope="col">Position</th>
                             <th scope="col">Schedule</th>
-                            <th scope="col">Experience Needed</th>
+                            <th scope="col" class="d-none d-md-table-cell">Experience Needed</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
@@ -131,20 +131,20 @@
                         <tr>
                             <td class="fw-semibold">Express Barista</td>
                             <td>Flexible (4&ndash;8 hour shifts)</td>
-                            <td>No experience required (training provided)</td>
+                            <td class="d-none d-md-table-cell">No experience required (training provided)</td>
                             <td><span class="badge bg-success">Hiring Now</span></td>
                         </tr>
                         <tr>
                             <td class="fw-semibold">Shift Lead</td>
                             <td>Full-time (rotational)</td>
-                            <td>1+ year in specialty coffee</td>
+                            <td class="d-none d-md-table-cell">1+ year in specialty coffee</td>
                             <td><span class="badge bg-warning text-dark">Reviewing</span></td>
                         </tr>
                         <tr>
                             <td class="fw-semibold">Roastery Assistant</td>
                             <td>Part-time (weekends)</td>
-                            <td>Basic understanding of coffee roasting</td>
-                            <td><button type="button" class="btn btn-sm btn-outline-secondary disabled" aria-disabled="true" id="btn-filled-role">Position Filled</button></td>
+                            <td class="d-none d-md-table-cell">Basic understanding of coffee roasting</td>
+                            <td><span class="badge bg-secondary" id="btn-filled-role">Position Filled</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -153,7 +153,7 @@
 
         <!-- Recruitment Process Section -->
         <section id="apply-section" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
-            <h2 class="h3 fw-bold mb-4 text-center text-md-start text-dark">Recruitment Process</h2>
+            <h2 class="h3 fw-bold mb-4 text-center text-md-start">Recruitment Process</h2>
             
             <ol class="list-group list-group-numbered shadow-sm mb-4">
                 <li class="list-group-item d-flex justify-content-between align-items-start p-3">
@@ -161,21 +161,18 @@
                         <div class="fw-bold">Online Application</div>
                         Submit the application form below with your current schedule availability.
                     </div>
-                    <span class="badge bg-secondary rounded-pill">Step 1</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start p-3">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">In-Person Interview</div>
                         Attend a brief twenty-minute conversational interview at our Mangilik El cafe.
                     </div>
-                    <span class="badge bg-secondary rounded-pill">Step 2</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start p-3">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">Paid Onboarding</div>
                         Complete three paid onboarding shifts alongside an experienced senior barista.
                     </div>
-                    <span class="badge bg-info text-dark rounded-pill">Step 3</span>
                 </li>
             </ol>
 
@@ -194,7 +191,7 @@
                         <div class="row g-3">
                             <div class="col-12 col-md-6">
                                 <label for="full-name" class="form-label fw-semibold">Full Name:</label>
-                                <input type="text" class="form-control" id="full-name" name="fullName" placeholder="e.g. Yasmina Rozieva" required>
+                                <input type="text" class="form-control" id="full-name" name="fullName" placeholder="e.g. Aigerim Nurlanova" required>
                             </div>
 
                             <div class="col-12 col-md-6">
@@ -209,7 +206,7 @@
 
                             <div class="col-12 col-md-6">
                                 <label for="hours-available" class="form-label fw-semibold">Available Hours Per Week:</label>
-                                <input type="number" class="form-control" id="hours-available" name="hours" min="10" max="40" placeholder="20" required>
+                                <input type="number" class="form-control" id="hours-available" name="hours" min="10" max="40" placeholder="e.g. 20" required>
                             </div>
 
                             <div class="col-12 col-md-6">
@@ -265,9 +262,9 @@
                             </div>
 
                             <!-- Buttons -->
-                            <div class="col-12 pt-2">
-                                <button type="submit" class="btn btn-primary btn-lg px-4 me-2" id="career-submit-btn">Submit Application</button>
-                                <button type="reset" class="btn btn-outline-secondary" id="career-reset-btn">Clear Form</button>
+                            <div class="col-12 pt-2 d-flex flex-wrap gap-2">
+                                <button type="submit" class="btn btn-primary px-4" id="career-submit-btn">Submit Application</button>
+                                <button type="reset" class="btn btn-outline-secondary px-4" id="career-reset-btn">Clear Form</button>
                             </div>
                         </div>
                     </fieldset>
@@ -284,13 +281,12 @@
 
         <!-- Back to Top Button -->
         <p class="text-end">
-            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top" id="back-to-top-btn">Back to top &uarr;</a>
+            <a class="btn btn-secondary btn-sm rounded-pill back-to-top hidden" href="#top" id="back-to-top-btn">Back to top &uarr;</a>
         </p>
     </main>
 
     <footer class="bg-dark text-white text-center py-4">
         <div class="container">
-            <hr class="border-secondary my-3">
             <p class="mb-1 text-light">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
             <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none text-light">+7 747 029 00 43</a></p>
             <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">zebracoffee.kz</a></p>

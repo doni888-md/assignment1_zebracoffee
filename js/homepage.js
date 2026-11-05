@@ -78,56 +78,45 @@ $(function () {
 
   const $promoContainer = $('#live-announcement-container');
   if ($promoContainer.length) {
-    const randomIndex = Math.floor(Math.random() * dailySpecials.length);
-    const todaysDrink = dailySpecials[randomIndex];
+    // The perk depends on the day of the week (0 = Sunday ... 6 = Saturday),
+    // so it stays the same all day instead of changing on every page reload.
+    const todayIndex = new Date().getDay() % dailySpecials.length;
+    const todaysDrink = dailySpecials[todayIndex];
 
     $promoContainer
       .removeClass('hidden')
-      .addClass('d-flex flex-column flex-md-row justify-content-between align-items-md-center shadow-sm rounded-4 p-3 mb-4')
-      .css({
-        'background-color': '#E6F6F5',
-        'border': '1.5px solid #00A99D',
-        'color': '#005751'
-      })
+      .addClass('d-flex flex-column flex-md-row justify-content-between align-items-md-center shadow-sm rounded-4 p-3 mb-4 promo-banner')
       .hide();
 
     const $textBlock = $('<div>').addClass('mb-2 mb-md-0');
     const $title = $('<h6>')
-      .addClass('fw-bold mb-1 fs-6')
-      .css('color', '#007068')
+      .addClass('fw-bold mb-1 fs-6 promo-title')
       .text(`Daily Perk: ${todaysDrink.name} (${todaysDrink.discount} OFF)`);
 
     const $desc = $('<p>')
       .addClass('mb-0 small text-secondary')
-      .text(`${todaysDrink.desc}. Click button to claim your bar coupon!`);
+      .text(`${todaysDrink.desc}. Click the button to claim your coupon!`);
 
     $textBlock.append($title, $desc);
 
     const $buttonWrapper = $('<div>');
     const $promoBtn = $('<button>')
       .attr('type', 'button')
-      .addClass('btn btn-sm rounded-pill px-3 py-1 text-nowrap text-white coupon-btn shadow-sm')
-      .css('background-color', '#00A99D')
+      .addClass('btn btn-sm rounded-pill px-3 py-1 text-nowrap text-white coupon-btn shadow-sm bg-zebra')
       .text('Claim Coupon');
 
     $buttonWrapper.append($promoBtn);
     $promoContainer.append($textBlock, $buttonWrapper);
 
-    $promoContainer.fadeIn(500, function () {
-      console.log('Daily promo banner mounted successfully.');
-    });
+    $promoContainer.fadeIn(500);
 
     $promoContainer.on('click', '.coupon-btn', function () {
       const randomCoupon = `ZEB-${Math.floor(1000 + Math.random() * 9000)}`;
       $(this)
         .fadeOut(150, function () {
           $(this)
-            .removeClass('btn btn-sm coupon-btn')
-            .addClass('badge font-monospace p-2 fs-6 shadow-sm')
-            .css({
-              'background-color': '#007068',
-              'color': '#ffffff'
-            })
+            .removeClass('btn btn-sm coupon-btn bg-zebra')
+            .addClass('badge font-monospace p-2 fs-6 shadow-sm coupon-code')
             .text(`CODE: #${randomCoupon}`)
             .fadeIn(200);
         });

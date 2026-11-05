@@ -28,6 +28,22 @@ function isValidPhone(phone) {
   return /^(\+7|8)?[\s-]?\(?[0-9]{3}\)?[\s-]?[0-9]{2,3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/.test(phone.trim());
 }
 
+// Today's date as "YYYY-MM-DD" in local time (the format an <input type="date"> uses).
+function todayAsInputValue() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
+// "2026-12-01" -> "1 December 2026" for the confirmation message.
+function formatDate(dateString) {
+  const [year, month, day] = dateString.split('-').map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
 function isFutureOrTodayDate(dateString) {
   if (!dateString) return false;
   const selectedDate = new Date(dateString);
@@ -37,23 +53,26 @@ function isFutureOrTodayDate(dateString) {
 }
 
 $(function () {
-  const $form =$('#career-application-form');
-  const $confirmationAlert =$('#career-confirmation-message');
+  const $form = $('#career-application-form');
+  const $confirmationAlert = $('#career-confirmation-message');
 
   if (!$form.length) return;
 
   $form.attr('novalidate', 'true');
 
-  const $fullName =$('#full-name');
-  const $email =$('#email-addr');
-  const $phone =$('#phone-num');
-  const $hours =$('#hours-available');
-  const $startDate =$('#start-date');
-  const $role =$('#desired-role');
-  const $terms =$('#terms');
-  const $coverLetter =$('#cover-letter');
+  const $fullName = $('#full-name');
+  const $email = $('#email-addr');
+  const $phone = $('#phone-num');
+  const $hours = $('#hours-available');
+  const $startDate = $('#start-date');
+  const $role = $('#desired-role');
+  const $terms = $('#terms');
+  const $coverLetter = $('#cover-letter');
 
-  const $charCounter =$('<small>')
+  // The calendar does not offer days in the past (the submit check below still validates it).
+  $startDate.attr('min', todayAsInputValue());
+
+  const $charCounter = $('<small>')
     .addClass('text-muted d-block mt-1 text-end')
     .text('Characters: 0 / 300');
   $coverLetter.after($charCounter);
@@ -69,31 +88,37 @@ $(function () {
   });
 
   function setFieldStatus($field, isValid, errorMsg = '') {
-    let $feedback =$field.parent().find('.invalid-feedback');
+    let $feedback = $field.parent().find('.invalid-feedback');
 
     if (!isValid) {
       $field.addClass('is-invalid').removeClass('is-valid');
       if (!$feedback.length) {
-        $feedback =$('<div>').addClass('invalid-feedback small');
+        $feedback = $('<div>').addClass('invalid-feedback small');
         $field.parent().append($feedback);
       }
-      $feedback.text(errorMsg).slideDown(200); } else {$field.removeClass('is-invalid').addClass('is-valid');
+      $feedback.text(errorMsg).slideDown(200);
+    } else {
+      $field.removeClass('is-invalid').addClass('is-valid');
       if ($feedback.length) {
-        $feedback.slideUp(150, function () {$(this).text('');
+        $feedback.slideUp(150, function () {
+          $(this).text('');
         });
       }
     }
   }
 
   $form.on('input change', '.form-control, .form-select, .form-check-input', function () {
-    const $field =$(this);
+    const $field = $(this);
     if ($field.hasClass('is-invalid')) {
-      $field.removeClass('is-invalid');$field.parent().find('.invalid-feedback').slideUp(150);
+      $field.removeClass('is-invalid');
+      $field.parent().find('.invalid-feedback').slideUp(150);
     }
   });
 
-  $form.on('reset', function () {$form.find('.form-control, .form-select, .form-check-input').removeClass('is-invalid is-valid');
-    $form.find('.invalid-feedback').hide();$charCounter.text('Characters: 0 / 300').removeClass('text-danger fw-bold').addClass('text-muted');
+  $form.on('reset', function () {
+    $form.find('.form-control, .form-select, .form-check-input').removeClass('is-invalid is-valid');
+    $form.find('.invalid-feedback').hide();
+    $charCounter.text('Characters: 0 / 300').removeClass('text-danger fw-bold').addClass('text-muted');
   });
 
   $form.on('submit', function (event) {
@@ -106,7 +131,7 @@ $(function () {
     if (nameVal.length < 3) {
       setFieldStatus($fullName, false, 'Please enter your full name (minimum 3 characters).');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$fullName;
+      if (!$firstInvalid) $firstInvalid = $fullName;
     } else {
       setFieldStatus($fullName, true);
     }
@@ -115,7 +140,7 @@ $(function () {
     if (!isValidEmail(emailVal)) {
       setFieldStatus($email, false, 'Please enter a valid email address.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$email;
+      if (!$firstInvalid) $firstInvalid = $email;
     } else {
       setFieldStatus($email, true);
     }
@@ -124,7 +149,7 @@ $(function () {
     if (!isValidPhone(phoneVal)) {
       setFieldStatus($phone, false, 'Please enter a valid phone number (+7...).');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$phone;
+      if (!$firstInvalid) $firstInvalid = $phone;
     } else {
       setFieldStatus($phone, true);
     }
@@ -133,7 +158,7 @@ $(function () {
     if (isNaN(hoursVal) || hoursVal < 10 || hoursVal > 40) {
       setFieldStatus($hours, false, 'Hours per week must be between 10 and 40.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$hours;
+      if (!$firstInvalid) $firstInvalid = $hours;
     } else {
       setFieldStatus($hours, true);
     }
@@ -142,25 +167,35 @@ $(function () {
     if (!isFutureOrTodayDate(dateVal)) {
       setFieldStatus($startDate, false, 'Start date cannot be in the past.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$startDate;
+      if (!$firstInvalid) $firstInvalid = $startDate;
     } else {
       setFieldStatus($startDate, true);
+    }
+
+    if ($coverLetter.val().trim().length > 300) {
+      setFieldStatus($coverLetter, false, 'Please keep your motivation within 300 characters.');
+      isFormValid = false;
+      if (!$firstInvalid) $firstInvalid = $coverLetter;
+    } else if ($coverLetter.val().trim().length > 0) {
+      setFieldStatus($coverLetter, true); // optional field: mark green only when it was filled in
     }
 
     if ($role.val() === 'shift-lead' && hoursVal < 30) {
       setFieldStatus($hours, false, 'Shift Lead position requires at least 30 hours per week.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$hours;
+      if (!$firstInvalid) $firstInvalid = $hours;
     }
 
-    if (!$terms.prop('checked')) {$terms.addClass('is-invalid');
+    if (!$terms.prop('checked')) {
+      $terms.addClass('is-invalid');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid =$terms;
+      if (!$firstInvalid) $firstInvalid = $terms;
     } else {
       $terms.removeClass('is-invalid');
     }
     if (!isFormValid) {
-      if ($firstInvalid) {$firstInvalid.focus();
+      if ($firstInvalid) {
+        $firstInvalid.focus();
       }
       return;
     }
@@ -168,6 +203,9 @@ $(function () {
     const demoAppId = generateApplicationId();
     const selectedRoleTitle = $role.find('option:selected').text();
 
+    // .html() builds only OUR fixed markup with empty slots.
+    // Everything the visitor typed goes in with .text(), so tags like <script> or <img onerror>
+    // are shown as plain text and never run (protection against XSS).
     $confirmationAlert
       .removeClass('hidden')
       .hide()
@@ -176,15 +214,23 @@ $(function () {
           <h4 class="alert-heading fw-bold mb-0 text-success">Application Submitted Successfully!</h4>
           <button type="button" class="btn-close" id="close-confirmation-btn" aria-label="Close"></button>
         </div>
-        <p class="fs-6 mb-2">Thank you, <strong>${nameVal}</strong>! Your application ID is: <mark class="fw-bold px-2 py-1 rounded bg-white shadow-sm">${demoAppId}</mark>.</p>
+        <p class="fs-6 mb-2">Thank you, <strong class="confirm-name"></strong>! Your application ID is: <mark class="fw-bold px-2 py-1 rounded bg-white shadow-sm confirm-id"></mark>.</p>
         <div class="p-3 bg-white rounded-3 border mb-3">
-          <p class="mb-1"><strong>Selected Position:</strong> ${selectedRoleTitle}</p>
-          <p class="mb-1"><strong>Commitment:</strong> ${hoursVal} hours/week</p>
-          <p class="mb-0"><strong>Earliest Start:</strong> ${dateVal}</p>
+          <p class="mb-1"><strong>Selected Position:</strong> <span class="confirm-role"></span></p>
+          <p class="mb-1"><strong>Commitment:</strong> <span class="confirm-hours"></span> hours/week</p>
+          <p class="mb-0"><strong>Earliest Start:</strong> <span class="confirm-date"></span></p>
         </div>
-        <p class="small text-secondary mb-0">Our barista team manager will reach out via <strong>${phoneVal}</strong> within 3 business days.</p>
-      `)
-      
+        <p class="small text-secondary mb-0">Our barista team manager will reach out via <strong class="confirm-phone"></strong> within 3 business days.</p>
+      `);
+
+    $confirmationAlert.find('.confirm-name').text(nameVal);
+    $confirmationAlert.find('.confirm-id').text(demoAppId);
+    $confirmationAlert.find('.confirm-role').text(selectedRoleTitle);
+    $confirmationAlert.find('.confirm-hours').text(hoursVal);
+    $confirmationAlert.find('.confirm-date').text(formatDate(dateVal));
+    $confirmationAlert.find('.confirm-phone').text(phoneVal);
+
+    $confirmationAlert
       .slideDown(500, function () {
         
         $('html, body').animate({
@@ -193,7 +239,8 @@ $(function () {
       });
 
     $form[0].reset();
-    $form.find('.form-control, .form-select, .form-check-input').removeClass('is-valid is-invalid');$charCounter.text('Characters: 0 / 300');
+    $form.find('.form-control, .form-select, .form-check-input').removeClass('is-valid is-invalid');
+    $charCounter.text('Characters: 0 / 300');
   });
 
   $confirmationAlert.on('click', '#close-confirmation-btn', function () {

@@ -76,16 +76,19 @@ function renderStandardsTable(items, $tbody) {
   }
 
   $.each(items, function (index, item) {
-    const badgeClass = item.category === 'speed' ? 'badge bg-warning text-dark' : 'badge bg-secondary';
-    
+    // One badge colour per category, so the colours match the filter buttons above the table.
+    const badgeClass = `badge badge-cat badge-cat-${item.category}`;
+
     const $row = $('<tr>')
       .addClass('benchmark-row')
-      .attr('data-id', item.id)
-      .css('cursor', 'pointer');
+      .attr('data-id', item.id);
 
     const $nameCell = $('<td>')
       .addClass('fw-semibold text-dark')
-      .html(`<span>${item.standard}</span> <small class="text-muted d-block font-monospace" style="font-size: 0.72rem;">[view details]</small>`);
+      .append(
+        $('<span>').text(item.standard),
+        $('<small>').addClass('benchmark-toggle d-block').text('Details ▾')
+      );
 
     const $targetCell = $('<td>').text(item.target);
     const $freqCell = $('<td>').append($('<span>').addClass(badgeClass).text(item.frequency));
@@ -98,12 +101,11 @@ function renderStandardsTable(items, $tbody) {
 
     const $detailCell = $('<td>')
       .attr('colspan', 3)
-      .addClass('bg-light p-3 rounded-bottom')
-      .css('border-left', '4px solid #008B82');
+      .addClass('bg-light p-3 rounded-bottom benchmark-detail-cell');
 
     $detailCell.html(`
       <div class="d-flex align-items-center justify-content-between mb-1">
-        <strong class="small text-uppercase" style="color: #008B82; letter-spacing: 0.5px;">Operational Standard Breakdown:</strong>
+        <strong class="small text-uppercase text-zebra benchmark-detail-title">Operational Standard Breakdown:</strong>
         <span class="badge bg-white text-dark border">Standard #${item.id}</span>
       </div>
       <p class="mb-0 small text-secondary">${item.detail}</p>
@@ -133,12 +135,12 @@ $(function () {
       </div>
       <div class="col-12 col-md-7">
         <label class="form-label small fw-bold text-secondary mb-1 d-block">Quick Filter by Category:</label>
-        <div class="btn-group btn-group-sm flex-wrap w-100" role="group" id="benchmark-filter-buttons">
-          <button type="button" class="btn btn-dark active filter-btn" data-cat="all">All</button>
-          <button type="button" class="btn btn-outline-dark filter-btn" data-cat="quality">Quality</button>
-          <button type="button" class="btn btn-outline-dark filter-btn" data-cat="speed">Speed</button>
-          <button type="button" class="btn btn-outline-dark filter-btn" data-cat="hospitality">Hospitality</button>
-          <button type="button" class="btn btn-outline-dark filter-btn" data-cat="hygiene">Hygiene</button>
+        <div class="d-flex flex-wrap gap-2" role="group" id="benchmark-filter-buttons">
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-dark active filter-btn" data-cat="all">All</button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="quality">Quality</button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="speed">Speed</button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hospitality">Hospitality</button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hygiene">Hygiene</button>
         </div>
       </div>
     </div>
@@ -167,7 +169,6 @@ $(function () {
     $tableBody.fadeOut(120, function () {
       renderStandardsTable(filtered, $tableBody);
       $tableBody.fadeIn(150);
-      $tableBody.find('.benchmark-row:first').addClass('table-active');
     });
 
     $counter.text(`Showing ${filtered.length} of ${coffeeStandardsData.length} standards`);
@@ -188,7 +189,6 @@ $(function () {
   });
 
   renderStandardsTable(coffeeStandardsData, $tableBody);
-  $tableBody.find('.benchmark-row:first').addClass('table-active');
 
   $tableBody.on('click', '.benchmark-row', function () {
     const $clickedRow = $(this);
@@ -196,14 +196,15 @@ $(function () {
     const $targetDetailRow = $tableBody.find(`.benchmark-detail-row[data-parent-id="${standardId}"]`);
     const isVisible = $targetDetailRow.is(':visible');
 
-    $clickedRow.siblings('.benchmark-row').removeClass('table-active');
+    $clickedRow.siblings('.benchmark-row').removeClass('table-active')
+      .find('.benchmark-toggle').text('Details ▾');
     $clickedRow.siblings('.benchmark-detail-row').fadeOut(150);
 
     if (isVisible) {
-      $clickedRow.removeClass('table-active');
+      $clickedRow.removeClass('table-active').find('.benchmark-toggle').text('Details ▾');
       $targetDetailRow.fadeOut(150);
     } else {
-      $clickedRow.addClass('table-active');
+      $clickedRow.addClass('table-active').find('.benchmark-toggle').text('Hide ▴');
       $targetDetailRow.fadeIn(200);
     }
   });

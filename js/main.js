@@ -8,7 +8,18 @@
  * preventing 'null reference' errors when targeting HTML nodes.
  */
 $(function () {
-  $('#back-to-top-btn').on('click', function (event) {
+  const $backToTop = $('#back-to-top-btn');
+
+  // Show the floating button only after the visitor has scrolled down,
+  // so on small screens it does not cover the first buttons and text of the page.
+  function updateBackToTop() {
+    $backToTop.toggleClass('hidden', $(window).scrollTop() < 400);
+  }
+
+  $(window).on('scroll', updateBackToTop);
+  updateBackToTop();
+
+  $backToTop.on('click', function (event) {
     event.preventDefault();
     $('html, body').animate({ scrollTop: 0 }, 500);
   });
