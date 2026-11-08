@@ -2,248 +2,585 @@
 
 /**
  * Zebra Coffee - Career Application Script
- * jQuery Version: 3.7.1
- * Initialized via $(function() { ... }) to guarantee full DOM availability.
- *
- * Comparison Comment (Feature Rewrite: Form Validation & Interactive Feedback):
- * Replaced vanilla element queries and manual DOM manipulation with jQuery selectors,
- * traversal (.closest, .parent), .slideDown() animation, and event delegation.
- * The jQuery approach is more expressive, resilient, and enables seamless dynamic feedback.
- *
- * Security Note:
- * Browser-side validation is solely for instant UX and does not guarantee security.
- * Malicious actors can bypass client JS easily, so the server must always perform its own checks.
+ * Pure Vanilla JavaScript implementation.
  */
 
-function generateApplicationId() {
-  const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-  return `APP-${randomSuffix}`;
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function isValidPhone(phone) {
-  return /^(\+7|8)?[\s-]?\(?[0-9]{3}\)?[\s-]?[0-9]{2,3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/.test(phone.trim());
-}
-
-// Today's date as "YYYY-MM-DD" in local time (the format an <input type="date"> uses).
-function todayAsInputValue() {
-  const now = new Date();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  return `${now.getFullYear()}-${month}-${day}`;
-}
-
-// "2026-12-01" -> "1 December 2026" for the confirmation message.
-function formatDate(dateString) {
-  const [year, month, day] = dateString.split('-').map(Number);
-  return new Date(year, month - 1, day).toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  });
-}
-
-function isFutureOrTodayDate(dateString) {
-  if (!dateString) return false;
-  const selectedDate = new Date(dateString);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return selectedDate >= today;
-}
-
-$(function () {
-  const $form = $('#career-application-form');
-  const $confirmationAlert = $('#career-confirmation-message');
-
-  if (!$form.length) return;
-
-  $form.attr('novalidate', 'true');
-
-  const $fullName = $('#full-name');
-  const $email = $('#email-addr');
-  const $phone = $('#phone-num');
-  const $hours = $('#hours-available');
-  const $startDate = $('#start-date');
-  const $role = $('#desired-role');
-  const $terms = $('#terms');
-  const $coverLetter = $('#cover-letter');
-
-  // The calendar does not offer days in the past (the submit check below still validates it).
-  $startDate.attr('min', todayAsInputValue());
-
-  const $charCounter = $('<small>')
-    .addClass('text-muted d-block mt-1 text-end')
-    .text('Characters: 0 / 300');
-  $coverLetter.after($charCounter);
-
-  $coverLetter.on('input', function () {
-    const len = $(this).val().length;
-    $charCounter.text(`Characters: ${len} / 300`);
-    if (len > 300) {
-      $charCounter.removeClass('text-muted').addClass('text-danger fw-bold');
-    } else {
-      $charCounter.removeClass('text-danger fw-bold').addClass('text-muted');
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Vacancies dataset (Array of objects)
+  const vacancies = [
+    {
+      id: 'barista',
+      title: 'Express Barista',
+      hourlyRate: 1400,
+      schedule: 'Flexible (4–8 hour shifts)',
+      experience: 'No experience required (training provided)',
+      isOpen: true
+    },
+    {
+      id: 'shift-lead',
+      title: 'Shift Lead',
+      hourlyRate: 1900,
+      schedule: 'Full-time (rotational)',
+      experience: '1+ year in specialty coffee',
+      isOpen: true
+    },
+    {
+      id: 'intern',
+      title: 'Student Intern',
+      hourlyRate: 1100,
+      schedule: 'Part-time (15–20 hrs/week)',
+      experience: 'Enrolled undergraduate student',
+      isOpen: true
+    },
+    {
+      id: 'roastery-assistant',
+      title: 'Roastery Assistant',
+      hourlyRate: 1600,
+      schedule: 'Part-time (weekends)',
+      experience: 'Basic understanding of coffee roasting',
+      isOpen: false // Position filled
     }
-  });
+  ];
 
-  function setFieldStatus($field, isValid, errorMsg = '') {
-    let $feedback = $field.parent().find('.invalid-feedback');
+  // DOM Elements
+  const form = document.getElementById('career-application-form');
+  const vacanciesTbody = document.getElementById('vacancies-table-body');
+  const openCountBadge = document.getElementById('open-roles-count');
+  const confirmationAlert = document.getElementById('career-confirmation-message');
+
+  if (!form) return;
+
+  form.noValidate = true;
+
+  const fields = {
+    name: document.getElementById('full-name'),
+    email: document.getElementById('email-addr'),
+    phone: document.getElementById('phone-num'),
+    hours: document.getElementById('hours-available'),
+    startDate: document.getElementById('start-date'),
+    role: document.getElementById('desired-role'),
+    terms: document.getElementById('terms'),
+    coverLetter: document.getElementById('cover-letter')
+  };
+
+  // -------------------------------------------------------------------------
+  // Reusable Functions with return statements (called from 2+ places)
+  // -------------------------------------------------------------------------
+
+  /**
+   * Finds role object from vacancies array by ID.
+   * Calls:
+   * 1. Inside renderVacanciesTable()
+   * 2. Inside calculateWeeklyPay()
+   * 3. Inside validateCareerForm()
+   * 4. Inside delegated click handler
+   */
+  function findRoleById(roleId) {
+    return vacancies.find(role => role.id === roleId) || null;
+  }
+
+  /**
+   * Calculates estimated weekly earnings based on rate, hours, and night diff.
+   * Condition: Shift Lead receives a +15% night/rotation shift differential.
+   * Calls:
+   * 1. On hours input event (updatePayDisplay)
+   * 2. On role change event (updatePayDisplay)
+   * 3. On successful form submission (confirmation payload)
+   */
+  function calculateWeeklyPay(roleId, hours) {
+    const role = findRoleById(roleId);
+    const numHours = Number(hours);
+
+    if (!role || isNaN(numHours) || numHours <= 0) {
+      return 0;
+    }
+
+    let rate = role.hourlyRate;
+    if (role.id === 'shift-lead') {
+      rate = Math.round(rate * 1.15);
+    }
+
+    return rate * numHours;
+  }
+
+  /**
+   * Counts currently open positions in vacancies array.
+   * Calls:
+   * 1. Initial table rendering
+   * 2. Form reset handler
+   */
+  function countOpenVacancies(list) {
+    return list.filter(item => item.isOpen).length;
+  }
+
+  /**
+   * Formats numbers into KZT currency string.
+   * Calls:
+   * 1. Vacancies table rendering
+   * 2. Weekly pay live display
+   * 3. Form submission confirmation card
+   */
+  function formatKzt(amount) {
+    return `${Number(amount).toLocaleString('en-US')} ₸`;
+  }
+
+  /**
+   * Returns today's date formatted as YYYY-MM-DD.
+   * Calls:
+   * 1. Sets min attribute for startDate input
+   * 2. Date input validation check
+   */
+  function todayAsInputValue() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${now.getFullYear()}-${month}-${day}`;
+  }
+
+  /**
+   * Formats YYYY-MM-DD into a human-readable string.
+   * Calls:
+   * 1. Confirmation message creation
+   */
+  function formatDate(dateString) {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  function generateApplicationId() {
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    return `APP-${randomSuffix}`;
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function isValidPhone(phone) {
+    return /^(\+7|8)?[\s-]?\(?[0-9]{3}\)?[\s-]?[0-9]{2,3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}$/.test(phone.trim());
+  }
+
+  function isFutureOrTodayDate(dateString) {
+    if (!dateString) return false;
+    return dateString >= todayAsInputValue();
+  }
+
+  // Set minimum selectable date
+  if (fields.startDate) {
+    fields.startDate.min = todayAsInputValue();
+  }
+
+  // -------------------------------------------------------------------------
+  // UI Injections: Live Calculator Display & Character Counter
+  // -------------------------------------------------------------------------
+  const charCounter = document.createElement('small');
+  charCounter.className = 'text-muted d-block mt-1 text-end';
+  charCounter.textContent = 'Characters: 0 / 300';
+  if (fields.coverLetter) {
+    fields.coverLetter.after(charCounter);
+  }
+
+  const payPreviewWrapper = document.createElement('div');
+  payPreviewWrapper.className = 'mt-2 p-2 bg-white border rounded small text-secondary';
+  payPreviewWrapper.innerHTML = 'Estimated weekly earnings: <strong class="text-dark" id="weekly-pay-display">—</strong>';
+  if (fields.hours) {
+    fields.hours.parentElement.appendChild(payPreviewWrapper);
+  }
+  const weeklyPayDisplay = document.getElementById('weekly-pay-display');
+
+  function updatePayDisplay() {
+    if (!weeklyPayDisplay || !fields.hours || !fields.role) return;
+
+    const hours = fields.hours.value.trim();
+    if (!hours || Number(hours) <= 0) {
+      weeklyPayDisplay.textContent = '— (enter hours)';
+      return;
+    }
+
+    const pay = calculateWeeklyPay(fields.role.value, hours);
+    const selectedRole = findRoleById(fields.role.value);
+    const bonusNotice = selectedRole && selectedRole.id === 'shift-lead' ? ' (incl. 15% night diff.)' : '';
+
+    weeklyPayDisplay.textContent = `${formatKzt(pay)}${bonusNotice}`;
+  }
+
+  // -------------------------------------------------------------------------
+  // Table & Select Dynamic Population
+  // -------------------------------------------------------------------------
+  function renderVacanciesTable() {
+    if (!vacanciesTbody) return;
+    vacanciesTbody.replaceChildren();
+
+    vacancies.forEach(job => {
+      const tr = document.createElement('tr');
+
+      const titleTd = document.createElement('td');
+      titleTd.className = 'fw-semibold';
+      titleTd.textContent = job.title;
+
+      const rateTd = document.createElement('td');
+      rateTd.textContent = `${formatKzt(job.hourlyRate)} / hr`;
+
+      const schedTd = document.createElement('td');
+      schedTd.textContent = job.schedule;
+
+      const expTd = document.createElement('td');
+      expTd.className = 'd-none d-md-table-cell';
+      expTd.textContent = job.experience;
+
+      const statusTd = document.createElement('td');
+      const badge = document.createElement('span');
+      if (job.isOpen) {
+        badge.className = 'badge bg-success';
+        badge.textContent = 'Hiring Now';
+      } else {
+        badge.className = 'badge bg-secondary';
+        badge.textContent = 'Position Filled';
+      }
+      statusTd.appendChild(badge);
+
+      const actionTd = document.createElement('td');
+      actionTd.className = 'text-end';
+      if (job.isOpen) {
+        const applyBtn = document.createElement('button');
+        applyBtn.type = 'button';
+        applyBtn.className = 'btn btn-sm btn-outline-primary apply-role-btn';
+        applyBtn.dataset.roleId = job.id;
+        applyBtn.textContent = 'Apply';
+        actionTd.appendChild(applyBtn);
+      } else {
+        const filledText = document.createElement('span');
+        filledText.className = 'text-muted small fst-italic';
+        filledText.textContent = 'Closed';
+        actionTd.appendChild(filledText);
+      }
+
+      tr.append(titleTd, rateTd, schedTd, expTd, statusTd, actionTd);
+      vacanciesTbody.appendChild(tr);
+    });
+
+    if (openCountBadge) {
+      const openCount = countOpenVacancies(vacancies);
+      openCountBadge.textContent = `Open roles: ${openCount} of ${vacancies.length}`;
+    }
+
+    populateRoleSelect();
+  }
+
+  function populateRoleSelect() {
+    if (!fields.role) return;
+    fields.role.replaceChildren();
+
+    vacancies.forEach(job => {
+      const option = document.createElement('option');
+      option.value = job.id;
+      option.textContent = job.isOpen
+        ? `${job.title} (${formatKzt(job.hourlyRate)}/hr)`
+        : `${job.title} — Position Filled`;
+
+      if (!job.isOpen) {
+        option.disabled = true;
+      }
+
+      fields.role.appendChild(option);
+    });
+
+    const firstOpen = vacancies.find(v => v.isOpen);
+    if (firstOpen) {
+      fields.role.value = firstOpen.id;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Delegated Event: Apply Button Click on tbody
+  // -------------------------------------------------------------------------
+  if (vacanciesTbody) {
+    vacanciesTbody.addEventListener('click', event => {
+      const button = event.target.closest('.apply-role-btn');
+      if (!button) return;
+
+      const roleId = button.dataset.roleId;
+      const role = findRoleById(roleId);
+
+      if (role && role.isOpen) {
+        fields.role.value = role.id;
+        updatePayDisplay();
+
+        const formSection = document.getElementById('apply-form-wrapper');
+        if (formSection) {
+          formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        fields.name.focus();
+      }
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // Validation Helpers
+  // -------------------------------------------------------------------------
+  function setFieldStatus(field, isValid, errorMsg = '') {
+    let feedback = field.parentElement.querySelector('.invalid-feedback');
 
     if (!isValid) {
-      $field.addClass('is-invalid').removeClass('is-valid');
-      if (!$feedback.length) {
-        $feedback = $('<div>').addClass('invalid-feedback small');
-        $field.parent().append($feedback);
+      field.classList.add('is-invalid');
+      field.classList.remove('is-valid');
+      if (!feedback) {
+        feedback = document.createElement('div');
+        feedback.className = 'invalid-feedback small';
+        field.parentElement.appendChild(feedback);
       }
-      $feedback.text(errorMsg).slideDown(200);
+      feedback.textContent = errorMsg;
+      feedback.style.display = 'block';
     } else {
-      $field.removeClass('is-invalid').addClass('is-valid');
-      if ($feedback.length) {
-        $feedback.slideUp(150, function () {
-          $(this).text('');
-        });
+      field.classList.remove('is-invalid');
+      field.classList.add('is-valid');
+      if (feedback) {
+        feedback.textContent = '';
+        feedback.style.display = 'none';
       }
     }
   }
 
-  $form.on('input change', '.form-control, .form-select, .form-check-input', function () {
-    const $field = $(this);
-    if ($field.hasClass('is-invalid')) {
-      $field.removeClass('is-invalid');
-      $field.parent().find('.invalid-feedback').slideUp(150);
+  function clearFormStatus() {
+    form.querySelectorAll('.form-control, .form-select, .form-check-input').forEach(input => {
+      input.classList.remove('is-invalid', 'is-valid');
+      const feedback = input.parentElement.querySelector('.invalid-feedback');
+      if (feedback) {
+        feedback.textContent = '';
+        feedback.style.display = 'none';
+      }
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // Form Events
+  // -------------------------------------------------------------------------
+  if (fields.coverLetter) {
+    fields.coverLetter.addEventListener('input', function () {
+      const len = this.value.length;
+      charCounter.textContent = `Characters: ${len} / 300`;
+      if (len > 300) {
+        charCounter.classList.remove('text-muted');
+        charCounter.classList.add('text-danger', 'fw-bold');
+      } else {
+        charCounter.classList.remove('text-danger', 'fw-bold');
+        charCounter.classList.add('text-muted');
+      }
+    });
+  }
+
+  if (fields.hours) {
+    fields.hours.addEventListener('input', updatePayDisplay);
+  }
+  if (fields.role) {
+    fields.role.addEventListener('change', updatePayDisplay);
+  }
+
+  form.addEventListener('input', event => {
+    const target = event.target;
+    if (target.classList.contains('is-invalid')) {
+      target.classList.remove('is-invalid');
+      const feedback = target.parentElement.querySelector('.invalid-feedback');
+      if (feedback) {
+        feedback.textContent = '';
+        feedback.style.display = 'none';
+      }
     }
   });
 
-  $form.on('reset', function () {
-    $form.find('.form-control, .form-select, .form-check-input').removeClass('is-invalid is-valid');
-    $form.find('.invalid-feedback').hide();
-    $charCounter.text('Characters: 0 / 300').removeClass('text-danger fw-bold').addClass('text-muted');
+  form.addEventListener('reset', () => {
+    if (confirmationAlert) {
+      confirmationAlert.classList.add('hidden');
+      confirmationAlert.style.setProperty('display', 'none', 'important');
+    }
+    clearFormStatus();
+    charCounter.textContent = 'Characters: 0 / 300';
+    charCounter.classList.remove('text-danger', 'fw-bold');
+    charCounter.classList.add('text-muted');
+
+    setTimeout(() => {
+      populateRoleSelect();
+      updatePayDisplay();
+    }, 0);
   });
 
-  $form.on('submit', function (event) {
+  form.addEventListener('submit', event => {
     event.preventDefault();
 
     let isFormValid = true;
-    let $firstInvalid = null;
+    let firstInvalid = null;
 
-    const nameVal = $fullName.val().trim();
+    const nameVal = fields.name.value.trim();
     if (nameVal.length < 3) {
-      setFieldStatus($fullName, false, 'Please enter your full name (minimum 3 characters).');
+      setFieldStatus(fields.name, false, 'Please enter your full name (minimum 3 characters).');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $fullName;
+      if (!firstInvalid) firstInvalid = fields.name;
     } else {
-      setFieldStatus($fullName, true);
+      setFieldStatus(fields.name, true);
     }
 
-    const emailVal = $email.val().trim();
+    const emailVal = fields.email.value.trim();
     if (!isValidEmail(emailVal)) {
-      setFieldStatus($email, false, 'Please enter a valid email address.');
+      setFieldStatus(fields.email, false, 'Please enter a valid email address.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $email;
+      if (!firstInvalid) firstInvalid = fields.email;
     } else {
-      setFieldStatus($email, true);
+      setFieldStatus(fields.email, true);
     }
 
-    const phoneVal = $phone.val().trim();
+    const phoneVal = fields.phone.value.trim();
     if (!isValidPhone(phoneVal)) {
-      setFieldStatus($phone, false, 'Please enter a valid phone number (+7...).');
+      setFieldStatus(fields.phone, false, 'Please enter a valid phone number (+7...).');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $phone;
+      if (!firstInvalid) firstInvalid = fields.phone;
     } else {
-      setFieldStatus($phone, true);
+      setFieldStatus(fields.phone, true);
     }
 
-    const hoursVal = parseInt($hours.val().trim(), 10);
+    const hoursVal = parseInt(fields.hours.value.trim(), 10);
     if (isNaN(hoursVal) || hoursVal < 10 || hoursVal > 40) {
-      setFieldStatus($hours, false, 'Hours per week must be between 10 and 40.');
+      setFieldStatus(fields.hours, false, 'Hours per week must be between 10 and 40.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $hours;
+      if (!firstInvalid) firstInvalid = fields.hours;
     } else {
-      setFieldStatus($hours, true);
+      setFieldStatus(fields.hours, true);
     }
 
-    const dateVal = $startDate.val();
+    const dateVal = fields.startDate.value;
     if (!isFutureOrTodayDate(dateVal)) {
-      setFieldStatus($startDate, false, 'Start date cannot be in the past.');
+      setFieldStatus(fields.startDate, false, 'Start date cannot be in the past.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $startDate;
+      if (!firstInvalid) firstInvalid = fields.startDate;
     } else {
-      setFieldStatus($startDate, true);
+      setFieldStatus(fields.startDate, true);
     }
 
-    if ($coverLetter.val().trim().length > 300) {
-      setFieldStatus($coverLetter, false, 'Please keep your motivation within 300 characters.');
+    if (fields.coverLetter && fields.coverLetter.value.trim().length > 300) {
+      setFieldStatus(fields.coverLetter, false, 'Please keep your motivation within 300 characters.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $coverLetter;
-    } else if ($coverLetter.val().trim().length > 0) {
-      setFieldStatus($coverLetter, true); // optional field: mark green only when it was filled in
+      if (!firstInvalid) firstInvalid = fields.coverLetter;
+    } else if (fields.coverLetter && fields.coverLetter.value.trim().length > 0) {
+      setFieldStatus(fields.coverLetter, true);
     }
 
-    if ($role.val() === 'shift-lead' && hoursVal < 30) {
-      setFieldStatus($hours, false, 'Shift Lead position requires at least 30 hours per week.');
+    const chosenRole = findRoleById(fields.role.value);
+    if (!chosenRole || !chosenRole.isOpen) {
+      setFieldStatus(fields.role, false, 'This role is currently filled and not accepting applications.');
       isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $hours;
-    }
-
-    if (!$terms.prop('checked')) {
-      $terms.addClass('is-invalid');
-      isFormValid = false;
-      if (!$firstInvalid) $firstInvalid = $terms;
+      if (!firstInvalid) firstInvalid = fields.role;
     } else {
-      $terms.removeClass('is-invalid');
+      setFieldStatus(fields.role, true);
     }
+
+    if (fields.role.value === 'shift-lead' && hoursVal < 30) {
+      setFieldStatus(fields.hours, false, 'Shift Lead position requires at least 30 hours per week.');
+      isFormValid = false;
+      if (!firstInvalid) firstInvalid = fields.hours;
+    }
+
+    if (!fields.terms.checked) {
+      setFieldStatus(fields.terms, false, 'You must confirm that your details are accurate.');
+      isFormValid = false;
+      if (!firstInvalid) firstInvalid = fields.terms;
+    } else {
+      setFieldStatus(fields.terms, true);
+    }
+
     if (!isFormValid) {
-      if ($firstInvalid) {
-        $firstInvalid.focus();
+      if (firstInvalid) {
+        firstInvalid.focus();
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       return;
     }
 
+    // Success: Generate and display confirmation card
     const demoAppId = generateApplicationId();
-    const selectedRoleTitle = $role.find('option:selected').text();
+    const roleTitle = chosenRole ? chosenRole.title : fields.role.value;
+    const estPay = calculateWeeklyPay(fields.role.value, hoursVal);
 
-    // .html() builds only OUR fixed markup with empty slots.
-    // Everything the visitor typed goes in with .text(), so tags like <script> or <img onerror>
-    // are shown as plain text and never run (protection against XSS).
-    $confirmationAlert
-      .removeClass('hidden')
-      .hide()
-      .html(`
-        <div class="d-flex justify-content-between align-items-start mb-2">
-          <h4 class="alert-heading fw-bold mb-0 text-success">Application Submitted Successfully!</h4>
-          <button type="button" class="btn-close" id="close-confirmation-btn" aria-label="Close"></button>
-        </div>
-        <p class="fs-6 mb-2">Thank you, <strong class="confirm-name"></strong>! Your application ID is: <mark class="fw-bold px-2 py-1 rounded bg-white shadow-sm confirm-id"></mark>.</p>
-        <div class="p-3 bg-white rounded-3 border mb-3">
-          <p class="mb-1"><strong>Selected Position:</strong> <span class="confirm-role"></span></p>
-          <p class="mb-1"><strong>Commitment:</strong> <span class="confirm-hours"></span> hours/week</p>
-          <p class="mb-0"><strong>Earliest Start:</strong> <span class="confirm-date"></span></p>
-        </div>
-        <p class="small text-secondary mb-0">Our barista team manager will reach out via <strong class="confirm-phone"></strong> within 3 business days.</p>
-      `);
+    if (confirmationAlert) {
+      confirmationAlert.replaceChildren();
 
-    $confirmationAlert.find('.confirm-name').text(nameVal);
-    $confirmationAlert.find('.confirm-id').text(demoAppId);
-    $confirmationAlert.find('.confirm-role').text(selectedRoleTitle);
-    $confirmationAlert.find('.confirm-hours').text(hoursVal);
-    $confirmationAlert.find('.confirm-date').text(formatDate(dateVal));
-    $confirmationAlert.find('.confirm-phone').text(phoneVal);
+      const topRow = document.createElement('div');
+      topRow.className = 'd-flex justify-content-between align-items-start mb-2';
 
-    $confirmationAlert
-      .slideDown(500, function () {
-        
-        $('html, body').animate({
-          scrollTop: $confirmationAlert.offset().top - 40
-        }, 400);
-      });
+      const header = document.createElement('h4');
+      header.className = 'alert-heading fw-bold mb-0 text-success';
+      header.textContent = 'Application Submitted Successfully!';
 
-    $form[0].reset();
-    $form.find('.form-control, .form-select, .form-check-input').removeClass('is-valid is-invalid');
-    $charCounter.text('Characters: 0 / 300');
+      const closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.className = 'btn-close';
+      closeBtn.id = 'close-confirmation-btn';
+      closeBtn.setAttribute('aria-label', 'Close');
+
+      topRow.append(header, closeBtn);
+
+      const greeting = document.createElement('p');
+      greeting.className = 'fs-6 mb-2';
+      greeting.textContent = 'Thank you, ';
+      const strongName = document.createElement('strong');
+      strongName.textContent = nameVal;
+      const idMark = document.createElement('mark');
+      idMark.className = 'fw-bold px-2 py-1 rounded bg-white shadow-sm';
+      idMark.textContent = demoAppId;
+      greeting.append(strongName, '! Your application ID is: ', idMark, '.');
+
+      const detailsBox = document.createElement('div');
+      detailsBox.className = 'p-3 bg-white rounded-3 border mb-3';
+
+      const pRole = document.createElement('p');
+      pRole.className = 'mb-1';
+      pRole.innerHTML = `<strong>Selected Position:</strong> ${roleTitle}`;
+
+      const pHours = document.createElement('p');
+      pHours.className = 'mb-1';
+      pHours.innerHTML = `<strong>Commitment:</strong> ${hoursVal} hours/week (Est. Pay: ${formatKzt(estPay)})`;
+
+      const pDate = document.createElement('p');
+      pDate.className = 'mb-0';
+      pDate.innerHTML = `<strong>Earliest Start:</strong> ${formatDate(dateVal)}`;
+
+      detailsBox.append(pRole, pHours, pDate);
+
+      const note = document.createElement('p');
+      note.className = 'small text-secondary mb-0';
+      note.innerHTML = `Our barista team manager will reach out via <strong>${phoneVal}</strong> within 3 business days.`;
+
+      confirmationAlert.append(topRow, greeting, detailsBox, note);
+
+      // Force block visibility
+      confirmationAlert.classList.remove('hidden');
+      confirmationAlert.style.setProperty('display', 'block', 'important');
+
+      confirmationAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.reset();
+    clearFormStatus();
+    if (charCounter) {
+      charCounter.textContent = 'Characters: 0 / 300';
+    }
+    updatePayDisplay();
   });
 
-  $confirmationAlert.on('click', '#close-confirmation-btn', function () {
-    $confirmationAlert.slideUp(400);
-  });
+  if (confirmationAlert) {
+    confirmationAlert.addEventListener('click', event => {
+      if (event.target.closest('#close-confirmation-btn')) {
+        confirmationAlert.classList.add('hidden');
+        confirmationAlert.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // Initialization
+  // -------------------------------------------------------------------------
+  renderVacanciesTable();
+  updatePayDisplay();
 });

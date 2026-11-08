@@ -186,3 +186,22 @@ main section.card {
 .team-photo {
     height: 260px;
 }
+
+/* Таблетка со счетчиком открытых ролей */
+#open-roles-count {
+  background-color: #00A99D !important;
+  color: #ffffff !important;
+}
+
+/* Кнопки Apply в таблице */
+.apply-role-btn {
+  background-color: #00A99D !important;
+  border-color: #00A99D !important;
+  color: #ffffff !important;
+}
+
+.apply-role-btn:hover {
+  background-color: #008f85 !important;
+  border-color: #008f85 !important;
+  color: #ffffff !important;
+}
