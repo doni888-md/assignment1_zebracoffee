@@ -101,16 +101,21 @@ document.addEventListener('DOMContentLoaded', () => {
     return rate * numHours;
   }
 
-  /**
+    /**
    * Counts currently open positions in vacancies array.
    * Calls:
-   * 1. Inside renderVacanciesTable()
-   * 2. Inside updateOpenVacanciesBadge() (called on form reset)
+   * 1. Inside updateOpenVacanciesBadge()
    */
   function countOpenVacancies(list) {
     return list.filter(item => item.isOpen).length;
   }
 
+  /**
+   * Writes "Open roles: X of Y" into the badge above the table.
+   * Calls:
+   * 1. Inside renderVacanciesTable() (first page load)
+   * 2. Inside form reset handler
+   */
   function updateOpenVacanciesBadge() {
     if (openCountBadge) {
       const openCount = countOpenVacancies(vacancies);
@@ -491,12 +496,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!firstInvalid) firstInvalid = fields.hours;
     }
 
-    if (!fields.terms.checked) {
-      fields.terms.classList.add('is-invalid');
+        if (!fields.terms.checked) {
+      setFieldStatus(fields.terms, false, 'You must confirm that your details are accurate.');
       isFormValid = false;
       if (!firstInvalid) firstInvalid = fields.terms;
     } else {
-      fields.terms.classList.remove('is-invalid');
+      setFieldStatus(fields.terms, true);
     }
 
     if (!isFormValid) {
@@ -514,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     form.reset();
     clearFormStatus();
-    
+
     if (confirmationAlert) {
       confirmationAlert.replaceChildren();
 
