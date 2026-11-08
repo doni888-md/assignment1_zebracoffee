@@ -13,39 +13,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Custom CSS -->
+    <!-- Existing project styles -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/korkem.css">
-    <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/korkem.css">
-
-<script src="js/booking.js" defer></script>
 </head>
 
 <body id="top">
 
     <!-- HEADER -->
     <header class="container-fluid bg-dark text-white p-3 mb-4">
-
         <div class="text-center mb-3">
             <img src="images/logo.png"
                  alt="Zebra Coffee Logo"
                  class="brand-logo">
 
-            <h1 class="display-6 fw-bold mb-0">
-                Zebra Coffee
-            </h1>
-
-            <p class="lead text-muted mb-0 fs-6">
-                City to-go coffee shop
-            </p>
+            <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
+            <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
         </div>
 
         <!-- NAVIGATION -->
         <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
-
             <div class="container-fluid">
-
                 <button class="navbar-toggler ms-auto"
                         type="button"
                         data-bs-toggle="collapse"
@@ -53,78 +41,50 @@
                         aria-controls="mainNav"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
-
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse justify-content-center"
-                     id="mainNav">
-
+                <div class="collapse navbar-collapse justify-content-center" id="mainNav">
                     <ul class="navbar-nav">
-
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="about.html">About</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="career.html">Careers</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="menu.html">Menu</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="reviews.html">Reviews</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link active"
-                               href="booking.html">
-                                Booking
-                            </a>
+                            <a class="nav-link active" href="booking.html">Booking</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link"
-                               href="contacts.html">
-                                Contacts
-                            </a>
+                            <a class="nav-link" href="contacts.html">Contacts</a>
                         </li>
-
                     </ul>
-
                 </div>
             </div>
-
         </nav>
-
     </header>
-
 
     <!-- MAIN -->
     <main class="container mb-5">
 
         <!-- INTRO -->
         <div class="row g-4 mb-4">
-
-            <section id="booking-intro"
-                     class="col-12 col-md-8">
-
+            <section id="booking-intro" class="col-12 col-md-8">
                 <div class="p-4 rounded-4 border shadow-sm h-100 bg-white">
-
                     <h2 class="h3 mb-3 text-center text-md-start">
-
                         Reserve Your Table at Zebra Coffee
-
                         <span class="badge bg-info text-dark d-none d-md-inline-block ms-2 fs-6">
                             Online Booking
                         </span>
-
                     </h2>
 
                     <p class="mb-0">
@@ -135,154 +95,103 @@
                         Choose your preferred date, time and seating area,
                         then submit your reservation request.
                     </p>
-
                 </div>
-
             </section>
-
 
             <!-- NOTICE -->
             <aside class="col-12 col-md-4">
-
                 <div class="alert alert-warning h-100 m-0 d-flex flex-column justify-content-center"
                      role="alert">
-
-                    <h3 class="h5 alert-heading">
-                        Important Notice
-                    </h3>
-
+                    <h3 class="h5 alert-heading">Important Notice</h3>
                     <p class="mb-0 small">
                         <strong>Please note:</strong>
                         Please arrive within 15 minutes of your selected
                         reservation time. For changes or cancellations,
                         contact us in advance.
                     </p>
-
                 </div>
-
             </aside>
-
         </div>
-
 
         <!-- BOOKING FORM -->
         <section id="reservation-form-section"
                  class="p-4 rounded-4 border shadow-sm bg-white mb-4">
 
-            <h3 class="h4 mb-4">
-                Booking Form
-            </h3>
+            <h3 class="h4 mb-4">Booking Form</h3>
 
-
-            <!-- Prepared for future JavaScript errors -->
             <div id="booking-form-errors"
                  class="alert alert-danger hidden mb-3"
                  role="alert">
             </div>
 
-
-            <!-- Prepared for future JavaScript confirmation -->
             <div id="booking-confirmation"
                  class="alert alert-success hidden mb-3"
                  role="alert">
-
-                <h4 class="alert-heading">
-                    Reservation Submitted!
-                </h4>
-
+                <h4 class="alert-heading">Reservation Submitted!</h4>
                 <p class="mb-0">
                     Your reservation request has been received.
                     We will use the contact information provided
                     in the form if further information is needed.
                 </p>
-
             </div>
 
-
-            <form id="booking-form"
-                  action="booking.html"
-                  method="post">
-
+            <form id="booking-form" action="booking.html" method="post">
                 <div class="row g-4 mb-4">
 
                     <!-- PERSONAL DETAILS -->
                     <fieldset class="col-12 col-md-6 border p-3 rounded bg-light">
-
                         <legend class="float-none w-auto px-2 fs-6 fw-bold text-white bg-primary rounded">
                             Personal Contact Details
                         </legend>
 
-
                         <div class="mb-3">
-
-                            <label for="full-name"
-                                   class="form-label">
+                            <label for="full-name" class="form-label">
                                 Full Name:
                             </label>
-
                             <input type="text"
                                    class="form-control"
                                    id="full-name"
                                    name="full_name"
                                    placeholder="Your full name"
                                    required>
-
                         </div>
 
-
                         <div class="mb-3">
-
-                            <label for="customer-email"
-                                   class="form-label">
+                            <label for="customer-email" class="form-label">
                                 Email Address:
                             </label>
-
                             <input type="email"
                                    class="form-control"
                                    id="customer-email"
                                    name="customer_email"
                                    placeholder="example@mail.com"
                                    required>
-
                         </div>
 
-
                         <div class="mb-3">
-
-                            <label for="customer-phone"
-                                   class="form-label">
+                            <label for="customer-phone" class="form-label">
                                 Phone Number:
                             </label>
-
                             <input type="tel"
                                    class="form-control"
                                    id="customer-phone"
                                    name="customer_phone"
                                    placeholder="+7 747 029 00 43"
                                    required>
-
                         </div>
-
                     </fieldset>
-
 
                     <!-- RESERVATION DETAILS -->
                     <fieldset class="col-12 col-md-6 border p-3 rounded bg-light">
-
                         <legend class="float-none w-auto px-2 fs-6 fw-bold text-white bg-primary rounded">
                             Reservation Details
                         </legend>
 
-
                         <div class="row g-2 mb-3">
-
                             <div class="col-12 col-sm-4">
-
-                                <label for="guests-count"
-                                       class="form-label small">
+                                <label for="guests-count" class="form-label small">
                                     Guests:
                                 </label>
-
                                 <input type="number"
                                        class="form-control"
                                        id="guests-count"
@@ -291,91 +200,64 @@
                                        max="10"
                                        value="2"
                                        required>
-
                             </div>
 
-
                             <div class="col-12 col-sm-4">
-
-                                <label for="booking-date"
-                                       class="form-label small">
+                                <label for="booking-date" class="form-label small">
                                     Date:
                                 </label>
-
                                 <input type="date"
                                        class="form-control"
                                        id="booking-date"
                                        name="booking_date"
                                        required>
-
                             </div>
 
-
                             <div class="col-12 col-sm-4">
-
-                                <label for="booking-time"
-                                       class="form-label small">
+                                <label for="booking-time" class="form-label small">
                                     Time:
                                 </label>
-
                                 <input type="time"
                                        class="form-control"
                                        id="booking-time"
                                        name="booking_time"
                                        required>
-
                             </div>
-
                         </div>
-
 
                         <!-- VISIT TYPE -->
                         <div class="mb-3">
-
                             <label class="form-label d-block fw-bold">
                                 Visit Type:
                             </label>
 
                             <div class="form-check">
-
                                 <input class="form-check-input"
                                        type="radio"
                                        name="visit_type"
                                        id="visit-personal"
                                        value="personal"
                                        checked>
-
-                                <label class="form-check-label"
-                                       for="visit-personal">
+                                <label class="form-check-label" for="visit-personal">
                                     Personal / Study
                                 </label>
-
                             </div>
 
-
                             <div class="form-check">
-
                                 <input class="form-check-input"
                                        type="radio"
                                        name="visit_type"
                                        id="visit-business"
                                        value="business">
-
-                                <label class="form-check-label"
-                                       for="visit-business">
+                                <label class="form-check-label" for="visit-business">
                                     Business Meeting
                                 </label>
-
                             </div>
-
                         </div>
-
 
                         <!-- SEATING -->
                         <div class="mb-3">
-
-                            <label for="seating-area"
-                                   class="form-label">
+                            <label for="seating-area" class="form-label">
                                 Preferred Seating Area:
                             </label>
 
@@ -383,107 +265,66 @@
                                     id="seating-area"
                                     name="seating_area"
                                     required>
-
-                                <option value="main-hall">
-                                    Main Hall
-                                </option>
-
-                                <option value="window-side">
-                                    Window Side Table
-                                </option>
-
-                                <option value="quiet-corner">
-                                    Quiet Workspace Corner
-                                </option>
-
+                                <option value="main-hall">Main Hall</option>
+                                <option value="window-side">Window Side Table</option>
+                                <option value="quiet-corner">Quiet Workspace Corner</option>
                             </select>
-
                         </div>
-
 
                         <!-- EXTRA OPTION -->
                         <div class="form-check mb-3">
-
                             <input class="form-check-input"
                                    type="checkbox"
                                    id="vip-requested"
                                    name="vip_requested"
                                    value="yes">
-
-                            <label class="form-check-label"
-                                   for="vip-requested">
-
+                            <label class="form-check-label" for="vip-requested">
                                 Request high-speed Wi-Fi
                                 and a power socket table
-
                             </label>
-
                         </div>
-
 
                         <!-- NOTES -->
                         <div class="mb-3">
-
-                            <label for="special-requests"
-                                   class="form-label">
+                            <label for="special-requests" class="form-label">
                                 Special Requests / Notes:
                             </label>
-
                             <textarea class="form-control"
                                       id="special-requests"
                                       name="special_requests"
                                       rows="3"
                                       placeholder="Let us know if you have any special requests."></textarea>
-
                         </div>
-
                     </fieldset>
-
                 </div>
 
                 <!-- BUTTONS -->
                 <div class="d-flex flex-wrap gap-2 align-items-center">
-
                     <button type="submit"
                             class="btn btn-primary btn-lg"
                             id="booking-submit-btn">
-
                         Submit Reservation
-
                     </button>
-
 
                     <button type="reset"
                             class="btn btn-outline-secondary"
                             id="booking-reset-btn">
-
                         Reset Form
-
                     </button>
-
 
                     <a href="tel:+77470290043"
                        class="btn btn-secondary btn-sm"
                        id="booking-call-btn">
-
                         Call Instead
-
                     </a>
-
                 </div>
-
             </form>
-
         </section>
-
 
         <!-- RULES -->
         <article id="booking-rules"
                  class="p-4 rounded-4 border shadow-sm bg-white">
-
-            <h3 class="h4 mb-3">
-                Reservation Rules &amp; Guidelines
-            </h3>
+            <h3 class="h4 mb-3">Reservation Rules &amp; Guidelines</h3>
 
             <p>
                 To keep everything comfortable for all guests,
@@ -495,42 +336,27 @@
             </p>
 
             <dl class="mb-0">
-
-                <dt>
-                    Cancellation Policy
-                </dt>
-
+                <dt>Cancellation Policy</dt>
                 <dd class="mb-0">
                     Please inform us at least one hour before
                     if your plans change.
                 </dd>
-
             </dl>
-
         </article>
-
 
         <!-- BACK TO TOP -->
         <p class="text-end">
-
             <a class="btn btn-secondary btn-sm rounded-pill back-to-top"
                href="#top"
                id="back-to-top-btn">
-
                 Back to top &uarr;
-
             </a>
-
         </p>
-
     </main>
-
 
     <!-- FOOTER -->
     <footer class="bg-dark text-white text-center py-4">
-
         <div class="container">
-
             <hr class="border-secondary my-3">
 
             <p class="mb-1 text-light">
@@ -568,15 +394,19 @@
             <p class="small text-secondary mb-0">
                 &copy; 2026 Zebra Coffee. All rights reserved.
             </p>
-
         </div>
-
     </footer>
 
+    <!-- jQuery 3.7.1 full build: load before main.js and the page script. -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
 </body>
 
 </html>
