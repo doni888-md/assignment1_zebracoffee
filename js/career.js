@@ -70,10 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Finds role object from vacancies array by ID.
    * Calls:
-   * 1. Inside renderVacanciesTable()
-   * 2. Inside calculateWeeklyPay()
-   * 3. Inside validateCareerForm()
-   * 4. Inside delegated click handler
+   * 1. Inside calculateWeeklyPay()
+   * 2. Inside vacancies table delegated click handler
+   * 3. Inside form submit event listener (validation & confirmation payload)
    */
   function findRoleById(roleId) {
     return vacancies.find(role => role.id === roleId) || null;
@@ -83,9 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
    * Calculates estimated weekly earnings based on rate, hours, and night diff.
    * Condition: Shift Lead receives a +15% night/rotation shift differential.
    * Calls:
-   * 1. On hours input event (updatePayDisplay)
-   * 2. On role change event (updatePayDisplay)
-   * 3. On successful form submission (confirmation payload)
+   * 1. Inside updatePayDisplay() (triggered on hours input & role change)
+   * 2. Inside form submit handler (builds confirmation message data)
    */
   function calculateWeeklyPay(roleId, hours) {
     const role = findRoleById(roleId);
@@ -106,19 +104,27 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Counts currently open positions in vacancies array.
    * Calls:
-   * 1. Initial table rendering
-   * 2. Form reset handler
+   * 1. Inside renderVacanciesTable()
+   * 2. Inside updateOpenVacanciesBadge() (called on form reset)
    */
   function countOpenVacancies(list) {
     return list.filter(item => item.isOpen).length;
   }
 
+  function updateOpenVacanciesBadge() {
+    if (openCountBadge) {
+      const openCount = countOpenVacancies(vacancies);
+      openCountBadge.textContent = `Open roles: ${openCount} of ${vacancies.length}`;
+    }
+  }
+
   /**
    * Formats numbers into KZT currency string.
    * Calls:
-   * 1. Vacancies table rendering
-   * 2. Weekly pay live display
-   * 3. Form submission confirmation card
+   * 1. Inside renderVacanciesTable() (hourly rates)
+   * 2. Inside populateRoleSelect() (option labels)
+   * 3. Inside updatePayDisplay() (live calculation)
+   * 4. Inside form submit handler (confirmation card)
    */
   function formatKzt(amount) {
     return `${Number(amount).toLocaleString('en-US')} ₸`;
@@ -128,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Returns today's date formatted as YYYY-MM-DD.
    * Calls:
    * 1. Sets min attribute for startDate input
-   * 2. Date input validation check
+   * 2. Inside isFutureOrTodayDate()
    */
   function todayAsInputValue() {
     const now = new Date();
@@ -140,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Formats YYYY-MM-DD into a human-readable string.
    * Calls:
-   * 1. Confirmation message creation
+   * 1. Inside form submit handler (confirmation card)
    */
   function formatDate(dateString) {
     const [year, month, day] = dateString.split('-').map(Number);
@@ -186,11 +192,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const payPreviewWrapper = document.createElement('div');
   payPreviewWrapper.className = 'mt-2 p-2 bg-white border rounded small text-secondary';
-  payPreviewWrapper.innerHTML = 'Estimated weekly earnings: <strong class="text-dark" id="weekly-pay-display">—</strong>';
+
+  const payPreviewLabel = document.createTextNode('Estimated weekly earnings: ');
+  const weeklyPayDisplay = document.createElement('strong');
+  weeklyPayDisplay.className = 'text-dark';
+  weeklyPayDisplay.id = 'weekly-pay-display';
+  weeklyPayDisplay.textContent = '—';
+
+  payPreviewWrapper.append(payPreviewLabel, weeklyPayDisplay);
   if (fields.hours) {
     fields.hours.parentElement.appendChild(payPreviewWrapper);
   }
-  const weeklyPayDisplay = document.getElementById('weekly-pay-display');
 
   function updatePayDisplay() {
     if (!weeklyPayDisplay || !fields.hours || !fields.role) return;
@@ -263,11 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
       vacanciesTbody.appendChild(tr);
     });
 
-    if (openCountBadge) {
-      const openCount = countOpenVacancies(vacancies);
-      openCountBadge.textContent = `Open roles: ${openCount} of ${vacancies.length}`;
-    }
-
+    updateOpenVacanciesBadge();
     populateRoleSelect();
   }
 
@@ -334,13 +342,11 @@ document.addEventListener('DOMContentLoaded', () => {
         field.parentElement.appendChild(feedback);
       }
       feedback.textContent = errorMsg;
-      feedback.style.display = 'block';
     } else {
       field.classList.remove('is-invalid');
       field.classList.add('is-valid');
       if (feedback) {
         feedback.textContent = '';
-        feedback.style.display = 'none';
       }
     }
   }
@@ -351,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const feedback = input.parentElement.querySelector('.invalid-feedback');
       if (feedback) {
         feedback.textContent = '';
-        feedback.style.display = 'none';
       }
     });
   }
@@ -387,7 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const feedback = target.parentElement.querySelector('.invalid-feedback');
       if (feedback) {
         feedback.textContent = '';
-        feedback.style.display = 'none';
       }
     }
   });
@@ -395,7 +399,6 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('reset', () => {
     if (confirmationAlert) {
       confirmationAlert.classList.add('hidden');
-      confirmationAlert.style.setProperty('display', 'none', 'important');
     }
     clearFormStatus();
     charCounter.textContent = 'Characters: 0 / 300';
@@ -405,6 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       populateRoleSelect();
       updatePayDisplay();
+      updateOpenVacanciesBadge();
     }, 0);
   });
 
@@ -450,8 +454,13 @@ document.addEventListener('DOMContentLoaded', () => {
       setFieldStatus(fields.hours, true);
     }
 
+    // Date validation: separate check for empty input vs past date
     const dateVal = fields.startDate.value;
-    if (!isFutureOrTodayDate(dateVal)) {
+    if (!dateVal) {
+      setFieldStatus(fields.startDate, false, 'Please choose a start date.');
+      isFormValid = false;
+      if (!firstInvalid) firstInvalid = fields.startDate;
+    } else if (!isFutureOrTodayDate(dateVal)) {
       setFieldStatus(fields.startDate, false, 'Start date cannot be in the past.');
       isFormValid = false;
       if (!firstInvalid) firstInvalid = fields.startDate;
@@ -483,11 +492,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!fields.terms.checked) {
-      setFieldStatus(fields.terms, false, 'You must confirm that your details are accurate.');
+      fields.terms.classList.add('is-invalid');
       isFormValid = false;
       if (!firstInvalid) firstInvalid = fields.terms;
     } else {
-      setFieldStatus(fields.terms, true);
+      fields.terms.classList.remove('is-invalid');
     }
 
     if (!isFormValid) {
@@ -498,11 +507,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Success: Generate and display confirmation card
+    // Success: Generate confirmation card safely via DOM API (no innerHTML with user input)
     const demoAppId = generateApplicationId();
     const roleTitle = chosenRole ? chosenRole.title : fields.role.value;
     const estPay = calculateWeeklyPay(fields.role.value, hoursVal);
-
+    
+    form.reset();
+    clearFormStatus();
+    
     if (confirmationAlert) {
       confirmationAlert.replaceChildren();
 
@@ -523,46 +535,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const greeting = document.createElement('p');
       greeting.className = 'fs-6 mb-2';
-      greeting.textContent = 'Thank you, ';
+
       const strongName = document.createElement('strong');
       strongName.textContent = nameVal;
+
       const idMark = document.createElement('mark');
       idMark.className = 'fw-bold px-2 py-1 rounded bg-white shadow-sm';
       idMark.textContent = demoAppId;
-      greeting.append(strongName, '! Your application ID is: ', idMark, '.');
+
+      greeting.append('Thank you, ', strongName, '! Your application ID is: ', idMark, '.');
 
       const detailsBox = document.createElement('div');
       detailsBox.className = 'p-3 bg-white rounded-3 border mb-3';
 
       const pRole = document.createElement('p');
       pRole.className = 'mb-1';
-      pRole.innerHTML = `<strong>Selected Position:</strong> ${roleTitle}`;
+      const roleLabel = document.createElement('strong');
+      roleLabel.textContent = 'Selected Position: ';
+      pRole.append(roleLabel, roleTitle);
 
       const pHours = document.createElement('p');
       pHours.className = 'mb-1';
-      pHours.innerHTML = `<strong>Commitment:</strong> ${hoursVal} hours/week (Est. Pay: ${formatKzt(estPay)})`;
+      const hoursLabel = document.createElement('strong');
+      hoursLabel.textContent = 'Commitment: ';
+      pHours.append(hoursLabel, `${hoursVal} hours/week (Est. Pay: ${formatKzt(estPay)})`);
 
       const pDate = document.createElement('p');
       pDate.className = 'mb-0';
-      pDate.innerHTML = `<strong>Earliest Start:</strong> ${formatDate(dateVal)}`;
+      const dateLabel = document.createElement('strong');
+      dateLabel.textContent = 'Earliest Start: ';
+      pDate.append(dateLabel, formatDate(dateVal));
 
       detailsBox.append(pRole, pHours, pDate);
 
       const note = document.createElement('p');
       note.className = 'small text-secondary mb-0';
-      note.innerHTML = `Our barista team manager will reach out via <strong>${phoneVal}</strong> within 3 business days.`;
+      const pPhone = document.createElement('strong');
+      pPhone.textContent = phoneVal;
+      note.append('Our barista team manager will reach out via ', pPhone, ' within 3 business days.');
 
       confirmationAlert.append(topRow, greeting, detailsBox, note);
-
-      // Force block visibility
       confirmationAlert.classList.remove('hidden');
-      confirmationAlert.style.setProperty('display', 'block', 'important');
-
       confirmationAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    form.reset();
-    clearFormStatus();
     if (charCounter) {
       charCounter.textContent = 'Characters: 0 / 300';
     }
@@ -573,7 +589,6 @@ document.addEventListener('DOMContentLoaded', () => {
     confirmationAlert.addEventListener('click', event => {
       if (event.target.closest('#close-confirmation-btn')) {
         confirmationAlert.classList.add('hidden');
-        confirmationAlert.style.setProperty('display', 'none', 'important');
       }
     });
   }
