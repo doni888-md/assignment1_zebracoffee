@@ -41,6 +41,7 @@ $(function () {
     // Selector by id
     const $tbody = $('#menu-table-body');
     if ($tbody.length === 0) return; // not the menu page
+    const $form = $('#order-form');
 
     $tbody.empty();
 
@@ -268,6 +269,10 @@ $(function () {
         });
 
         $('#order-total').text(grandTotal);
+        if (orderItems.length > 0) {
+            $('#order-form-errors').addClass('hidden d-none').text('');
+        }
+        $('#order-confirmation-message').addClass('hidden d-none');
     }
 
     // Delegated: the remove buttons are re-created on every redraw of the list.
@@ -275,13 +280,98 @@ $(function () {
         orderItems.splice(parseInt($(this).attr('data-index'), 10), 1);
         updateOrderUI();
     });
+        // ------------------------------------------------------------------
+    // FORM VALIDATION: #order-form
+    // ------------------------------------------------------------------
+    const PHONE_PATTERN = /^(\+7|8)\d{10}$/;
 
-    $('#order-reset-btn').on('click', function () {
+    // Switch off the browser's own validation so OUR messages are shown.
+    $form.attr('novalidate', 'novalidate');
+
+    function showFieldError($field, message) {
+        clearFieldError($field);
+        $field.addClass('is-invalid');
+        $('<div>', { 'class': 'invalid-feedback' }).text(message).insertAfter($field);
+    }
+
+    function clearFieldError($field) {
+        $field.removeClass('is-invalid').next('.invalid-feedback').remove();
+    }
+
+    function isPhoneValid(phone) {
+        return PHONE_PATTERN.test(phone.replace(/[\s\-()]/g, ''));
+    }
+
+    // The error disappears as soon as the visitor starts fixing the field.
+    $form.on('input change', 'input, select', function () {
+        clearFieldError($(this));
+        $('#order-form-errors').addClass('hidden d-none').text('');
+    });
+
+    $form.on('submit', function (event) {
+        event.preventDefault();
+
+        const $name  = $('#order-name');
+        const $phone = $('#order-phone');
+        const $time  = $('#order-time');
+
+        const name  = $.trim($name.val());
+        const phone = $.trim($phone.val());
+        const time  = $time.val();
+
+        let hasErrors = false;
+
+        clearFieldError($name);
+        clearFieldError($phone);
+        clearFieldError($time);
+        $('#order-confirmation-message').addClass('hidden d-none');
+
+        if (name === '') {
+            showFieldError($name, 'Please enter your name.');
+            hasErrors = true;
+        }
+
+        if (phone === '') {
+            showFieldError($phone, 'Please enter your phone number.');
+            hasErrors = true;
+        } else if (!isPhoneValid(phone)) {
+            showFieldError($phone, 'Phone format: +7 700 000 00 00.');
+            hasErrors = true;
+        }
+
+        if (time === '') {
+            showFieldError($time, 'Please choose the pickup time.');
+            hasErrors = true;
+        }
+
+        if (orderItems.length === 0) {
+            $('#order-form-errors').text('Your order is empty.').removeClass('hidden d-none');
+            hasErrors = true;
+        } else {
+            $('#order-form-errors').addClass('hidden d-none').text('');
+        }
+
+        if (hasErrors) return;
+
+        $('#order-confirm-name').text(name);
+        $('#order-confirm-total').text($('#order-total').text() + ' ₸');
+        $('#order-confirm-time').text(time);
+
+        $('#order-confirmation-message')
+            .removeClass('hidden d-none')
+            .hide()
+            .fadeIn(300);
+    });
+
+        $('#order-reset-btn').on('click', function () {
         orderItems = [];
         updateOrderUI();
         // put the place buttons back to "Here": attribute selector + :not() filter
         $tbody.find('.place-btn[data-place="Here"]:not(.selected)').trigger('click');
         $('#order-confirmation-message').addClass('hidden d-none');
+        // new: clear the form errors
+        $form.find('.is-invalid').removeClass('is-invalid').next('.invalid-feedback').remove();
+        $('#order-form-errors').addClass('hidden d-none').text('');
     });
 
     updateOrderUI();
