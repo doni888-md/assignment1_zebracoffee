@@ -584,9 +584,6 @@ document.addEventListener('DOMContentLoaded', () => {
       confirmationAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    if (charCounter) {
-      charCounter.textContent = 'Characters: 0 / 300';
-    }
     updatePayDisplay();
   });
 

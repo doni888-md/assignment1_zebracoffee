@@ -121,5 +121,47 @@ $(function () {
             .fadeIn(200);
         });
     });
+      // ===== Night Owls: live status (is the night offer active right now?) =====
+  const NIGHT_START = 0;   // 00:00
+  const NIGHT_END = 6;     // 06:00
+
+  // Returns how many minutes are left until the given hour (today or tomorrow).
+  function minutesUntil(hour, now) {
+    const target = new Date(now);
+    target.setHours(hour, 0, 0, 0);
+    if (target <= now) {
+      target.setDate(target.getDate() + 1);
+    }
+    return Math.ceil((target - now) / 60000);
+  }
+
+  // 125 -> "2 h 5 min", 40 -> "40 min"
+  function formatDuration(totalMinutes) {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return hours > 0 ? `${hours} h ${minutes} min` : `${minutes} min`;
+  }
+
+  const $nightAlert = $('#student-promo-alert');
+  const $nightStatus = $('<div>').addClass('small fw-semibold mt-1').hide();
+  $nightAlert.children('div').first().append($nightStatus);
+
+  function updateNightStatus() {
+    const now = new Date();
+    const hour = now.getHours();
+    const isNight = hour >= NIGHT_START && hour < NIGHT_END;
+
+    if (isNight) {
+      $nightStatus.text(`Active now: ends in ${formatDuration(minutesUntil(NIGHT_END, now))}.`);
+      $nightAlert.removeClass('bg-zebra').addClass('bg-dark');
+    } else {
+      $nightStatus.text(`Starts in ${formatDuration(minutesUntil(NIGHT_START, now))} (at 00:00).`);
+      $nightAlert.removeClass('bg-dark').addClass('bg-zebra');
+    }
+  }
+
+  updateNightStatus();
+  $nightStatus.fadeIn(400);
+  setInterval(updateNightStatus, 60000); // refresh once a minute
   }
 });

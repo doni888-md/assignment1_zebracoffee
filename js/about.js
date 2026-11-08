@@ -64,14 +64,18 @@ const coffeeStandardsData = [
 function renderStandardsTable(items, $tbody) {
   $tbody.empty();
 
-  if (items.length === 0) {
-    const $emptyRow = $('<tr>').append(
-      $('<td>')
-        .attr('colspan', 3)
-        .addClass('text-center text-muted py-4')
-        .html('🔍 <em>No matching operational benchmarks found.</em>')
-    );
-    $tbody.append($emptyRow);
+    if (items.length === 0) {
+    const $emptyCell = $('<td>')
+      .attr('colspan', 3)
+      .addClass('text-center text-muted py-4')
+      .append(
+        $('<p>').addClass('mb-2').html('<em>No matching operational benchmarks found.</em>'),
+        $('<button>')
+          .attr('type', 'button')
+          .addClass('btn btn-sm btn-dark rounded-pill px-3 empty-reset-btn')
+          .text('Show all standards')
+      );
+    $tbody.append($('<tr>').append($emptyCell));
     return;
   }
 
@@ -136,11 +140,11 @@ $(function () {
       <div class="col-12 col-md-7">
         <label class="form-label small fw-bold text-secondary mb-1 d-block">Quick Filter by Category:</label>
         <div class="d-flex flex-wrap gap-2" role="group" id="benchmark-filter-buttons">
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-dark active filter-btn" data-cat="all">All</button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="quality">Quality</button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="speed">Speed</button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hospitality">Hospitality</button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hygiene">Hygiene</button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-dark active filter-btn" data-cat="all">All<span class="filter-count"></button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="quality">Quality<span class="filter-count"></button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="speed">Speed<span class="filter-count"></button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hospitality">Hospitality<span class="filter-count"></button>
+          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hygiene">Hygiene<span class="filter-count"></button>
         </div>
       </div>
     </div>
@@ -155,15 +159,36 @@ $(function () {
   const $counter = $('#benchmark-counter');
   let currentCategory = 'all';
 
+    // true if the search text is found in the name, the target or the detail of a standard
+  function matchesSearch(item, q) {
+    return item.standard.toLowerCase().indexOf(q) !== -1 ||
+           item.target.toLowerCase().indexOf(q) !== -1 ||
+           item.detail.toLowerCase().indexOf(q) !== -1;
+  }
+
+  // how many standards of this category match the current search ('all' = every category)
+  function countMatches(category, q) {
+    return $.grep(coffeeStandardsData, function (item) {
+      return matchesSearch(item, q) && (category === 'all' || item.category === category);
+    }).length;
+  }
+
+  // writes "(2)" into every filter button; a category with 0 results is dimmed
+  function updateFilterCounts(q) {
+    $filterButtons.each(function () {
+      const count = countMatches($(this).attr('data-cat'), q);
+      $(this)
+        .toggleClass('opacity-50', count === 0)
+        .find('.filter-count').text(`(${count})`);
+    });
+  }
+
   function applyFilter() {
     const q = $searchInput.val().trim().toLowerCase();
 
     const filtered = $.grep(coffeeStandardsData, function (item) {
-      const matchText = item.standard.toLowerCase().indexOf(q) !== -1 || 
-                        item.target.toLowerCase().indexOf(q) !== -1 ||
-                        item.detail.toLowerCase().indexOf(q) !== -1;
       const matchCat = (currentCategory === 'all') || (item.category === currentCategory);
-      return matchText && matchCat;
+      return matchesSearch(item, q) && matchCat;
     });
 
     $tableBody.fadeOut(120, function () {
@@ -172,6 +197,13 @@ $(function () {
     });
 
     $counter.text(`Showing ${filtered.length} of ${coffeeStandardsData.length} standards`);
+    updateFilterCounts(q);
+  }
+
+  // clears the search and goes back to "All"
+  function resetFilters() {
+    $searchInput.val('');
+    $filterButtons.filter('[data-cat="all"]').trigger('click');
   }
 
   $searchInput.on('input', applyFilter);
@@ -183,12 +215,13 @@ $(function () {
     applyFilter();
   });
 
-  $('#benchmark-reset-all').on('click', function () {
-    $searchInput.val('');
-    $filterButtons.filter('[data-cat="all"]').trigger('click');
-  });
+  $('#benchmark-reset-all').on('click', resetFilters);
+
+  // delegated: the "Show all standards" button is created only when nothing is found
+  $tableBody.on('click', '.empty-reset-btn', resetFilters);
 
   renderStandardsTable(coffeeStandardsData, $tableBody);
+  updateFilterCounts('');
 
   $tableBody.on('click', '.benchmark-row', function () {
     const $clickedRow = $(this);
