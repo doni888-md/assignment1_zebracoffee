@@ -517,7 +517,7 @@ $(function () {
             .empty()
             .append(buildSummary(review, values, generateReference()))
             .append(makeEl('p', 'mb-0 mt-3 small fw-semibold',
-                'Demonstration only: no data was sent to a server, and the reference number is temporary. Your review is shown only on this page until it is reloaded.'));
+                ' '));
         showBox($confirmationBox);
     }
 
@@ -590,4 +590,5 @@ $(function () {
     });
 
     renderReviews();
+    
 });
