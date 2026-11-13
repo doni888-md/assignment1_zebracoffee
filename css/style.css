@@ -1,0 +1,208 @@
+/* =========================================================
+   Zebra Coffee — shared styles (every page uses this file)
+   Page-specific styles live in css/<page>.css
+   ========================================================= */
+
+/* ---------- 1. Colors and fonts in one place ---------- */
+:root {
+  --zebra-cream: #F8F5EE;      /* page background */
+  --zebra-black: #141414;      /* text, borders, dark sections */
+  --zebra-teal: #00A99D;       /* main accent (buttons, highlights) */
+  --zebra-teal-dark: #00756C;  /* teal for text (better contrast) */
+  --zebra-teal-light: #E3F7F5; /* soft teal backgrounds */
+  --zebra-yellow: #FFD23F;     /* small accents: badges, stickers */
+  --zebra-grey: #555555;       /* secondary text */
+  --zebra-line: #E2DED5;       /* thin dividers */
+  --zebra-error: #B42318;      /* form errors */
+  --zebra-ok: #1F9D55;         /* valid fields, "open now" dot */
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Make Bootstrap use our colors */
+  --bs-body-bg: var(--zebra-cream);
+  --bs-body-color: var(--zebra-black);
+  --bs-body-font-family: var(--font-body);
+  --bs-link-color: var(--zebra-black);
+  --bs-link-hover-color: var(--zebra-teal-dark);
+  --bs-form-invalid-color: var(--zebra-error);
+  --bs-form-invalid-border-color: var(--zebra-error);
+  --bs-form-valid-border-color: var(--zebra-ok);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--zebra-cream); color: var(--zebra-black); font-family: var(--font-body); }
+main { overflow-x: clip; } /* decorations (stripes, stickers) never cause sideways scrolling */
+a { color: var(--zebra-black); }
+a:hover { color: var(--zebra-teal-dark); }
+
+/* ---------- 2. Typography helpers ---------- */
+.font-display { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; }
+.font-serif-italic { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+.font-mono { font-family: var(--font-mono); }
+.text-teal { color: var(--zebra-teal-dark); }
+.text-muted-zebra { color: var(--zebra-grey); }
+
+.page-title { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 0.95; font-size: clamp(2.8rem, 6vw, 5rem); }
+.section-title { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; font-size: clamp(2rem, 4vw, 3rem); }
+.eyebrow { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ---------- 3. Header and navigation ---------- */
+.site-header { background: #fff; }
+.brand-link { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--zebra-black); }
+.brand-link:hover { color: var(--zebra-black); }
+.brand-logo { width: 52px; height: 52px; object-fit: contain; background: var(--zebra-black); border-radius: 50%; padding: 6px; } /* the logo is white, so it sits on a black circle */
+.brand-name { font-family: var(--font-display); font-weight: 800; font-size: 2.1rem; letter-spacing: 0.05em; }
+
+.site-nav {
+  position: sticky; top: 0; z-index: 1030;
+  background: #fff;
+  border-top: 1px solid var(--zebra-line);
+  border-bottom: 2px solid var(--zebra-black);
+}
+.site-nav .nav-link {
+  color: var(--zebra-black);
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.site-nav .nav-link:hover { background: var(--zebra-teal-light); color: var(--zebra-black); }
+.site-nav .nav-link.active { background: var(--zebra-black); color: #fff; }
+
+.cart-link { border: 2px solid var(--zebra-black); display: inline-flex; align-items: center; gap: 8px; }
+.cart-badge {
+  background: var(--zebra-yellow); color: var(--zebra-black);
+  border-radius: 999px; min-width: 22px; height: 22px; padding: 0 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+}
+.cart-badge.bump { animation: bump 0.4s ease; }
+@keyframes bump { 50% { transform: scale(1.35); } }
+
+/* ---------- 4. Buttons ---------- */
+.btn-zebra, .btn-zebra-outline, .btn-zebra-teal {
+  border-radius: 999px; font-weight: 700; padding: 12px 24px;
+  border: 2px solid var(--zebra-black); min-height: 48px;
+}
+.btn-zebra { background: var(--zebra-black); color: #fff; }
+.btn-zebra:hover, .btn-zebra:focus { background: #333; color: #fff; border-color: var(--zebra-black); }
+.btn-zebra-outline { background: #fff; color: var(--zebra-black); }
+.btn-zebra-outline:hover, .btn-zebra-outline:focus { background: var(--zebra-teal-light); color: var(--zebra-black); border-color: var(--zebra-black); }
+.btn-zebra-teal { background: var(--zebra-teal); color: var(--zebra-black); }
+.btn-zebra-teal:hover, .btn-zebra-teal:focus { background: #1BBFB3; color: var(--zebra-black); border-color: var(--zebra-black); }
+
+/* round "+" button on product cards */
+.btn-plus {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid var(--zebra-black); background: var(--zebra-teal); color: var(--zebra-black);
+  font-size: 1.5rem; font-weight: 700; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.btn-plus:hover { background: #1BBFB3; }
+
+/* pill buttons used as filters / choices */
+.pill-btn {
+  min-height: 44px; padding: 8px 18px; border-radius: 999px;
+  border: 2px solid var(--zebra-black); background: #fff; color: var(--zebra-black);
+  font-weight: 600;
+}
+.pill-btn.active { background: var(--zebra-black); color: #fff; }
+
+/* ---------- 5. Cards ---------- */
+.zebra-card {
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 24px;
+  overflow: hidden; height: 100%;
+}
+.hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.hover-lift:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 var(--zebra-black); }
+.card-photo { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-bottom: 2px solid var(--zebra-black); }
+.tag {
+  display: inline-block; font-size: 0.75rem; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px; border: 2px solid var(--zebra-black); background: #fff;
+}
+.tag-yellow { background: var(--zebra-yellow); }
+.tag-teal { background: #7FD6CF; }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 999px;
+  padding: 6px 14px; font-weight: 600; font-size: 0.9rem;
+}
+.status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--zebra-ok); }
+
+/* ---------- 6. Forms (errors are red, valid fields green) ---------- */
+.zebra-form {
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 28px; padding: 32px;
+}
+.zebra-form .form-label { font-weight: 600; font-size: 0.9rem; }
+.zebra-form .form-control,
+.zebra-form .form-select {
+  border: 2px solid var(--zebra-black); border-radius: 14px; min-height: 48px;
+}
+.zebra-form .form-control:focus,
+.zebra-form .form-select:focus { border-color: var(--zebra-teal); box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.25); }
+.zebra-form .form-control.is-invalid,
+.zebra-form .form-select.is-invalid { border-color: var(--zebra-error); }
+.zebra-form .form-control.is-valid,
+.zebra-form .form-select.is-valid { border-color: var(--zebra-ok); }
+.zebra-form .invalid-feedback { color: var(--zebra-error); font-weight: 500; }
+.form-check-input:checked { background-color: var(--zebra-teal); border-color: var(--zebra-teal); }
+.form-check-input.is-invalid ~ .form-check-label { color: var(--zebra-error); }
+.form-alert {
+  background: #FDECEA; border: 2px solid var(--zebra-error); color: #7A1A12;
+  border-radius: 14px; padding: 12px 16px; font-weight: 600;
+}
+.char-count { font-size: 0.8rem; color: var(--zebra-grey); }
+
+/* ---------- 7. Success modal (shared for all forms) ---------- */
+.success-modal .modal-content {
+  border: 2px solid var(--zebra-black); border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--zebra-teal); text-align: center; padding: 12px;
+}
+.success-icon {
+  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto;
+  background: var(--zebra-teal); border: 2px solid var(--zebra-black);
+  display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700;
+}
+.success-number { font-family: var(--font-mono); font-size: 1.8rem; font-weight: 700; }
+.success-lines { background: var(--zebra-cream); border-radius: 16px; padding: 12px 16px; text-align: left; }
+.success-lines div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.9rem; padding: 3px 0; }
+
+/* ---------- 8. Toast ("added to cart") ---------- */
+.zebra-toast { background: var(--zebra-black); color: #fff; border-radius: 18px; box-shadow: 6px 6px 0 var(--zebra-teal); }
+.zebra-toast a { color: var(--zebra-yellow); font-weight: 700; }
+
+/* ---------- 9. Back to top button (fixed, bottom right) ---------- */
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 1040;
+  background: var(--zebra-teal); color: var(--zebra-black);
+  border: 2px solid var(--zebra-black); border-radius: 999px;
+  padding: 12px 20px; font-weight: 700; text-decoration: none;
+  box-shadow: 4px 4px 0 var(--zebra-black);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+.back-to-top.show { opacity: 1; visibility: visible; transform: none; }
+.back-to-top:hover { color: var(--zebra-black); background: #1BBFB3; }
+
+/* ---------- 10. Footer ---------- */
+.site-footer { background: var(--zebra-black); color: #D6D6D6; }
+.site-footer a { color: #fff; }
+.site-footer a:hover { color: var(--zebra-yellow); }
+.footer-copy { color: #9A9A9A; font-size: 0.85rem; }
+
+/* ---------- 11. Accessibility: less motion if the user asks ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- 12. Small screens ---------- */
+@media (max-width: 575px) {
+  .brand-name { font-size: 1.5rem; }
+  .brand-logo { width: 40px; height: 40px; }
+  .zebra-form { padding: 20px; }
+  .back-to-top { right: 12px; bottom: 12px; padding: 10px 14px; }
+}

@@ -1,0 +1,157 @@
+/* =========================================================
+   dana.css — Dana's pages: Menu, Reviews, Cart
+   (shared things — header, buttons, forms — are in style.css)
+   ========================================================= */
+
+/* #########################################################
+   MENU PAGE (menu.html)
+   ######################################################### */
+
+.menu-search { flex: 0 1 340px; }
+.menu-search .form-control { border: 2px solid var(--zebra-black); border-radius: 999px; min-height: 48px; padding: 10px 18px; }
+.menu-search .form-control:focus { border-color: var(--zebra-teal); box-shadow: 0 0 0 0.2rem rgba(0, 169, 157, 0.25); }
+.pill-count { opacity: 0.7; }
+
+/* product card */
+.menu-card { display: flex; flex-direction: column; }
+.menu-card .photo-btn { padding: 0; border: 0; background: none; position: relative; display: block; width: 100%; }
+.menu-card .temp-tag { position: absolute; top: 12px; right: 12px; }
+.menu-card .badge-tag { position: absolute; top: 12px; left: 12px; }
+
+/* empty search result */
+.empty-state {
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 28px; overflow: hidden;
+  display: flex; flex-wrap: wrap;
+}
+.empty-state.d-none { display: none !important; }
+.empty-stripes {
+  flex: 0 0 160px; min-height: 160px;
+  background: repeating-linear-gradient(-45deg, var(--zebra-black) 0 14px, var(--zebra-cream) 14px 28px);
+}
+
+/* drink window */
+.drink-modal { border: 2px solid var(--zebra-black); border-radius: 28px; overflow: hidden; box-shadow: 10px 10px 0 var(--zebra-black); }
+.drink-image { width: 100%; height: 100%; min-height: 280px; max-height: 520px; object-fit: cover; display: block; }
+
+.option-btn {
+  min-height: 44px; min-width: 88px; padding: 8px 14px;
+  border: 2px solid var(--zebra-black); border-radius: 14px; background: #fff; color: var(--zebra-black);
+  text-align: center; line-height: 1.2;
+}
+.option-btn small { display: block; font-size: 0.8rem; }
+.option-btn.active { background: var(--zebra-teal); }
+.option-select { border: 2px solid var(--zebra-black); border-radius: 14px; min-height: 48px; }
+
+/* − 1 + buttons: used in the drink window AND in the cart */
+.qty-box { display: inline-flex; align-items: center; border: 2px solid var(--zebra-black); border-radius: 999px; }
+.qty-box button { width: 44px; height: 44px; border: 0; background: transparent; font-size: 1.4rem; font-weight: 700; }
+.qty-box span { min-width: 28px; text-align: center; font-weight: 700; font-size: 1.1rem; }
+
+/* #########################################################
+   REVIEWS PAGE (reviews.html)
+   ######################################################### */
+
+.summary-box {
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 28px; padding: 28px;
+  display: flex; flex-wrap: wrap; gap: 28px; align-items: center; height: 100%;
+}
+.summary-avg { font-size: 4.5rem; line-height: 1; }
+.summary-stars { font-size: 1.4rem; letter-spacing: 2px; }
+
+.rating-bar-row { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+.rating-bar-row .label { width: 30px; font-weight: 600; }
+.rating-bar-row .count { width: 20px; text-align: right; }
+.rating-bar {
+  flex: 1; height: 12px; border: 2px solid var(--zebra-black); border-radius: 999px;
+  overflow: hidden; background: var(--zebra-cream);
+}
+.rating-bar-fill { height: 100%; background: var(--zebra-teal); transition: width 0.4s ease; }
+
+.sort-select { border: 2px solid var(--zebra-black); border-radius: 999px; min-height: 44px; width: auto; }
+
+.review-card {
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 24px; padding: 24px;
+  height: 100%; display: flex; flex-direction: column; gap: 12px;
+}
+.review-card.is-new { border-color: var(--zebra-teal); box-shadow: 6px 6px 0 var(--zebra-teal); }
+.avatar {
+  width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--zebra-black);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 800; flex: 0 0 44px;
+}
+.avatar-0 { background: var(--zebra-teal-light); }
+.avatar-1 { background: var(--zebra-yellow); }
+.avatar-2 { background: #fff; }
+.review-stars { white-space: nowrap; letter-spacing: 1px; }
+.recommend-tag { align-self: flex-start; font-size: 0.8rem; font-weight: 600; background: var(--zebra-teal-light); border-radius: 999px; padding: 4px 10px; }
+
+/* star rating in the form */
+.star-btn {
+  width: 44px; height: 44px; border-radius: 12px; border: 2px solid var(--zebra-black);
+  background: #fff; font-size: 1.3rem; line-height: 1;
+}
+.star-btn.on { background: var(--zebra-yellow); }
+#rating-group.is-invalid .star-btn { border-color: var(--zebra-error); }
+fieldset { border: 0; margin: 0; padding: 0; }
+
+/* #########################################################
+   CART PAGE (cart.html)
+   ######################################################### */
+
+.cart-empty {
+  background: #fff; border: 2px solid var(--zebra-black); border-radius: 28px; padding: 48px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+}
+.cart-empty.d-none { display: none !important; }
+
+.cart-lines, .cart-box { background: #fff; border: 2px solid var(--zebra-black); border-radius: 24px; padding: 8px 24px; }
+.cart-box { padding: 24px; }
+
+.cart-line { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--zebra-line); }
+.cart-line:last-child { border-bottom: 0; }
+.cart-line img { width: 84px; height: 84px; object-fit: cover; border-radius: 16px; border: 2px solid var(--zebra-black); }
+.cart-line .line-info { flex: 1 1 180px; min-width: 0; }
+.cart-line .line-sum { min-width: 90px; text-align: right; font-weight: 700; }
+
+/* .qty-box (− 1 +) is described in the MENU part above */
+.btn-remove {
+  width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--zebra-black); background: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.btn-remove:hover { background: #FDECEA; }
+
+.zebra-progress { height: 18px; border: 2px solid var(--zebra-black); border-radius: 999px; background: var(--zebra-cream); }
+.zebra-progress .progress-bar { background: var(--zebra-teal); transition: width 0.4s ease; }
+
+/* dark summary on the right */
+.summary-card {
+  position: sticky; top: 90px;
+  background: var(--zebra-black); color: #fff; border-radius: 24px; padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.discount-row { color: #9A9A9A; }
+.discount-row.is-on { color: #7FE3DA; }
+.summary-total { border-top: 1px dashed #777; padding-top: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+#sum-total { font-size: 2rem; color: var(--zebra-yellow); }
+.promo-input { background: #262626; color: #fff; border: 2px solid #fff; border-radius: 14px; text-transform: uppercase; min-height: 44px; }
+.promo-input:focus { background: #262626; color: #fff; border-color: var(--zebra-teal); box-shadow: none; }
+.promo-input::placeholder { color: #9A9A9A; }
+.promo-input.is-invalid { border-color: #FF9C8F; }
+.btn-promo { background: var(--zebra-yellow); color: var(--zebra-black); border: 2px solid var(--zebra-yellow); border-radius: 14px; font-weight: 700; }
+.btn-promo:hover { background: #FFE07A; }
+.promo-message.ok { color: #7FE3DA; }
+.promo-message.error { color: #FF9C8F; }
+.promo-note { color: #BDBDBD; }
+
+/* receipt */
+.receipt { background: #fff; padding: 32px 30px 24px; max-width: 420px; margin: 0 auto; box-shadow: 8px 8px 0 var(--zebra-black); }
+.receipt-row { display: flex; justify-content: space-between; gap: 12px; font-size: 0.9rem; padding: 3px 0; }
+.receipt-line { border-top: 2px dashed var(--zebra-black); opacity: 1; margin: 12px 0; }
+.receipt-edge {
+  max-width: 420px; height: 14px; margin: 0 auto;
+  background: radial-gradient(circle at 10px 0, var(--zebra-cream) 9px, #fff 10px) 0 0 / 20px 14px repeat-x;
+}
+
+@media (max-width: 991px) {
+  .summary-card { position: static; }
+}
