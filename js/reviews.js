@@ -7,7 +7,7 @@
    ========================================================= */
 
 $(function () {
-    const VISIBLE_LIMIT = 6;
+  const VISIBLE_LIMIT = 6;
 
   // Reviews written on this page. A normal array lives only in memory,
   // so after a page reload it is empty again and only the 10 starter reviews stay.
@@ -29,7 +29,7 @@ $(function () {
     { name: 'Alina', rating: 5, drink: 'dessert', recommend: true, createdAt: '2026-10-15', text: 'Warm Cinnabon with an Ice Latte with mango syrup is my new weekend habit. Clean tables, soft music and a really friendly team.' }
   ];
 
-    function allReviews() {
+  function allReviews() {
     return newReviews.concat(starterReviews);   // new ones first
   }
 

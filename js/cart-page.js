@@ -1,8 +1,8 @@
 /* =========================================================
    cart-page.js — Cart page (jQuery)
    1. Lines from localStorage (cart.js): +/−, remove
-   2. Totals: progress to 10% (from 5 000 ₸), promo code,
-      only the BIGGER discount is used (they don't add up)
+   2. Totals: promo code = −% on the drink of the day,
+        then −10% on the whole order from 5 000 ₸ (both can work)
    3. Pickup time options (from 15 minutes ahead)
    4. Pickup form validation -> success window -> receipt
    ========================================================= */
@@ -10,7 +10,6 @@
 $(function () {
   const BIG_ORDER = 5000;      // from this sum you get 10%
   const BIG_ORDER_PERCENT = 10;
-  let promoPercent = 0;        // set by a valid ZEB-#### code
 
   let promoOn = false;         // true after a valid ZEB-#### code
 
@@ -53,7 +52,7 @@ $(function () {
       '</div>'
     );
     $line.attr('data-key', line.key);
-    $line.find('img').attr('src', line.image);
+    $line.find('img').attr({ src: line.image, alt: line.name });
     $line.find('.line-name').text(line.name);
     $line.find('.line-details').text((line.details ? line.details + ' · ' : '') + formatPrice(line.price));
     $line.find('.line-qty').text(line.qty);
