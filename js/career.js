@@ -1,10 +1,3 @@
-/* =========================================================
-   career.js — Careers page (vanilla JavaScript)
-   1. Vacancy cards from an array
-   2. "Apply" chooses the role in the form and scrolls to it
-   3. Form validation (rules below) + success window
-   The red error texts and the success window come from js/forms.js
-   ========================================================= */
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -23,13 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
     return vacancies.find(function (v) { return v.id === id; });
   }
 
-  // Shift leads get +15% on top of the hourly rate
   function calculateWeeklyPay(role, hours) {
     const bonus = role.id === 'shift-lead' ? 1.15 : 1;
     return role.hourlyRate * hours * bonus;
   }
 
-  // ---------- 1. Cards ----------
   function renderVacancies() {
     grid.innerHTML = '';
 
@@ -85,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('open-count').textContent = openCount;
   }
 
-  // Options for the <select> — only open roles
   function populateRoleSelect() {
     vacancies.forEach(function (role) {
       if (!role.isOpen) return;
@@ -96,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Highlight the chosen card + show "Applying for: ..." above the form
   function showChosenRole(id) {
     document.querySelectorAll('.vacancy-card').forEach(function (card) {
       const chosen = card.dataset.id === id;
@@ -121,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
   renderVacancies();
   populateRoleSelect();
 
-  // ---------- 2. Apply buttons (one listener on the grid = delegation) ----------
   grid.addEventListener('click', function (event) {
     const button = event.target.closest('.apply-btn');
     if (!button) return;
@@ -135,13 +123,12 @@ document.addEventListener('DOMContentLoaded', function () {
     showChosenRole(roleSelect.value);
   });
 
-  // live character counter for the cover letter
+
   const cover = document.getElementById('cover-letter');
   cover.addEventListener('input', function () {
     document.getElementById('cover-count').textContent = cover.value.length;
   });
 
-  // ---------- 3. Validation rules ----------
   const rules = [
     {
       field: '#full-name',
@@ -192,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
       field: '#resume-file',
       check: function () {
         const file = document.getElementById('resume-file').files[0];
-        if (!file) return '';                                         // optional
+        if (!file) return '';
         if (!/\.(pdf|docx)$/i.test(file.name)) return 'Only .pdf or .docx files.';
         if (file.size > 5 * 1024 * 1024) return 'File is too big (max 5 MB).';
         return '';
@@ -210,7 +197,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   ];
 
-  // ---------- 4. Everything is valid ----------
   const form = document.getElementById('career-form');
 
   setupForm('#career-form', rules, function () {
@@ -234,7 +220,6 @@ document.addEventListener('DOMContentLoaded', function () {
       ]
     });
 
-    // reset first, then clean the colors and the counter
     form.reset();
     clearFormState($(form));
     showChosenRole('');

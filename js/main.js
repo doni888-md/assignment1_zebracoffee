@@ -1,24 +1,13 @@
-/* =========================================================
-   main.js — things every page needs (jQuery)
-   1. cart badge in the menu
-   2. "Back to top" button (fixed, bottom right)
-   3. small "added to cart" toast that Home and Menu use
-   ========================================================= */
-
 $(function () {
-  // ---------- 1. Cart badge ----------
   updateCartBadge(false);
 
-  // If the cart changes in another tab, refresh the number here too.
   $(window).on('storage', function (event) {
     if (event.originalEvent.key === CART_KEY) updateCartBadge(true);
   });
 
-  // ---------- 2. Back to top ----------
   const $toTop = $('#back-to-top');
 
   function toggleBackToTop() {
-    // show the button after the visitor scrolled 400px down
     $toTop.toggleClass('show', $(window).scrollTop() > 400);
   }
 
@@ -31,8 +20,6 @@ $(function () {
   });
 });
 
-// ---------- 3. Toast ----------
-// showToast('Raf added to cart') — creates the toast once, then reuses it.
 function showToast(message) {
   let $toast = $('#zebra-toast');
 

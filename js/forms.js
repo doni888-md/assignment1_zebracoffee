@@ -1,30 +1,12 @@
-/* =========================================================
-   forms.js — shared form helpers (jQuery)
-   Used by: Careers, Reviews, Booking, Contacts, Cart
+const NAME_RE = /^[A-Za-zА-Яа-яЁёӘәҒғҚқҢңӨөҰұҮүҺһІі' .-]+$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+const PHONE_CHARS_RE = /^[\d\s()+-]+$/;
+const PHONE_RE = /^(\+?7|8)[\s(-]*7\d{2}[\s)-]*\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
 
-   How a page uses it:
-     const rules = [
-       { field: '#full-name', check: function () { ...return 'error text' or ''... } },
-       ...
-     ];
-     setupForm('#my-form', rules, function () { ...everything is valid... });
-
-   - Red text appears in <div class="invalid-feedback" id="<field id>-error">
-   - Red border = Bootstrap class .is-invalid, green border = .is-valid
-   ========================================================= */
-
-// ---------- Regular expressions used in several forms ----------
-const NAME_RE = /^[A-Za-zА-Яа-яЁёӘәҒғҚқҢңӨөҰұҮүҺһІі' .-]+$/;  // letters, space, ' . -
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;                 // name@mail.kz
-const PHONE_CHARS_RE = /^[\d\s()+-]+$/;                          // only allowed symbols
-const PHONE_RE = /^(\+?7|8)[\s(-]*7\d{2}[\s)-]*\d{3}[\s-]?\d{2}[\s-]?\d{2}$/; // +7 7XX XXX XX XX or 8 7XX...
-
-// Value of a field without spaces at the start/end
 function fieldValue(selector) {
   return $.trim($(selector).val() || '');
 }
 
-// ---------- Ready-made checks (return error text or '') ----------
 function checkName(value, maxLength) {
   if (value === '') return 'Please enter your name.';
   if (value.length < 2) return 'At least 2 letters.';
@@ -47,7 +29,6 @@ function checkPhone(value, required) {
   return '';
 }
 
-// "2026-11-20" -> Date at 00:00 (or null if the text is not a date)
 function parseDate(value) {
   const date = new Date(value + 'T00:00');
   return isNaN(date) ? null : date;
@@ -59,7 +40,6 @@ function todayAtMidnight() {
   return today;
 }
 
-// ---------- Showing errors ----------
 function showFieldError($field, message) {
   $field.addClass('is-invalid').removeClass('is-valid');
   $field.find('.form-check-input').addClass('is-invalid');      // for radio/checkbox groups
@@ -79,7 +59,6 @@ function clearFormState($form) {
   $form.data('submitted', false);
 }
 
-// Runs every rule, paints the fields, returns how many errors were found.
 function runValidation(rules) {
   let errorCount = 0;
 
@@ -98,27 +77,23 @@ function runValidation(rules) {
   return errorCount;
 }
 
-// Connects a form with its rules.
-// onValid() runs only when there are 0 errors.
 function setupForm(formSelector, rules, onValid) {
   const $form = $(formSelector);
 
   $form.on('submit', function (event) {
-    event.preventDefault();                 // never reload the page
+    event.preventDefault();
     $form.data('submitted', true);
 
     const errors = runValidation(rules);
     $form.find('.form-alert').toggleClass('d-none', errors === 0);
 
     if (errors > 0) {
-      // move the cursor to the first wrong field
       $form.find('.is-invalid').first().trigger('focus');
       return;
     }
     onValid();
   });
 
-  // After the first "Send" click, check again while the user types.
   $form.on('input change', 'input, select, textarea', function () {
     if ($form.data('submitted')) {
       const errors = runValidation(rules);
@@ -127,13 +102,10 @@ function setupForm(formSelector, rules, onValid) {
   });
 }
 
-// ---------- Success window ----------
-// Random number like "ZB-4821"
 function makeNumber(prefix) {
   return prefix + '-' + Math.floor(1000 + Math.random() * 9000);
 }
 
-// details = { title, label, number, text, lines: [['Zone', 'Main Hall'], ...] }
 function showSuccessModal(details) {
   const $modal = $('#successModal');
 

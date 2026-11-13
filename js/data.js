@@ -1,12 +1,6 @@
-/* =========================================================
-   data.js — shared data (used by Home, Menu and Cart)
-   Arrays with data + 3 tiny helper functions at the bottom.
-   ========================================================= */
 
-// Every item on the menu.
-// "sizes" = price for 250 / 350 / 480 ml. Items without sizes have one "price".
 const menuItems = [
-  // ----- Hot drinks -----
+
   { id: 'espresso', name: 'Espresso', category: 'hot', taste: 'Short and strong, 30 ml', price: 900, image: 'images/americanoespresso.jpg', sugar: true },
   { id: 'americano', name: 'Americano', category: 'hot', taste: 'Espresso and hot water', sizes: [790, 890, 990], image: 'images/americanoespresso.jpg', sugar: true },
   { id: 'cappuccino', name: 'Cappuccino', category: 'hot', taste: 'Thick foam, classic', sizes: [990, 1040, 1090], image: 'images/cappuccinolatte.jpg', sugar: true },
@@ -16,7 +10,6 @@ const menuItems = [
   { id: 'hot-chocolate', name: 'Hot Chocolate', category: 'hot', taste: 'Thick and chocolatey', price: 990, image: 'images/IMG_0932.jpg' },
   { id: 'cocoa', name: 'Cocoa', category: 'hot', taste: 'Light, milky, cozy', price: 990, image: 'images/IMG_0932.jpg' },
 
-  // ----- Cold drinks -----
   { id: 'iced-latte', name: 'Ice Latte', category: 'cold', taste: 'Cold latte with your syrup', price: 1290, image: 'images/IMG_0931.jpg',
     optionLabel: 'Flavor / Syrup', options: ['Pomegranate', 'Raspberry', 'Mango', 'Cherry', 'Mint', 'Blackcurrant'] },
   { id: 'espresso-tonic', name: 'Espresso Tonic', category: 'cold', taste: 'Espresso over sparkling tonic', price: 1290, image: 'images/IMG_0753.jpg' },
@@ -27,7 +20,6 @@ const menuItems = [
   { id: 'frappe', name: 'Frappe', category: 'cold', taste: 'Blended ice and coffee', price: 1590, image: 'images/IMG_0929.jpg',
     optionLabel: 'Flavor', options: ['Chocolate', 'Salted Caramel', 'Hazelnut'] },
 
-  // ----- Desserts -----
   { id: 'cinnabon', name: 'Cinnabon', category: 'desserts', taste: 'Warm roll, cream cheese', price: 990, image: 'images/IMG_0757.jpg' },
   { id: 'spanish-cheesecake', name: 'Spanish Cheesecake', category: 'desserts', taste: 'Creamy, not too sweet', price: 1390, image: 'images/IMG_0756.jpg', badge: 'Hit' },
   { id: 'mochi', name: 'Mochi', category: 'desserts', taste: 'Soft rice dough, cold filling', price: 850, image: 'images/IMG_0939.jpg',
@@ -41,8 +33,6 @@ const menuItems = [
 
 const sizeNames = ['250 ml', '350 ml', '480 ml'];
 
-// "Drink of the day" on the Home page: one drink from menuItems (by id).
-// With a ZEB-#### promo code the Cart takes this % off THIS drink only.
 const dailySpecials = [
   { id: 'raf', desc: 'Creamy, vanilla, very soft — our most loved drink', discount: 15 },
   { id: 'matcha', desc: 'Green, blue or mango — cold and fresh', discount: 10 },
@@ -50,17 +40,14 @@ const dailySpecials = [
   { id: 'cappuccino', desc: 'Thick foam, classic — the barista favourite', discount: 15 }
 ];
 
-// Today's special: day of the week (0–6) divided by 4, the remainder is the index.
 function getTodaySpecial() {
   return dailySpecials[new Date().getDay() % dailySpecials.length];
 }
 
-// Find one menu item by its id, e.g. findMenuItem('raf')
 function findMenuItem(id) {
   return menuItems.find(function (item) { return item.id === id; });
 }
 
-// 1290 -> "1 290 ₸"
 function formatPrice(amount) {
   return Math.round(amount).toLocaleString('ru-RU').replace(/ /g, ' ') + ' ₸';
 }

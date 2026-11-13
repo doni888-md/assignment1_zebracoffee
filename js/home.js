@@ -1,15 +1,5 @@
-/* =========================================================
-   home.js — Home page (jQuery)
-   1. Rotating italic word in the hero
-   2. "Hits right now" cards from data.js
-   3. Mood picker
-   4. Night Owls timer (00:00–06:00)
-   5. Today's perk + promo code
-   ========================================================= */
-
 $(function () {
 
-  // ---------- 1. Rotating word ----------
   const $words = $('.rotating-word');
   let wordIndex = 0;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -17,12 +7,11 @@ $(function () {
   if (!reduceMotion) {
     setInterval(function () {
       $words.eq(wordIndex).removeClass('is-active');
-      wordIndex = (wordIndex + 1) % $words.length;      // 0,1,2,3,4,0,1...
+      wordIndex = (wordIndex + 1) % $words.length;
       $words.eq(wordIndex).addClass('is-active');
     }, 2200);
   }
 
-  // ---------- 2. Hits ----------
   const hitIds = ['raf', 'flat-white', 'iced-latte', 'cinnabon'];
   const $hits = $('#hits-grid');
 
@@ -51,7 +40,7 @@ $(function () {
         '</article>' +
       '</div>'
     );
-    // .text() and .attr() — safe way to put data into the card
+
     $card.find('img').attr({ src: item.image, alt: item.name });
     $card.find('.item-name').text(item.name);
     $card.find('.item-taste').text(item.taste);
@@ -60,14 +49,12 @@ $(function () {
     $hits.append($card);
   });
 
-  // one handler for all "+" buttons (event delegation)
   $hits.on('click', '.add-hit', function () {
     const item = findMenuItem($(this).data('id'));
     addToCart(makeCartLine(item));
     showToast(item.name + ' added to cart');
   });
 
-  // ---------- 3. Mood picker ----------
   const moods = {
     sleepy: { title: 'Wake-up kit', ids: ['espresso', 'americano'] },
     sweet: { title: 'Something sweet', ids: ['raf', 'frappe'] },
@@ -115,11 +102,9 @@ $(function () {
 
   showMood(currentMood);
 
-  // ---------- 4. Night Owls timer ----------
-  const NIGHT_START = 0; // 00:00
-  const NIGHT_END = 6;   // 06:00
+  const NIGHT_START = 0;
+  const NIGHT_END = 6;
 
-  // minutes from "now" until the given hour (today or tomorrow)
   function minutesUntil(hour, now) {
     const target = new Date(now);
     target.setHours(hour, 0, 0, 0);
@@ -127,7 +112,6 @@ $(function () {
     return Math.ceil((target - now) / 60000);
   }
 
-  // 125 -> "2 h 5 min"
   function formatDuration(totalMinutes) {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
@@ -148,11 +132,11 @@ $(function () {
   }
 
   updateNightTimer();
-  setInterval(updateNightTimer, 60000); // once a minute
+  setInterval(updateNightTimer, 60000);
 
-    // ---------- 5. Drink of the day ----------
-  const special = getTodaySpecial();             // { id: 'raf', desc: ..., discount: 15 }
-  const specialItem = findMenuItem(special.id);  // the real drink from the menu
+
+  const special = getTodaySpecial();
+  const specialItem = findMenuItem(special.id);
 
   $('#perk-name').text(specialItem.name + ' −' + special.discount + '%');
   $('#perk-desc').text(special.desc);
