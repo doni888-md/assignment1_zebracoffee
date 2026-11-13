@@ -1,14 +1,10 @@
-/* =========================================================
-   booking.js — Booking page (jQuery)
-   1. Zone cards work like radio buttons
-   2. Form validation (every field) + success window
-   ========================================================= */
+
 
 $(function () {
   const $zones = $('#zone-group');
   const $zoneInput = $('#booking-zone');
 
-  // ---------- 1. Zones ----------
+
   $zones.on('click', '.zone-card', function () {
     const $card = $(this);
 
@@ -17,8 +13,8 @@ $(function () {
     $card.addClass('is-selected').attr('aria-checked', 'true')
       .find('.zone-mark').text('✓ Selected');
 
-    $zoneInput.val($card.data('zone')).trigger('change'); // re-check the form if needed
-    // after choosing on a phone, scroll to the form
+    $zoneInput.val($card.data('zone')).trigger('change'); 
+  
     if (window.innerWidth < 768) {
       document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth' });
     }
@@ -28,13 +24,13 @@ $(function () {
     $('#notes-count').text($(this).val().length);
   });
 
-  // ---------- 2. Rules ----------
+ 
   const rules = [
     {
       field: '#booking-zone',
       check: function () {
         const empty = $zoneInput.val() === '';
-        $zones.toggleClass('is-invalid', empty);   // red borders on the zone cards
+        $zones.toggleClass('is-invalid', empty);   
         return empty ? 'Choose a zone above: Main Hall, Window or Quiet Corner.' : '';
       }
     },
@@ -112,7 +108,6 @@ $(function () {
       ]
     });
 
-    // clean everything for the next booking
     const $form = $('#booking-form');
     $form[0].reset();
     $zoneInput.val('');

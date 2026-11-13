@@ -1,14 +1,8 @@
-/* =========================================================
-   contacts.js — Contacts page (jQuery)
-   1. Live clock: Astana time (UTC+5)
-   2. Email / phone switch in the form
-   3. Form validation + success window
-   ========================================================= */
+
 
 $(function () {
 
-  // ---------- 1. Clock ----------
-  // Astana is UTC+5 — so the clock is right even if the computer is in another city.
+
   function updateClock() {
     const now = new Date();
     const utcMinutes = now.getTime() / 60000 + now.getTimezoneOffset();
@@ -23,7 +17,7 @@ $(function () {
   updateClock();
   setInterval(updateClock, 1000);
 
-  // ---------- 2. Reply by email or phone ----------
+ 
   function replyMethod() {
     return $('input[name="reply-method"]:checked').val();
   }
@@ -38,7 +32,7 @@ $(function () {
     $('#message-count').text($(this).val().length);
   });
 
-  // ---------- 3. Rules ----------
+
   const topicNames = {
     general: 'General question', booking: 'Booking', feedback: 'Feedback',
     lost: 'Lost item', careers: 'Careers', partner: 'Partnership'
