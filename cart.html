@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cart | Zebra Coffee</title>
+    <meta name="description" content="Zebra Coffee — specialty coffee shop on Mangilik El 38, Astana. Open 24/7.">
+    <link rel="icon" href="images/logo.png">
+
+    <!-- Bootstrap 5.3.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Our styles: shared + this page -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/menu.css" rel="stylesheet">
+</head>
+<body>
+    <a class="visually-hidden-focusable" href="#main">Skip to content</a>
+
+    <!-- ===== HEADER: logo + name ===== -->
+    <header class="site-header" id="top">
+        <div class="container py-3 text-center">
+            <a href="index.html" class="brand-link">
+                <img src="images/logo.png" alt="" class="brand-logo">
+                <span class="brand-name">ZEBRA COFFEE</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== MENU: all pages (sticks to the top while scrolling) ===== -->
+    <nav class="site-nav navbar navbar-expand-lg py-1" aria-label="Main">
+        <div class="container">
+            <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                <ul class="navbar-nav align-items-center gap-1 py-2 py-lg-1">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
+                <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+                <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                <li class="nav-item">
+                    <a class="nav-link cart-link active" aria-current="page" href="cart.html" aria-label="Cart">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                        Cart <span class="cart-badge">0</span>
+                    </a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main">
+
+        <!-- ===== CART VIEW ===== -->
+        <section class="container py-5" id="cart-view">
+            <h1 class="page-title mb-4">Your <span class="font-serif-italic text-teal">order</span></h1>
+
+            <!-- empty cart -->
+            <div class="cart-empty d-none" id="cart-empty">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                <h2 class="font-display h2 mb-0">Your cart is empty</h2>
+                <p class="text-muted-zebra mb-0">Pick something on the menu — it will show up here.</p>
+                <a href="menu.html" class="btn btn-zebra">Go to the menu</a>
+            </div>
+
+            <div class="row g-4 align-items-start" id="cart-full">
+                <div class="col-lg-8 d-flex flex-column gap-4">
+
+                    <!-- lines (created by cart-page.js) -->
+                    <div class="cart-lines" id="cart-lines"></div>
+
+                    <!-- progress to the 10% discount -->
+                    <div class="cart-box">
+                        <div class="d-flex justify-content-between flex-wrap gap-2 fw-semibold mb-2">
+                            <span id="progress-text"></span>
+                            <span>5 000 ₸</span>
+                        </div>
+                        <div class="progress zebra-progress" role="progressbar" aria-label="Progress to 10% discount" aria-valuemin="0" aria-valuemax="5000" aria-valuenow="0" id="discount-progress">
+                            <div class="progress-bar" id="discount-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- pickup form -->
+                    <form class="zebra-form d-flex flex-column gap-3" id="order-form" novalidate>
+                        <h2 class="font-display h3 mb-0">Pickup details</h2>
+                        <div class="form-alert d-none" role="alert">Please correct the fields marked in red.</div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="order-name" class="form-label">Name *</label>
+                                <input type="text" id="order-name" class="form-control" autocomplete="given-name">
+                                <div class="invalid-feedback" id="order-name-error"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="order-phone" class="form-label">Phone *</label>
+                                <input type="tel" id="order-phone" class="form-control" placeholder="+7 7__ ___ __ __" autocomplete="tel">
+                                <div class="invalid-feedback" id="order-phone-error"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="order-time" class="form-label">Pickup time *</label>
+                                <select id="order-time" class="form-select">
+                                    <option value="">Choose a time</option>
+                                </select>
+                                <div class="form-text">Earliest in 15 minutes</div>
+                                <div class="invalid-feedback" id="order-time-error"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset id="order-place-group">
+                                    <legend class="form-label mb-2">Where</legend>
+                                    <div class="d-flex flex-wrap gap-4 pt-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="order-place" id="place-here" value="here">
+                                            <label class="form-check-label" for="place-here">Here, at a table</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="order-place" id="place-away" value="away" checked>
+                                            <label class="form-check-label" for="place-away">Takeaway</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-zebra btn-lg" id="place-order">Place order</button>
+                    </form>
+                </div>
+
+                <!-- summary -->
+                <aside class="col-lg-4">
+                    <div class="summary-card">
+                        <h2 class="font-display h3">Summary</h2>
+                        <div class="d-flex justify-content-between"><span>Subtotal</span><span id="sum-subtotal">0 ₸</span></div>
+                        <div class="d-flex justify-content-between discount-row" id="promo-row"><span id="promo-name">Promo code</span><span id="sum-promo">—</span></div>
+                        <div class="d-flex justify-content-between discount-row" id="big-row"><span>10% from 5 000 ₸</span><span id="sum-big">—</span></div>
+                        <div class="summary-total">
+                            <span class="fw-bold">Total</span>
+                            <span class="font-display" id="sum-total">0 ₸</span>
+                        </div>
+
+                        <form class="d-flex flex-column gap-2 mt-2" id="promo-form" novalidate>
+                            <label for="promo-code" class="fw-semibold small">Promo code from the home page</label>
+                            <div class="d-flex gap-2">
+                                <input type="text" id="promo-code" class="form-control promo-input" placeholder="ZEB-0000" autocomplete="off">
+                                <button type="submit" class="btn btn-promo">Apply</button>
+                            </div>
+                            <span class="small promo-message" id="promo-message" aria-live="polite"></span>
+                        </form>
+                        <p class="small promo-note mb-0">The promo code takes a discount off the drink of the day. Orders from 5 000 ₸ get another 10% off everything.</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ===== RECEIPT VIEW (after the order is placed) ===== -->
+        <section class="container py-5 d-none" id="receipt-view">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 d-flex flex-column gap-3">
+                    <span class="tag align-self-start fs-6 px-3 py-2" style="background: var(--zebra-teal-light); border-color: var(--zebra-teal)">✓ Order accepted</span>
+                    <h1 class="page-title mb-0">See you <span class="font-serif-italic text-teal">at <span id="receipt-time-title"></span></span></h1>
+                    <p class="lead text-muted-zebra mb-0">Say the order number at the counter on Mangilik El 38 — it will be waiting for you. Pay at pickup.</p>
+                    <a href="menu.html" class="btn btn-zebra btn-lg align-self-start">Order something else</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="receipt font-mono">
+                        <div class="text-center">
+                            <div class="font-display fs-4" style="letter-spacing: 0.06em">ZEBRA COFFEE</div>
+                            <div class="small">Mangilik El 38 · Astana · 24/7</div>
+                        </div>
+                        <hr class="receipt-line">
+                        <div class="receipt-row"><span>ORDER</span><strong class="fs-5" id="receipt-number"></strong></div>
+                        <div class="receipt-row"><span>PICKUP</span><span id="receipt-pickup"></span></div>
+                        <div class="receipt-row"><span>NAME</span><span id="receipt-name"></span></div>
+                        <hr class="receipt-line">
+                        <div id="receipt-lines"></div>
+                        <hr class="receipt-line">
+                        <div class="receipt-row"><span>SUBTOTAL</span><span id="receipt-subtotal"></span></div>
+                        <div class="receipt-row"><span id="receipt-promo-name">PROMO</span><span id="receipt-promo"></span></div>
+                        <div class="receipt-row"><span>DISCOUNT −10%</span><span id="receipt-big"></span></div>
+                        <div class="receipt-row align-items-baseline"><strong>TOTAL</strong><strong class="fs-4" id="receipt-total"></strong></div>
+                        <div class="text-center small mt-2">thank you, night owl</div>
+                    </div>
+                    <div class="receipt-edge" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Back to top (fixed, bottom right) ===== -->
+    <a href="#top" class="back-to-top" id="back-to-top">Back to top <span aria-hidden="true">↑</span></a>
+
+    <!-- ===== Success window (filled by showSuccessModal() in js/forms.js) ===== -->
+    <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-labelledby="successModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column gap-3">
+                    <div class="success-icon" aria-hidden="true">✓</div>
+                    <h2 class="success-title font-display h3 mb-0" id="successModalTitle">Sent!</h2>
+                    <div>
+                        <div class="success-label eyebrow text-muted-zebra">Number</div>
+                        <div class="success-number">—</div>
+                    </div>
+                    <p class="success-text mb-0"></p>
+                    <div class="success-lines"></div>
+                    <button type="button" class="btn btn-zebra" data-bs-dismiss="modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="container py-5 text-center d-flex flex-column gap-2">
+            <span class="font-display fs-4 text-white" style="letter-spacing: 0.05em">ZEBRA COFFEE</span>
+            <span>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</span>
+            <span>
+                Phone: <a href="tel:+77470290043">+7 747 029 00 43</a> ·
+                Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a> ·
+                Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a>
+            </span>
+            <span class="footer-copy mt-2">&copy; 2026 Zebra Coffee. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- jQuery 3.7.1 and Bootstrap 5.3.3 (with Popper) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Our scripts: shared first, then this page -->
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/cart-page.js"></script>
+</body>
+</html>

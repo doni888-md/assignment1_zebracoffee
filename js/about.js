@@ -1,244 +1,29 @@
-'use strict';
-
-/**
- * Zebra Coffee - About Page Standards & Interactive Benchmark Explorer
- * jQuery Version: 3.7.1
- * Initialized via $(function() { ... }) to avoid executing on incomplete DOM.
- *
- * Comparison Comment (Feature Rewrite: Standards Table & Filter):
- * Replaced document.createElement, native classList, and multiple event listeners
- * with jQuery .empty(), .append(), .before(), .closest(), and delegated .on().
- */
-
-const coffeeStandardsData = [
-  {
-    id: 1,
-    standard: 'Order Prep Time',
-    target: '< 3 minutes',
-    frequency: 'Every order',
-    category: 'speed',
-    detail: 'Automated cup dosing and calibrated tampers allow baristas to pull espresso shots in 25s without compromising crema.'
-  },
-  {
-    id: 2,
-    standard: 'Grinder Calibration',
-    target: 'Exact double shot extraction',
-    frequency: 'Twice per shift',
-    category: 'quality',
-    detail: 'Morning and evening micron adjustments ensure 18g in, 36g out within a strict 26-28 second flow window.'
-  },
-  {
-    id: 3,
-    standard: 'Milk Steaming Temp',
-    target: '60°C – 65°C sweet spot',
-    frequency: 'Every drink',
-    category: 'quality',
-    detail: 'Preserves the natural sweetness of lactose without scalding proteins, delivering velvety microfoam for latte art.'
-  },
-  {
-    id: 4,
-    standard: 'Workplace Seating & Wi-Fi',
-    target: '24/7 continuous access',
-    frequency: 'Continuous',
-    category: 'hospitality',
-    detail: 'High-speed gigabit Wi-Fi, power outlets under every seat on the 2nd floor, and quiet study zones.'
-  },
-  {
-    id: 5,
-    standard: 'Steam Wand Sanitization',
-    target: 'Purge and wipe instantly',
-    frequency: 'After each cup',
-    category: 'hygiene',
-    detail: 'Dedicated antibacterial microfiber cloths and immediate steam purging prevent milk residue buildup.'
-  },
-  {
-    id: 6,
-    standard: 'Fresh Bean Rest Period',
-    target: '7 to 21 days from roast',
-    frequency: 'Weekly audit',
-    category: 'quality',
-    detail: 'Locally roasted in Astana; rested 7 days for peak CO2 degassing before opening valves at the espresso bar.'
-  }
-];
-
-function renderStandardsTable(items, $tbody) {
-  $tbody.empty();
-
-    if (items.length === 0) {
-    const $emptyCell = $('<td>')
-      .attr('colspan', 3)
-      .addClass('text-center text-muted py-4')
-      .append(
-        $('<p>').addClass('mb-2').html('<em>No matching operational benchmarks found.</em>'),
-        $('<button>')
-          .attr('type', 'button')
-          .addClass('btn btn-sm btn-dark rounded-pill px-3 empty-reset-btn')
-          .text('Show all standards')
-      );
-    $tbody.append($('<tr>').append($emptyCell));
-    return;
-  }
-
-  $.each(items, function (index, item) {
-    // One badge colour per category, so the colours match the filter buttons above the table.
-    const badgeClass = `badge badge-cat badge-cat-${item.category}`;
-
-    const $row = $('<tr>')
-      .addClass('benchmark-row')
-      .attr('data-id', item.id);
-
-    const $nameCell = $('<td>')
-      .addClass('fw-semibold text-dark')
-      .append(
-        $('<span>').text(item.standard),
-        $('<small>').addClass('benchmark-toggle d-block').text('Details ▾')
-      );
-
-    const $targetCell = $('<td>').text(item.target);
-    const $freqCell = $('<td>').append($('<span>').addClass(badgeClass).text(item.frequency));
-
-    $row.append($nameCell, $targetCell, $freqCell);
-    const $detailRow = $('<tr>')
-      .addClass('benchmark-detail-row')
-      .attr('data-parent-id', item.id)
-      .hide();
-
-    const $detailCell = $('<td>')
-      .attr('colspan', 3)
-      .addClass('bg-light p-3 rounded-bottom benchmark-detail-cell');
-
-    $detailCell.html(`
-      <div class="d-flex align-items-center justify-content-between mb-1">
-        <strong class="small text-uppercase text-zebra benchmark-detail-title">Operational Standard Breakdown:</strong>
-        <span class="badge bg-white text-dark border">Standard #${item.id}</span>
-      </div>
-      <p class="mb-0 small text-secondary">${item.detail}</p>
-    `);
-
-    $detailRow.append($detailCell);
-    $tbody.append($row, $detailRow);
-  });
-}
+/* =========================================================
+   about.js — About page (jQuery)
+   1. Flip cards "Our numbers"
+   2. Gallery: click a photo -> it opens bigger in a window
+   (The FAQ accordion works with Bootstrap only, no JS needed.)
+   ========================================================= */
 
 $(function () {
-  const $tableBody = $('#standards-table-body');
-  const $controlBox = $('#standards-status-container');
-  const $standardsTable = $('#standards-table');
 
-  if (!$tableBody.length || !$controlBox.length || !$standardsTable.length) return;
+  // ---------- 1. Flip cards ----------
+  // one handler on the parent for all 5 cards (event delegation)
+  $('#flip-cards').on('click', '.flip-card', function () {
+    const $card = $(this);
+    const flipped = !$card.hasClass('is-flipped');
 
-  $standardsTable.closest('.table-responsive').before($controlBox);
-
-  $controlBox.addClass('card p-4 mb-3 bg-light border-0 shadow-sm rounded-4').removeClass('hidden');
-
-  $controlBox.html(`
-    <div class="row g-3 align-items-center">
-      <div class="col-12 col-md-5">
-        <label for="benchmark-search-input" class="form-label small fw-bold text-secondary mb-1">Search Standards:</label>
-        <input type="text" class="form-control form-control-sm rounded-pill px-3" placeholder="Search (e.g. Grinder, 24/7)..." id="benchmark-search-input">
-      </div>
-      <div class="col-12 col-md-7">
-        <label class="form-label small fw-bold text-secondary mb-1 d-block">Quick Filter by Category:</label>
-        <div class="d-flex flex-wrap gap-2" role="group" id="benchmark-filter-buttons">
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-dark active filter-btn" data-cat="all">All<span class="filter-count"></button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="quality">Quality<span class="filter-count"></button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="speed">Speed<span class="filter-count"></button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hospitality">Hospitality<span class="filter-count"></button>
-          <button type="button" class="btn btn-sm rounded-pill px-3 btn-outline-dark filter-btn" data-cat="hygiene">Hygiene<span class="filter-count"></button>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
-      <small class="text-muted" id="benchmark-counter">Showing all ${coffeeStandardsData.length} standards</small>
-      <button type="button" class="btn btn-link btn-sm text-decoration-none p-0 text-secondary" id="benchmark-reset-all">Reset search</button>
-    </div>
-  `);
-
-  const $searchInput = $('input[type="text"]#benchmark-search-input');
-  const $filterButtons = $('#benchmark-filter-buttons .filter-btn');
-  const $counter = $('#benchmark-counter');
-  let currentCategory = 'all';
-
-    // true if the search text is found in the name, the target or the detail of a standard
-  function matchesSearch(item, q) {
-    return item.standard.toLowerCase().indexOf(q) !== -1 ||
-           item.target.toLowerCase().indexOf(q) !== -1 ||
-           item.detail.toLowerCase().indexOf(q) !== -1;
-  }
-
-  // how many standards of this category match the current search ('all' = every category)
-  function countMatches(category, q) {
-    return $.grep(coffeeStandardsData, function (item) {
-      return matchesSearch(item, q) && (category === 'all' || item.category === category);
-    }).length;
-  }
-
-  // writes "(2)" into every filter button; a category with 0 results is dimmed
-  function updateFilterCounts(q) {
-    $filterButtons.each(function () {
-      const count = countMatches($(this).attr('data-cat'), q);
-      $(this)
-        .toggleClass('opacity-50', count === 0)
-        .find('.filter-count').text(`(${count})`);
-    });
-  }
-
-  function applyFilter() {
-    const q = $searchInput.val().trim().toLowerCase();
-
-    const filtered = $.grep(coffeeStandardsData, function (item) {
-      const matchCat = (currentCategory === 'all') || (item.category === currentCategory);
-      return matchesSearch(item, q) && matchCat;
-    });
-
-    $tableBody.fadeOut(120, function () {
-      renderStandardsTable(filtered, $tableBody);
-      $tableBody.fadeIn(150);
-    });
-
-    $counter.text(`Showing ${filtered.length} of ${coffeeStandardsData.length} standards`);
-    updateFilterCounts(q);
-  }
-
-  // clears the search and goes back to "All"
-  function resetFilters() {
-    $searchInput.val('');
-    $filterButtons.filter('[data-cat="all"]').trigger('click');
-  }
-
-  $searchInput.on('input', applyFilter);
-
-  $filterButtons.on('click', function () {
-    $filterButtons.removeClass('btn-dark active').addClass('btn-outline-dark');
-    $(this).removeClass('btn-outline-dark').addClass('btn-dark active');
-    currentCategory = $(this).attr('data-cat');
-    applyFilter();
+    $card.toggleClass('is-flipped', flipped).attr('aria-pressed', String(flipped));
   });
 
-  $('#benchmark-reset-all').on('click', resetFilters);
+  // ---------- 2. Gallery ----------
+  const photoModal = new bootstrap.Modal('#photoModal');
 
-  // delegated: the "Show all standards" button is created only when nothing is found
-  $tableBody.on('click', '.empty-reset-btn', resetFilters);
+  $('#gallery').on('click', '.gallery-item', function () {
+    const $img = $(this).find('img');
 
-  renderStandardsTable(coffeeStandardsData, $tableBody);
-  updateFilterCounts('');
-
-  $tableBody.on('click', '.benchmark-row', function () {
-    const $clickedRow = $(this);
-    const standardId = $clickedRow.attr('data-id');
-    const $targetDetailRow = $tableBody.find(`.benchmark-detail-row[data-parent-id="${standardId}"]`);
-    const isVisible = $targetDetailRow.is(':visible');
-
-    $clickedRow.siblings('.benchmark-row').removeClass('table-active')
-      .find('.benchmark-toggle').text('Details ▾');
-    $clickedRow.siblings('.benchmark-detail-row').fadeOut(150);
-
-    if (isVisible) {
-      $clickedRow.removeClass('table-active').find('.benchmark-toggle').text('Details ▾');
-      $targetDetailRow.fadeOut(150);
-    } else {
-      $clickedRow.addClass('table-active').find('.benchmark-toggle').text('Hide ▴');
-      $targetDetailRow.fadeIn(200);
-    }
+    $('#photoModalImage').attr({ src: $img.attr('src'), alt: $img.attr('alt') });
+    $('#photoModalCaption').text($(this).data('caption'));
+    photoModal.show();
   });
 });

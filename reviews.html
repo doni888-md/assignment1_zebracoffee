@@ -2,241 +2,229 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Reviews of Zebra Coffee on Mangilik El 38 in Astana.">
-    <title>Zebra Coffee - Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reviews | Zebra Coffee</title>
+    <meta name="description" content="Zebra Coffee — specialty coffee shop on Mangilik El 38, Astana. Open 24/7.">
+    <link rel="icon" href="images/logo.png">
 
-    <!-- Bootstrap v5.3.3 CSS CDN Connection -->
+    <!-- Bootstrap 5.3.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS Layer -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/dana.css">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/reviews.js" defer></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Our styles: shared + this page -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/menu.css" rel="stylesheet">
 </head>
-<body id="top">
-    
-    <header class="container-fluid bg-dark text-white p-3 mb-4">
-        <div class="text-center mb-3">
-            <img src="images/logo.png" alt="Zebra Coffee Logo" class="brand-logo" id="reviews-brand-logo">
-            <h1 class="display-6 fw-bold mb-0">Zebra Coffee</h1>
-            <p class="lead text-muted mb-0 fs-6">City to-go coffee shop</p>
+<body>
+    <a class="visually-hidden-focusable" href="#main">Skip to content</a>
+
+    <!-- ===== HEADER: logo + name ===== -->
+    <header class="site-header" id="top">
+        <div class="container py-3 text-center">
+            <a href="index.html" class="brand-link">
+                <img src="images/logo.png" alt="" class="brand-logo">
+                <span class="brand-name">ZEBRA COFFEE</span>
+            </a>
         </div>
-        
-        <nav class="navbar navbar-expand-md navbar-dark pt-3 border-top border-secondary">
-            <div class="container-fluid">
-                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation" id="reviews-nav-toggle-btn">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-center" id="mainNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
-                        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="reviews.html">Reviews</a></li>
-                        <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
     </header>
 
+    <!-- ===== MENU: all pages (sticks to the top while scrolling) ===== -->
+    <nav class="site-nav navbar navbar-expand-lg py-1" aria-label="Main">
+        <div class="container">
+            <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                <ul class="navbar-nav align-items-center gap-1 py-2 py-lg-1">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="career.html">Careers</a></li>
+                <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="reviews.html">Reviews</a></li>
+                <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+                <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                <li class="nav-item">
+                    <a class="nav-link cart-link" href="cart.html" aria-label="Cart">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                        Cart <span class="cart-badge">0</span>
+                    </a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <main class="container mb-5">
-        <p class="quick-links text-center text-md-start mb-4 text-muted">
-            Quick links: <a href="#reviews" class="btn btn-sm btn-outline-secondary py-0" id="quick-link-reviews">Reviews</a>
-            <span class="mx-1">|</span>
-            <a href="#review-form-section" class="btn btn-sm btn-outline-secondary py-0" id="quick-link-review-form">Write a Review</a>
-        </p>
+    <main id="main">
 
-        <!-- Reviews Section -->
-        <section id="reviews" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
-            <h2 class="h3 fw-bold mb-3 text-center text-md-start">Customer Reviews</h2>
-            <p class="lead fs-6 text-muted mb-4">
-                Visitors share their impressions of the coffee, the service and the atmosphere at Zebra Coffee.
-            </p>
-
-            <div class="row g-4">
-                <div class="col-12 col-lg-8">
-                    <!-- Container where new reviews will be added by future JS -->
-                    <div id="reviews-list" class="d-flex flex-column gap-3">
-                        <article class="review-card card border shadow-sm" id="review-1">
-                            <div class="card-body">
-                                <h3 class="h5 fw-bold">Visitors' Opinions</h3>
-                                <figure class="text-center my-3">
-                                    <img src="images/IMG_0045.jpg" alt="Review of Zebra Coffee" class="img-fluid rounded-3 review-photo">
-                                </figure>
-                                <blockquote class="blockquote">
-                                    <p class="mb-2">Pleasant atmosphere, great purple on Salvador Geisha. A clean balanced cup with a bright aroma, pleasant sweetness and revealing floral and fruity notes.</p>
-                                    <footer class="blockquote-footer">d sss__, <time datetime="2026-07-30">30 July 2026</time></footer>
-                                </blockquote>
-
-                                <div class="row g-3">
-                                    <div class="col-12 col-md-6">
-                                        <figure class="mb-0 text-center">
-                                            <img src="images/IMG_0046.jpg" alt="Interior of Zebra Coffee" class="img-fluid rounded-3 review-photo">
-                                            <figcaption class="small mt-2">Main interior of Zebra Coffee.</figcaption>
-                                        </figure>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <figure class="mb-0 text-center">
-                                            <img src="images/IMG_0047.jpg" alt="Another view of Zebra Coffee interior" class="img-fluid rounded-3 review-photo">
-                                            <figcaption class="small mt-2">Another view of the interior.</figcaption>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
+        <!-- ===== Title + summary ===== -->
+        <section class="container py-5">
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-6 d-flex flex-column justify-content-center gap-3">
+                    <h1 class="page-title mb-0">What guests <span class="font-serif-italic text-teal">say</span></h1>
+                    <p class="lead text-muted-zebra mb-0">Honest words from people who stopped by — day and night.</p>
+                    <a href="#write" class="btn btn-zebra btn-lg align-self-start">Write a review</a>
                 </div>
-
-                <div class="col-12 col-lg-4">
-                    <aside class="card border shadow-sm">
-                        <div class="card-body">
-                            <h3 class="h5 fw-bold">Review Tips</h3>
-                                <ul class="mb-3">
-                                    <li>Write about your personal experience.
-                                        <ul>
-                                            <li>Mention the drink.</li>
-                                            <li>Mention the atmosphere.</li>
-                                        </ul>
-                                    </li>
-                                    <li>Be honest and clear.</li>
-                                    <li>Do not share private information.</li>
-                                </ul>
-                                <a href="#review-form-section" class="btn btn-dark btn-sm rounded-pill px-3" id="reviews-write-btn">Write a Review</a>
+                <div class="col-lg-6">
+                    <div class="summary-box">
+                        <div class="d-flex flex-column">
+                            <span class="font-display summary-avg" id="avg-rating">0.0</span>
+                            <span class="summary-stars" id="avg-stars" aria-hidden="true"></span>
+                            <span class="text-muted-zebra" id="review-count"></span>
                         </div>
-                    </aside>
+                        <div class="flex-grow-1 d-flex flex-column gap-2" id="rating-bars"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Review Form Section -->
-        <section id="review-form-section" class="card shadow-sm border-0 p-4 p-md-5 mb-4 rounded-4">
-            <h2 class="h3 fw-bold mb-3 text-center text-md-start">Write a Review</h2>
-            <p class="text-secondary mb-4">
-                Fill in the form and press <strong>Submit Review</strong>. Your review will appear in the list above,
-                and a confirmation message will be shown right below the form. All fields except phone are required.
-            </p>
+        <!-- ===== Filters + list ===== -->
+        <section class="container pb-5">
+            <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+                <div class="d-flex flex-wrap gap-2" id="rating-filter" role="group" aria-label="Filter by rating">
+                    <button type="button" class="pill-btn active" data-filter="all" aria-pressed="true">All</button>
+                    <button type="button" class="pill-btn" data-filter="5" aria-pressed="false">5 ★</button>
+                    <button type="button" class="pill-btn" data-filter="4" aria-pressed="false">4 ★</button>
+                    <button type="button" class="pill-btn" data-filter="3" aria-pressed="false">3 ★ and lower</button>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <label for="review-sort" class="fw-semibold small">Sort</label>
+                    <select id="review-sort" class="form-select sort-select">
+                        <option value="newest">Newest first</option>
+                        <option value="highest">Highest rating</option>
+                        <option value="lowest">Lowest rating</option>
+                    </select>
+                </div>
+            </div>
 
-            <!-- Prepared error message container for future JS validation -->
-            <div id="review-form-errors" class="alert alert-danger hidden mb-3" role="alert"></div>
+            <p class="visually-hidden" aria-live="polite" id="review-result-text"></p>
+            <div class="row g-4" id="review-list"></div>
+            <p class="text-center text-muted-zebra d-none mt-4" id="review-empty">No reviews with this rating yet.</p>
 
-            <form id="review-form" method="post" action="reviews.html">
-                <fieldset class="border p-4 rounded-3 bg-light">
-                    <legend class="float-none w-auto px-3 fs-5 fw-bold text-secondary">Your Review</legend>
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn-zebra-outline d-none" id="show-more" aria-expanded="false">Show more</button>
+            </div>
+        </section>
 
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <label for="review-name" class="form-label fw-semibold">Name:</label>
-                            <input type="text" id="review-name" name="name" class="form-control" placeholder="Your name" required>
-                        </div>
+        <!-- ===== Form ===== -->
+        <section class="container pb-5 mb-4" id="write" style="max-width: 880px">
+            <form class="zebra-form d-flex flex-column gap-3" id="review-form" novalidate>
+                <div>
+                    <h2 class="font-display h2 mb-1">Leave a review</h2>
+                    <p class="text-muted-zebra mb-0">Fields marked * are required.</p>
+                </div>
+                <div class="form-alert d-none" role="alert">Please correct the fields marked in red.</div>
 
-                        <div class="col-12 col-md-6">
-                            <label for="review-email" class="form-label fw-semibold">Email:</label>
-                            <input type="email" id="review-email" name="email" class="form-control" placeholder="example@mail.kz" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label for="review-phone" class="form-label fw-semibold">Phone (optional):</label>
-                            <input type="tel" id="review-phone" name="phone" class="form-control" placeholder="+7 700 000 00 00">
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label for="review-date" class="form-label fw-semibold">Visit date:</label>
-                            <input type="date" id="review-date" name="visitDate" class="form-control" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label for="review-rating" class="form-label fw-semibold">Rating (1–5):</label>
-                            <input type="number" id="review-rating" name="rating" class="form-control" min="1" max="5" placeholder="5" required>
-                        </div>
-
-                        <div class="col-12 col-md-6">
-                            <label for="review-drink" class="form-label fw-semibold">Favorite drink:</label>
-                            <select id="review-drink" name="drink" class="form-select">
-                                <option value="coffee">Coffee</option>
-                                <option value="tea">Tea</option>
-                                <option value="dessert">Dessert</option>
-                            </select>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="p-3 bg-white border rounded-3">
-                                <span class="form-label fw-semibold d-block mb-2">Overall impression:</span>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="review-good" name="impression" value="good" required>
-                                    <label class="form-check-label" for="review-good">Good</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="review-excellent" name="impression" value="excellent">
-                                    <label class="form-check-label" for="review-excellent">Excellent</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="review-text" class="form-label fw-semibold">Review:</label>
-                            <textarea id="review-text" name="review" class="form-control" rows="5" placeholder="Write your review" required></textarea>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="review-recommend" name="recommend">
-                                <label class="form-check-label" for="review-recommend">I recommend Zebra Coffee.</label>
-                            </div>
-                        </div>
-
-                        <div class="col-12 pt-2">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 me-2" id="review-submit-btn">Submit Review</button>
-                            <button type="button" class="btn btn-outline-dark me-2" id="review-preview-btn">Preview</button>
-                            <button type="reset" class="btn btn-outline-secondary" id="review-reset-btn">Clear Form</button>
-                        </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="review-name" class="form-label">Name *</label>
+                        <input type="text" id="review-name" class="form-control" placeholder="Your name" autocomplete="given-name">
+                        <div class="invalid-feedback" id="review-name-error"></div>
                     </div>
-                </fieldset>
+                    <div class="col-md-6">
+                        <label for="review-email" class="form-label">Email *</label>
+                        <input type="email" id="review-email" class="form-control" placeholder="example@mail.kz" autocomplete="email">
+                        <div class="invalid-feedback" id="review-email-error"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="review-phone" class="form-label">Phone (optional)</label>
+                        <input type="tel" id="review-phone" class="form-control" placeholder="+7 700 000 00 00" autocomplete="tel">
+                        <div class="invalid-feedback" id="review-phone-error"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="review-date" class="form-label">Visit date *</label>
+                        <input type="date" id="review-date" class="form-control">
+                        <div class="invalid-feedback" id="review-date-error"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="review-drink" class="form-label">What did you try?</label>
+                        <select id="review-drink" class="form-select">
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea / matcha</option>
+                            <option value="dessert">Dessert</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset id="rating-group">
+                            <legend class="form-label mb-2">Rating *</legend>
+                            <div class="d-flex gap-2" id="star-buttons">
+                                <button type="button" class="star-btn" data-value="1" aria-label="1 star">★</button>
+                                <button type="button" class="star-btn" data-value="2" aria-label="2 stars">★</button>
+                                <button type="button" class="star-btn" data-value="3" aria-label="3 stars">★</button>
+                                <button type="button" class="star-btn" data-value="4" aria-label="4 stars">★</button>
+                                <button type="button" class="star-btn" data-value="5" aria-label="5 stars">★</button>
+                            </div>
+                            <input type="hidden" id="review-rating" value="">
+                            <div class="invalid-feedback" id="rating-group-error"></div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="review-text" class="form-label">Your review *</label>
+                    <textarea id="review-text" class="form-control" rows="5" placeholder="Write your review"></textarea>
+                    <div class="d-flex justify-content-between gap-3">
+                        <div class="invalid-feedback" id="review-text-error"></div>
+                        <span class="char-count ms-auto"><span id="text-count">0</span> / 1000</span>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="review-recommend">
+                    <label class="form-check-label" for="review-recommend">I would recommend Zebra Coffee to friends</label>
+                </div>
+
+                <button type="submit" class="btn btn-zebra btn-lg">Publish review</button>
             </form>
-
-            <!-- Prepared preview container (will be filled by JS later) -->
-            <div id="review-preview" class="card border mt-4 hidden">
-                <div class="card-body">
-                    <h3 class="h5 fw-bold">Preview of your review</h3>
-                    <p class="mb-1"><strong id="review-preview-name"></strong> &middot; <span id="review-preview-rating"></span></p>
-                    <p class="mb-0" id="review-preview-text"></p>
-                </div>
-            </div>
-
-            <!-- Prepared confirmation container (will be toggled by JS later) -->
-            <div id="review-confirmation-message" class="alert alert-success mt-4 p-4 rounded-3 hidden" role="alert">
-                <h4 class="alert-heading fw-bold mb-2">☕ Thank you for your review!</h4>
-                <p class="mb-1">Your review has been submitted and now appears in the list of customer reviews above.</p>
-                <p class="mb-0 small text-secondary">We read every review and use it to improve our service at Mangilik El 38.</p>
-            </div>
         </section>
-
-        <!-- Back to Top Button -->
-        <p class="text-end">
-            <a class="btn btn-secondary btn-sm rounded-pill back-to-top" href="#top" id="back-to-top-btn">Back to top &uarr;</a>
-        </p>
     </main>
 
-    <footer class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <hr class="border-secondary my-3">
-            <p class="mb-1 text-light">Address: Mangilik El 38 Avenue, Astana, Kazakhstan</p>
-            <p class="mb-1">Phone: <a href="tel:+77470290043" class="text-decoration-none text-light">+7 747 029 00 43</a></p>
-            <p class="mb-1">Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">zebracoffee.kz</a></p>
-            <p class="mb-3">Email: <a href="mailto:info@zebracoffee.kz" class="text-decoration-none text-light">info@zebracoffee.kz</a></p>
-            <hr class="border-secondary my-3">
-            <p class="small text-secondary mb-0">&copy; 2026 Zebra Coffee. All rights reserved.</p>
+    <!-- ===== Back to top (fixed, bottom right) ===== -->
+    <a href="#top" class="back-to-top" id="back-to-top">Back to top <span aria-hidden="true">↑</span></a>
+
+    <!-- ===== Success window (filled by showSuccessModal() in js/forms.js) ===== -->
+    <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-labelledby="successModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column gap-3">
+                    <div class="success-icon" aria-hidden="true">✓</div>
+                    <h2 class="success-title font-display h3 mb-0" id="successModalTitle">Sent!</h2>
+                    <div>
+                        <div class="success-label eyebrow text-muted-zebra">Number</div>
+                        <div class="success-number">—</div>
+                    </div>
+                    <p class="success-text mb-0"></p>
+                    <div class="success-lines"></div>
+                    <button type="button" class="btn btn-zebra" data-bs-dismiss="modal">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="container py-5 text-center d-flex flex-column gap-2">
+            <span class="font-display fs-4 text-white" style="letter-spacing: 0.05em">ZEBRA COFFEE</span>
+            <span>Address: Mangilik El 38 Avenue, Astana, Kazakhstan</span>
+            <span>
+                Phone: <a href="tel:+77470290043">+7 747 029 00 43</a> ·
+                Email: <a href="mailto:info@zebracoffee.kz">info@zebracoffee.kz</a> ·
+                Official website: <a href="https://zebracoffee.kz" target="_blank" rel="noopener noreferrer">zebracoffee.kz</a>
+            </span>
+            <span class="footer-copy mt-2">&copy; 2026 Zebra Coffee. All rights reserved.</span>
         </div>
     </footer>
 
-    <!-- Bootstrap v5.3.3 JS Bundle CDN -->
+    <!-- jQuery 3.7.1 and Bootstrap 5.3.3 (with Popper) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Our scripts: shared first, then this page -->
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/reviews.js"></script>
 </body>
 </html>
