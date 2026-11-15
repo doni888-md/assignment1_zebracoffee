@@ -1,19 +1,9 @@
-/* =========================================================
-   reviews.js — Reviews page (jQuery)
-   1. Reviews array (+ new ones, kept only until the page is reloaded)
-   2. Summary: average, stars, bars 5★…1★
-   3. Filter, sort, "Show more" (first 6 visible)
-   4. Form: star rating, validation, success window, new review on top
-   ========================================================= */
 
 $(function () {
   const VISIBLE_LIMIT = 6;
 
-  // Reviews written on this page. A normal array lives only in memory,
-  // so after a page reload it is empty again and only the 10 starter reviews stay.
   const newReviews = [];
 
-  // An older version saved reviews in localStorage — clean that up once.
   localStorage.removeItem('zebraReviews');
 
   const starterReviews = [
@@ -30,13 +20,12 @@ $(function () {
   ];
 
   function allReviews() {
-    return newReviews.concat(starterReviews);   // new ones first
+    return newReviews.concat(starterReviews);  
   }
 
   const drinkNames = { coffee: 'Coffee', tea: 'Tea / matcha', dessert: 'Dessert' };
   const filters = { rating: 'all', sort: 'newest', showAll: false };
 
-  // 4 -> "★★★★☆"
   function starsText(rating) {
     return '★★★★★'.slice(0, rating) + '☆☆☆☆☆'.slice(0, 5 - rating);
   }
@@ -45,7 +34,6 @@ $(function () {
     return new Date(isoDate + 'T00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
   }
 
-  // ---------- 2. Summary ----------
   function renderSummary() {
     const reviews = allReviews();
     const sum = reviews.reduce(function (total, r) { return total + r.rating; }, 0);
@@ -67,7 +55,6 @@ $(function () {
     });
   }
 
-  // ---------- 3. List ----------
   function filteredAndSorted() {
     const list = allReviews().filter(function (r) {
       if (filters.rating === 'all') return true;
@@ -148,8 +135,6 @@ $(function () {
   renderSummary();
   renderList();
 
-  // ---------- 4. Form ----------
-  // star buttons -> hidden input #review-rating
   function paintStars(value) {
     $('#star-buttons .star-btn').each(function () {
       $(this).toggleClass('on', Number($(this).data('value')) <= value)
@@ -208,7 +193,6 @@ $(function () {
       isOwn: true
     };
 
-        // add to the start of the array (newest first) — not saved anywhere
     newReviews.unshift(review);
 
     showSuccessModal({
@@ -223,7 +207,6 @@ $(function () {
       ]
     });
 
-    // show the new review on top
     filters.rating = 'all';
     filters.sort = 'newest';
     $('#rating-filter .pill-btn').removeClass('active').attr('aria-pressed', 'false').first().addClass('active').attr('aria-pressed', 'true');
@@ -231,7 +214,6 @@ $(function () {
     renderSummary();
     renderList();
 
-    // clean the form
     const $form = $('#review-form');
     $form[0].reset();
     $('#review-rating').val('');

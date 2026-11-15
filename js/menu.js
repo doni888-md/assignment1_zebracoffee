@@ -1,17 +1,9 @@
-/* =========================================================
-   menu.js — Menu page (jQuery)
-   1. Cards from menuItems (data.js)
-   2. Category pills + search (with counters and empty state)
-   3. Drink window: size / sugar / flavor / quantity -> price
-   4. "Add to cart" (cart.js) + toast (main.js)
-   ========================================================= */
 
 $(function () {
   const $grid = $('#menu-grid');
   const $search = $('#menu-search');
   let currentCategory = 'all';
 
-  // ---------- helpers ----------
   function matchesSearch(item, query) {
     if (query === '') return true;
     return (item.name + ' ' + item.taste).toLowerCase().indexOf(query) !== -1;
@@ -27,7 +19,6 @@ $(function () {
     return 'Dessert';
   }
 
-  // one card -> jQuery object
   function buildCard(item) {
     const priceText = item.sizes ? 'from ' + formatPrice(item.sizes[0]) : formatPrice(item.price);
     const $col = $(
@@ -64,13 +55,11 @@ $(function () {
     return $col;
   }
 
-  // ---------- 1 + 2. Render with filters ----------
   function renderMenu() {
     const query = $.trim($search.val()).toLowerCase();
     const found = menuItems.filter(function (item) { return matchesSearch(item, query); });
     const shown = found.filter(function (item) { return matchesCategory(item, currentCategory); });
 
-    // numbers next to All / Hot / Cold / Desserts
     $('#category-pills .pill-btn').each(function () {
       const category = $(this).data('category');
       const count = found.filter(function (item) { return matchesCategory(item, category); }).length;
@@ -103,7 +92,6 @@ $(function () {
 
   renderMenu();
 
-  // ---------- 3. Drink window ----------
   const drinkModal = new bootstrap.Modal('#drinkModal');
   const choice = { item: null, sizeIndex: 1, sugar: 'No sugar', qty: 1 };
 
@@ -119,7 +107,7 @@ $(function () {
   function openDrink(id) {
     const item = findMenuItem(id);
     choice.item = item;
-    choice.sizeIndex = 1;          // 350 ml by default
+    choice.sizeIndex = 1;         
     choice.sugar = 'No sugar';
     choice.qty = 1;
 
@@ -127,7 +115,6 @@ $(function () {
     $('#drink-taste').text(item.taste);
     $('#drink-image').attr({ src: item.image, alt: item.name });
 
-    // sizes
     const $sizes = $('#size-options').empty();
     if (item.sizes) {
       item.sizes.forEach(function (price, index) {
@@ -141,12 +128,10 @@ $(function () {
     }
     $('#size-block').toggle(Boolean(item.sizes));
 
-    // sugar
     $('#sugar-block').toggle(Boolean(item.sugar));
     $('#sugar-options .option-btn').removeClass('active').attr('aria-pressed', 'false')
       .first().addClass('active').attr('aria-pressed', 'true');
 
-    // flavor / syrup / type
     const $select = $('#flavor-select').empty();
     if (item.options) {
       $('#flavor-label').text(item.optionLabel);
@@ -160,7 +145,6 @@ $(function () {
     drinkModal.show();
   }
 
-  // one handler for every card (photo and "+")
   $grid.on('click', '.open-drink', function () {
     openDrink($(this).data('id'));
   });
@@ -188,7 +172,6 @@ $(function () {
     updateModalPrice();
   });
 
-  // ---------- 4. Add to cart ----------
   $('#add-to-cart').on('click', function () {
     const line = makeCartLine(choice.item, {
       sizeIndex: choice.sizeIndex,

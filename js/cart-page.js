@@ -1,32 +1,21 @@
-/* =========================================================
-   cart-page.js — Cart page (jQuery)
-   1. Lines from localStorage (cart.js): +/−, remove
-   2. Totals: promo code = −% on the drink of the day,
-        then −10% on the whole order from 5 000 ₸ (both can work)
-   3. Pickup time options (from 15 minutes ahead)
-   4. Pickup form validation -> success window -> receipt
-   ========================================================= */
 
 $(function () {
-  const BIG_ORDER = 5000;      // from this sum you get 10%
+  const BIG_ORDER = 5000;      
   const BIG_ORDER_PERCENT = 10;
 
-  let promoOn = false;         // true after a valid ZEB-#### code
+  let promoOn = false;       
 
-  const special = getTodaySpecial();             // { id: 'raf', discount: 15, ... }
-  const specialItem = findMenuItem(special.id);  // the drink of the day
+  const special = getTodaySpecial();            
+  const specialItem = findMenuItem(special.id); 
 
-  // ---------- 2. Discount logic ----------
   function calculateTotals() {
     const subtotal = getCartSubtotal();
 
-    // 1) promo: only the lines with the drink of the day
     const specialSum = getCart()
       .filter(function (line) { return line.id === special.id; })
       .reduce(function (sum, line) { return sum + line.price * line.qty; }, 0);
     const promoDiscount = promoOn ? Math.round(specialSum * special.discount / 100) : 0;
 
-    // 2) 10% on the rest of the order, if the order is from 5 000 ₸
     const bigDiscount = subtotal >= BIG_ORDER ? Math.round((subtotal - promoDiscount) * BIG_ORDER_PERCENT / 100) : 0;
 
     return {
@@ -38,7 +27,6 @@ $(function () {
     };
   }
 
-  // ---------- 1. Render the cart ----------
   function buildLine(line) {
     const $line = $(
       '<div class="cart-line">' +
@@ -88,7 +76,6 @@ $(function () {
     $('#big-row').toggleClass('is-on', totals.bigDiscount > 0);
     $('#sum-total').text(formatPrice(totals.total));
 
-    // the code was applied, but the drink of the day was removed from the cart
     if (promoOn && totals.specialSum === 0) {
       promoOn = false;
       $('#promo-message').removeClass('ok').addClass('error').text(specialItem.name + ' was removed — add it again to use the code.');
@@ -97,7 +84,6 @@ $(function () {
     $('#place-order').text('Place order · ' + formatPrice(totals.total));
   }
 
-  // +/−/remove — one handler on the list (delegation)
   $('#cart-lines').on('click', 'button', function () {
     const key = $(this).closest('.cart-line').data('key');
     if ($(this).hasClass('qty-plus')) changeQty(key, 1);
@@ -106,7 +92,6 @@ $(function () {
     renderCart();
   });
 
-  // ---------- Promo code ----------
   $('#promo-form').on('submit', function (event) {
     event.preventDefault();
     const code = $.trim($('#promo-code').val()).toUpperCase();
@@ -132,14 +117,13 @@ $(function () {
     renderCart();
   });
 
-  // ---------- 3. Pickup times ----------
   function fillPickupTimes() {
     const $select = $('#order-time');
     const chosen = $select.val();
     $select.find('option:not(:first)').remove();
 
-    const start = new Date(Date.now() + 15 * 60000);                   // +15 minutes
-    start.setMinutes(Math.ceil(start.getMinutes() / 5) * 5, 0, 0);   // round up to 5 min
+    const start = new Date(Date.now() + 15 * 60000);                   
+    start.setMinutes(Math.ceil(start.getMinutes() / 5) * 5, 0, 0); 
 
     for (let i = 0; i < 12; i++) {
       const time = new Date(start.getTime() + i * 10 * 60000);       // every 10 minutes
@@ -151,7 +135,6 @@ $(function () {
 
   fillPickupTimes();
 
-  // ---------- 4. Pickup form ----------
   const rules = [
     { field: '#order-name', check: function () { return checkName(fieldValue('#order-name'), 40); } },
     { field: '#order-phone', check: function () { return checkPhone(fieldValue('#order-phone'), true); } },
@@ -160,7 +143,6 @@ $(function () {
       check: function () {
         const $option = $('#order-time option:selected');
         if ($('#order-time').val() === '') return 'Choose when you will pick it up.';
-        // the page could be open for a long time — the time must still be 15+ min ahead
         if (Number($option.data('time')) < Date.now() + 14 * 60000) {
           fillPickupTimes();
           return 'This time is too soon now — please choose again.';
@@ -179,7 +161,6 @@ $(function () {
     const place = $('input[name="order-place"]:checked').val() === 'here' ? 'Here' : 'Takeaway';
     const name = fieldValue('#order-name');
 
-    // fill the receipt
     $('#receipt-number').text('#' + number);
     $('#receipt-pickup').text(time + ' · ' + place);
     $('#receipt-name').text(name);
@@ -209,7 +190,6 @@ $(function () {
       ]
     });
 
-    // empty the cart and switch to the receipt
     clearCart();
     $('#cart-view').addClass('d-none');
     $('#receipt-view').removeClass('d-none');
